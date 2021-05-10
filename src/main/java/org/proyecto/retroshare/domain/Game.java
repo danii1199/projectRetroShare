@@ -3,6 +3,8 @@ package org.proyecto.retroshare.domain;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @PrimaryKeyJoinColumn(name = "productId")
 public class Game extends Product {
@@ -11,18 +13,26 @@ public class Game extends Product {
 	private String gender;
 	private String developer;
 	private Float price;
+	
+
+	@JsonIgnoreProperties(value = { "games", "hibernateLazyInitializer" }, allowSetters = true)
+	
+	
+
+	public Game() {
+		super();
+	}
+
 
 	public Game(String description, String name, String gender, String developer, Float price) {
-		super(description);
+		super();
 		this.name = name;
 		this.gender = gender;
 		this.developer = developer;
 		this.price = price;
 	}
 
-	public Game() {
-		super();
-	}
+
 
 	public String getName() {
 		return name;
@@ -55,5 +65,7 @@ public class Game extends Product {
 	public void setPrice(Float price) {
 		this.price = price;
 	}
+
+
 
 }

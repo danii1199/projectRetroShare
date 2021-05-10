@@ -9,8 +9,12 @@ src/main/ui/node_modules
 
 src/main/ui/node_modules/.cache/babel-loader
 
+src/main/ui/public
+
 src/main/ui/README
 src/main/ui/yarn
+
+bin
 
 .vscode
 

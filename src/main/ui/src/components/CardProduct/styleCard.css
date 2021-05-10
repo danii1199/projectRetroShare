@@ -1,0 +1,76 @@
+.MuiCard-root.custom-card {
+  transition: all 0.2s ease-in-out;
+  background: #3f4669b9;
+  color: #d2d2d2;
+  padding-top: 52px;
+  background-image: url("../../fondoPantalla/chincheta.png");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 40px 40px;
+  border-radius: 20px;
+  margin: "5px";
+}
+
+.MuiCard-root.custom-card:hover {
+  background-image: none;
+  transform: scale(1.02);
+  box-shadow: 0px 0px 20px 1px #ffffff;
+}
+
+.custom-card .content {
+  padding-bottom: 0px;
+}
+
+.custom-card .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-card p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-card .price {
+  margin-top: 10px;
+}
+
+.custom-card .status {
+  margin-top: 0px;
+  color: #45c712;
+}
+
+.custom-card .actions-content {
+  padding: 5px 5px 5px 15px;
+}
+
+.custom-card .basket-item-price {
+  margin-bottom: 0;
+}
+
+.actions-content {
+  display: flex;
+}
+
+.actions-content h2 {
+  flex-grow: 1;
+}
+
+.custom-card .custom-button {
+  color: yellow;
+}
+
+.custom-card .custom-button:hover {
+  color: purple;
+}
+
+.custom-card .custom-button svg {
+  margin-right: 10px;
+}
+
+.custom-card .increase-product-quantity {
+  color: purple;
+  border-color: purple;
+}

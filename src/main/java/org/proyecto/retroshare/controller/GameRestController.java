@@ -48,7 +48,7 @@ public class GameRestController {
 	}
 
 	// GUARDAR NUEVO JUEGO
-	@PostMapping(value = "/g-save/{idUser}/{idProductStatus}")
+	@PostMapping(value = "/game/{idUser}/{idProductStatus}")
 	public ResponseEntity<Game> save(@RequestBody Game game, @PathVariable Long idUser,
 			@PathVariable Long idProductStatus) {
 
@@ -68,21 +68,25 @@ public class GameRestController {
 	}
 
 	// Actualizar un juego
-	@PostMapping(value = "g-update/{id}/{idProductStatus")
+	@PostMapping(value = "g-update/{id}/{idProductStatus}")
 	public ResponseEntity<Game> update(@PathVariable Long id, @RequestBody Game game,
 			@PathVariable Long idProductStatus) {
 
-		Game gameupdate = gameRepository.findById(id)
+		Game gameUpdate = gameRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No existe el juego" + id));
 
-		gameupdate.setDescription(game.getDescription());
-		gameupdate.setName(game.getName());
-		gameupdate.setGender(game.getGender());
-		gameupdate.setPrice(game.getPrice());
-		gameupdate.setDeveloper(game.getDeveloper());
-		gameupdate.setProductStatus(game.getProductStatus());
+		gameUpdate.setDescription(game.getDescription());
+		gameUpdate.setName(game.getName());
+		gameUpdate.setGender(game.getGender());
+		gameUpdate.setPrice(game.getPrice());
+		gameUpdate.setDeveloper(game.getDeveloper());
 
-		Game obj = gameRepository.save(gameupdate);
+		ProductStatus productStatus = productStatusRepository.findById(idProductStatus)
+				.orElseThrow(() -> new ResourceNotFoundException("No existe el estado" + idProductStatus));
+		gameUpdate.setProductStatus(productStatus);
+		productStatus.getProducts().add(gameUpdate);
+
+		Game obj = gameRepository.save(gameUpdate);
 		return new ResponseEntity<Game>(obj, HttpStatus.OK);
 
 	}

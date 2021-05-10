@@ -47,7 +47,7 @@ public class VinylRestController {
 	}
 
 	// GUARDAR NUEVO VINILO
-	@PostMapping(value = "/v-save/{idUser}/{idProductStatus}")
+	@PostMapping(value = "/vinyl/{idUser}/{idProductStatus}")
 	public ResponseEntity<Vinyl> save(@RequestBody Vinyl vinyl, @PathVariable Long idUser,
 			@PathVariable Long idProductStatus) {
 		User user = userRepository.getOne(idUser);
@@ -64,8 +64,9 @@ public class VinylRestController {
 	}
 
 	// Actualizar un vinilo
-	@PostMapping(value = "v-update/{id}")
-	public ResponseEntity<Vinyl> update(@PathVariable Long id, @RequestBody Vinyl vinyl) {
+	@PostMapping(value = "v-update/{id}/{idProductStatus}")
+	public ResponseEntity<Vinyl> update(@PathVariable Long id, @RequestBody Vinyl vinyl,
+			@PathVariable Long idProductStatus) {
 
 		Vinyl vinylUpdate = vinylRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No existe el vinilo" + id));
@@ -76,6 +77,11 @@ public class VinylRestController {
 		vinylUpdate.setSongs(vinyl.getSongs());
 		vinylUpdate.setYear(vinyl.getYear());
 		vinylUpdate.setPrice(vinyl.getPrice());
+		
+		ProductStatus productStatus = productStatusRepository.findById(idProductStatus)
+				.orElseThrow(() -> new ResourceNotFoundException("No existe el estado" + idProductStatus));
+		vinylUpdate.setProductStatus(productStatus);
+		productStatus.getProducts().add(vinylUpdate);
 
 		Vinyl obj = vinylRepository.save(vinylUpdate);
 		return new ResponseEntity<Vinyl>(obj, HttpStatus.OK);
