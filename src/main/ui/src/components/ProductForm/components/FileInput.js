@@ -54,7 +54,7 @@ const useStyles = makeStyles(() => ({
                   <ListItemIcon>
                     <InsertDriveFile />
                   </ListItemIcon>
-                  <ListItemText primary={f.name} secondary={f.size} />
+                  <ListItemText primary={f.name} />
                 </ListItem>
               ))}
             </List>

@@ -1,10 +1,10 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 
 const GameConsoleDataComponentAdmin = () => {
-  const [gameConsole, setGameConsole] = React.useState([]);
+  const [gameConsole, setGameConsole] =useState([]);
 
-  React.useEffect(() => {
+ useEffect(() => {
     obtenerDatos();
   }, []);
 

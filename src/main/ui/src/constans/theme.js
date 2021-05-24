@@ -17,11 +17,11 @@ let theme = {
     },
     "palette": {
       "common": {
-        "black": "#D9B504",
-        "white": "#D9B504"
+        "black": "#0D0D0D",
+        "white": "#8C8C8C"
       },
       "background": {
-        "paper": "#0D0D0D",
+        "paper": "#D9B504",
         "default": "#0D0D0D"
       },
       "primary": {

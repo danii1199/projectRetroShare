@@ -31,36 +31,7 @@ export const Step1 = () => {
     setValues(data);
   };
 
-  const handleChange = (event) => {
-    console.log(event.target.value);
-    if(event.target.value==="gameconsole"){
-      document.getElementById("consola").hidden=false;
-      document.getElementById("juegos").hidden=true;
-      document.getElementById("vinilos").hidden=true;
-      document.getElementById("tocadiscos").hidden=true;
-    }
-
-    else if(event.target.value==="game"){
-      document.getElementById("juegos").hidden=false;
-      document.getElementById("consola").hidden=true;
-      document.getElementById("vinilos").hidden=true;
-      document.getElementById("tocadiscos").hidden=true;
-    }
-
-    else if(event.target.value==="vinyl"){
-      document.getElementById("juegos").hidden=true;
-      document.getElementById("consola").hidden=true;
-      document.getElementById("vinilos").hidden=false;
-      document.getElementById("tocadiscos").hidden=true;
-    }
-
-    else if(event.target.value==="recordplayer"){
-      document.getElementById("juegos").hidden=true;
-      document.getElementById("consola").hidden=true;
-      document.getElementById("vinilos").hidden=true;
-      document.getElementById("tocadiscos").hidden=false;
-    }
-  };
+  
 
   return (
     <MainContainer>
@@ -89,7 +60,7 @@ export const Step1 = () => {
 
         <InputLabel htmlFor="productType">Product type</InputLabel>
         <NativeSelect
-          onChange={handleChange}
+          
           className={styles.selector}
           variant="outlined"
           margin="normal"

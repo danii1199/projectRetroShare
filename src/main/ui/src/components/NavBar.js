@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
   search: {
     position: "relative",
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: theme.shape.borderRadius.primary,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25),
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   inputRoot: {
-    color: "inherit",
+    color: "ihnerit",
   },
   background: {
     background: theme.palette.primary,
@@ -323,7 +323,7 @@ const NavBar = () => {
               </IconButton>
             </div>
             <IconButton
-              src="../public/discoVinilo.png"
+              
               color="inherit"
               component={Link}
               to="/"
@@ -332,7 +332,7 @@ const NavBar = () => {
                 alt={"pokeball"}
                 width={"50"}
                 src={
-                  "https://www.pikpng.com/pngl/b/59-590145_pokeball-8-bit-pixel-art-pokemon-clipart.png"
+                  "pokePixel.png"
                 }
               />{" "}
               

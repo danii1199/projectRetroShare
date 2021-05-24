@@ -3,7 +3,6 @@ import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //import UserDataComponent from "./components/DataComponent/UserDataComponent";
 //import GameDataComponent from "./components/DataComponent/GameDataComponent";
-import Game from "./components/DataComponent/Game";
 //import GameConsoleDataComponent from "./components/DataComponent/GameConsoleDataComponent";
 //import GameConsole from "./components/DataComponent/GameConsole";
 //import SingIn from "./components/UserAuth/SingIn";
@@ -15,10 +14,11 @@ import Products from "./components/Products/Products";
 import { Result } from "./components/ProductForm/Result";
 import ProductView from "./components/ProductView/ProductView";
 import VinylDataComponent from "./components/DataComponent/VinylDataComponent";
-import Vinyl from "./components/DataComponent/Vinyl";
 import RecordPlayerDataComponent from "./components/DataComponent/RecordPlayerDataComponent";
-import RecordPlayer from "./components/DataComponent/RecordPlayer";
 import UserProfile from "./components/User/UserProfile";
+import Game from "./components/ProductsPage/Game";
+import Vinyl from "./components/ProductsPage/Vinyl";
+import RecordPlayer from "./components/ProductsPage/RecordPlayer";
 import OneUser from "./components/User/OneUser";
 import Cart from "./pages/cart";
 import Chat from "./components/Chat/Chat";
@@ -28,8 +28,8 @@ import { CartFormResult } from "./pages/cart/CartFormResult";
 import { lazy, Suspense } from "react";
 import { Container } from "@material-ui/core";
 import Main from "./components/CheckOut/Views/Main";
-import theme from "./constans/theme"
-import { ThemeProvider } from '@material-ui/core/styles';
+import theme from "./constans/theme";
+import { ThemeProvider } from "@material-ui/core/styles";
 
 const UserDataComponent = lazy(() =>
   import("./components/DataComponent/UserDataComponent")
@@ -41,7 +41,7 @@ const GameConsoleDataComponent = lazy(() =>
   import("./components/DataComponent/GameConsoleDataComponent")
 );
 const GameConsole = lazy(() =>
-  import("./components/DataComponent/GameConsole")
+  import("./components/ProductsPage/GameConsole")
 );
 const SingIn = lazy(() => import("./components/UserAuth/SingIn"));
 const SingUp = lazy(() => import("./components/UserAuth/SingUp"));

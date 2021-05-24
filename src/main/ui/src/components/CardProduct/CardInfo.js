@@ -5,13 +5,55 @@ import {
   CardActions,
   Typography,
   CardActionArea,
+  fade,
 } from "@material-ui/core";
 import "./styleCard.css";
 import EuroSymbolIcon from "@material-ui/icons/EuroSymbol";
 import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    marginLeft: theme.spacing(3),
+    boxShadow: "0 4px 10px 0 #8C8C8C",
+    float: "rigth",
+  },
+  customCard: {
+    transition: "all 0.2s ease-in-out",
+    backgroundColor: theme.palette.background.main,
+    "&:hover": {
+      backgroundColor: fade(theme.palette.primary.light, 0.85),
+      boxShadow: "0px 0px 20px 1px #8C8C8C",
+      transform: "scale(1.02)",
+    },
+    color: theme.palette.common.white,
+    padding: "5px",
+    borderRadius: "10px",
+    margin: "5px",
+  },
+  content: {
+    paddingBottom: theme.spacing(0),
+  },
+  title: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  price: {
+    marginTop: theme.spacing(1),
+  },
+  status: {
+    marginTop: theme.spacing(0),
+    color: theme.palette.common.black,
+  },
+  actionsContent: {
+    padding: theme.spacing(1),
+  },
+}));
 
 const CardProduct = ({ product }) => {
   const history = useHistory();
+  const classes = useStyles();
 
   return (
     <Card className="custom-card">
@@ -24,16 +66,16 @@ const CardProduct = ({ product }) => {
         <CardMedia
           component="img"
           alt={product.image}
-          height="260"
-          className="card-image"
-          image={process.env.PUBLIC_URL + "/" + product.image}
+          height="220"
+          className={classes.image}
+          image={product.image}
           title={product.name}
         />
-        <CardContent className="content">
+        <CardContent className={classes.content}>
           <Typography
             align="left"
             display="inline"
-            className="title"
+            className={classes.title}
             gutterBottom
             variant="h5"
             component="h2"
@@ -41,7 +83,7 @@ const CardProduct = ({ product }) => {
             {product.name}
           </Typography>
           <Typography
-            className="status"
+            className={classes.status}
             align="right"
             gutterBottom
             variant="h6"
@@ -51,15 +93,26 @@ const CardProduct = ({ product }) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions className="actions-content">
-        <Typography field="price" gutterBottom variant="h5" component="h2">
+      <CardActions className={classes.actionsContent}>
+        <Typography
+          className={classes.price}
+          gutterBottom
+          variant="h5"
+          component="h2"
+        >
           {product.price} <EuroSymbolIcon />
         </Typography>
-        {product.userBuyer!==null&&
-        <Typography align="right" field="price" gutterBottom variant="h5" component="h2">
-          Finalizado
-        </Typography>
-}
+        {product.userBuyer !== null && (
+          <Typography
+            align="right"
+            field="price"
+            gutterBottom
+            variant="h5"
+            component="h2"
+          >
+            Finalizado
+          </Typography>
+        )}
       </CardActions>
     </Card>
   );

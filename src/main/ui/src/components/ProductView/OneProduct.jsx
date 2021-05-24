@@ -11,12 +11,31 @@ import "./StyleProductView.css";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles((theme) => ({
+  carousel: {
+    height: "auto",
+  },
+  imagenes: {
+    margin: "auto",
+    width: "auto",
+    height: "auto",
+    position: "absolute",
+  },
+  h3: {
+    margin: "30px",
+    color: theme.palette.text.secondary
+  },
+  product: {
+    margin: theme.spacing(10)
+  },
+}));
 
 const OneProduct = ({ product }) => {
   const { addProduct, cartItems } = useContext(CartContext);
   const history = useHistory();
-
+  const classes = useStyles();
   const isInCart = (product) => {
     return !!cartItems.find((item) => item.id === product.id);
   };

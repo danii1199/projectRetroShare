@@ -3,9 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import CardProduct from "../CardProduct/CardProduct";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import { useContext, Suspense } from "react";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import "./style.css";
 import VideoGameAPI from "../../lib/VideoGameAPI";
 import GameConsoleAPI from "../../lib/GameConsoleAPI";
 import VinylAPI from "../../lib/VinylAPI";
@@ -13,6 +10,7 @@ import RecordPlayerAPI from "../../lib/RecordPlayerAPI";
 import Caru1 from "../Carousel/Caru1";
 import OneUser from "../../lib/OneUser";
 import AuthService from "../../Service/Auth/AuthService";
+import PrincipalButtons from "../Buttons/PrincipalButtons";
 
 const useStyles = makeStyles((theme) => ({
   carousel: {
@@ -24,12 +22,6 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     position: "absolute",
   },
-  button: {
-    margin: theme.spacing(6,8,6,6),
-    padding: theme.spacing(2, 8),
-    boxShadow: '0 4px 10px 0 #8C8C8C', 
-  },
-
   h3: {
     margin: "30px",
     color: theme.palette.text.secondary
@@ -61,42 +53,7 @@ const Products = () => {
       </div>
       <div>
         <Grid item>
-          <Button
-            className={classes.button}
-            color="primary"
-            variant="contained"
-            component={Link}
-            to="/videogames"
-          >
-            Games
-          </Button>
-          <Button
-            className={classes.button}
-            color="primary"
-            variant="contained"
-            component={Link}
-            to="/gameconsole"
-          >
-            Consoles
-          </Button>
-          <Button
-            className={classes.button}
-            color="primary"
-            variant="contained"
-            component={Link}
-            to="/rplayer"
-          >
-            R.Player
-          </Button>
-          <Button
-            className={classes.button}
-            color="primary"
-            variant="contained"
-            component={Link}
-            to="/vinyl"
-          >
-            Vinyl
-          </Button>
+          <PrincipalButtons/>
         </Grid>
       </div>
 
