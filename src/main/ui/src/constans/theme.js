@@ -31,10 +31,10 @@ let theme = {
         "contrastText": "#0D0D0D"
       },
       "secondary": {
-        "light": "#ff4081",
-        "main": "#f50057",
-        "dark": "#c51162",
-        "contrastText": "#fff"
+        "light": "#9D93A3",
+        "main": "#8C8C8C",
+        "dark": "#A39B93",
+        "contrastText": "#D9B504"
       },
       "error": {
         "light": "#e57373",
@@ -44,7 +44,7 @@ let theme = {
       },
       "text": {
         "primary": "#8C8C8C",
-        "secondary": "#D9B504",
+        "secondary": "#8C8C8C",
         "disabled": "#8C8C8C",
         "hint": "#8C8C8C"
       }

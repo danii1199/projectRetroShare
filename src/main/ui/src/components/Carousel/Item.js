@@ -5,10 +5,11 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   padding: {
-    marginTop: theme.spacing(8)
+    marginTop: theme.spacing(2),
+    
   },
-  title: {
-    marginTop: theme.spacing(0)
+  image: {
+    height: "500px"
   }
 }));
 
@@ -21,9 +22,7 @@ const Item = (props) => {
           <CardMedia
             component="img"
             alt={props.item.image}
-            height="500px"
-            width="auto"
-            className="card-image"
+            className={classes.image}
             image={props.item.image}
             title={props.item.name}
           >

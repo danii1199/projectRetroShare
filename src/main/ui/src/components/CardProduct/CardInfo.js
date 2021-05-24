@@ -5,9 +5,8 @@ import {
   CardActions,
   Typography,
   CardActionArea,
-  fade,
+  fade
 } from "@material-ui/core";
-import "./styleCard.css";
 import EuroSymbolIcon from "@material-ui/icons/EuroSymbol";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -15,7 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   button: {
     marginLeft: theme.spacing(3),
-    boxShadow: "0 4px 10px 0 #8C8C8C",
+    boxShadow: "5px 6px 15px 1px #0D0D0D",
     float: "rigth",
   },
   customCard: {
@@ -49,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
   actionsContent: {
     padding: theme.spacing(1),
   },
+  icon: {
+    color: theme.palette.primary.light
+    
+  },
+
 }));
 
 const CardProduct = ({ product }) => {
@@ -68,7 +72,7 @@ const CardProduct = ({ product }) => {
           alt={product.image}
           height="220"
           className={classes.image}
-          image={product.image}
+          image={process.env.PUBLIC_URL + "/" + product.image}
           title={product.name}
         />
         <CardContent className={classes.content}>
@@ -102,20 +106,16 @@ const CardProduct = ({ product }) => {
         >
           {product.price} <EuroSymbolIcon />
         </Typography>
-        {product.userBuyer !== null && (
-          <Typography
-            align="right"
-            field="price"
-            gutterBottom
-            variant="h5"
-            component="h2"
-          >
-            Finalizado
-          </Typography>
-        )}
+        {product.userBuyer!==null&&
+        <Typography align="right" field="price" gutterBottom variant="h5" component="h2">
+          Vendido
+        </Typography>
+}
       </CardActions>
     </Card>
   );
 };
 
 export default CardProduct;
+
+

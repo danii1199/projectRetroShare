@@ -11,7 +11,6 @@ import {
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "@material-ui/icons";
 import { Person } from "@material-ui/icons";
-import "./styleCard.css";
 import EuroSymbolIcon from "@material-ui/icons/EuroSymbol";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
@@ -21,7 +20,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   button: {
     marginLeft: theme.spacing(3),
-    boxShadow: "0 4px 10px 0 #8C8C8C",
+    boxShadow: "5px 6px 15px 1px #0D0D0D",
     float: "rigth",
   },
   customCard: {
@@ -55,7 +54,8 @@ const useStyles = makeStyles((theme) => ({
   actionsContent: {
     padding: theme.spacing(1),
   },
-  image: {
+  icon: {
+    color: theme.palette.primary.light
     
   },
 
@@ -118,11 +118,11 @@ const CardProduct = ({ product }) => {
           className={classes.button}
           variant="contained"
           size="large"
-          color="primary"
+          color="secondary"
           component={Link}
           to={`user/${product.userOwner.id}`}
         >
-          <Person />
+          <Person className={classes.icon} />
         </Button>
 
         {!isInCart(product) && (
@@ -131,10 +131,10 @@ const CardProduct = ({ product }) => {
               className={classes.button}
               variant="contained"
               size="large"
-              color="primary"
+              color="secondary"
               onClick={() => addProduct(product)}
             >
-              <ShoppingCart />
+              <ShoppingCart className={classes.icon} />
             </Button>
           </>
         )}
@@ -144,7 +144,7 @@ const CardProduct = ({ product }) => {
               className={classes.button}
               variant="contained"
               size="large"
-              color="primary"
+              color="secondary"
               onClick={() => {
                 history.push(`/cart`);
                 history.go();

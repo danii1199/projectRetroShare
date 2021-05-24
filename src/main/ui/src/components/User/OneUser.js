@@ -6,7 +6,7 @@ import { ProductsContext } from "../../contexts/ProductsContext";
 import { useContext } from "react";
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   avatar: {
     marginTop: "20px",
     width: "160px",
@@ -16,22 +16,26 @@ const useStyles = makeStyles({
   texto: {
     marginTop: "20px",
     paddingLeft: "30px",
+    color: theme.palette.common.white
   },
   titulo: {
+    color: theme.palette.common.white,
     marginBottom: "30px",
   },
   infoUser: {
+    color: theme.palette.common.white,
     display: "flex",
     justifyContent: "space-around",
   },
   messageArea: {
+    color: theme.palette.common.white,
     height: "65vh",
     overflowY: "auto",
   },
   background: {
     marginTop: "90px",
   },
-});
+}));
 
 const UserProfile = () => {
   const classes = useStyles();

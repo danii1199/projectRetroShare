@@ -21,7 +21,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-    marginBottom: "80px"
+    marginBottom: "80px",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -104,7 +104,6 @@ const NavBar = () => {
   const isSideMenuOpen = Boolean(sideMenuMoreAnchorEl);
   const logOut = () => AuthService.logout;
 
-  
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -322,20 +321,14 @@ const NavBar = () => {
                 <MenuIcon />
               </IconButton>
             </div>
-            <IconButton
-              
-              color="inherit"
-              component={Link}
-              to="/"
-            >
+            <IconButton component={Link} to="/">
               <img
                 alt={"pokeball"}
                 width={"50"}
                 src={
-                  "pokePixel.png"
+                  "https://www.pikpng.com/pngl/b/59-590145_pokeball-8-bit-pixel-art-pokemon-clipart.png"
                 }
               />{" "}
-              
             </IconButton>
             <SearchBar />
             <div className={classes.sectionDesktop}>
@@ -601,7 +594,7 @@ const NavBar = () => {
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-              
+
               <IconButton
                 edge="end"
                 aria-label="account of current user"
@@ -614,7 +607,6 @@ const NavBar = () => {
                 <p>Log In</p>
                 <ExitToAppIcon />
               </IconButton>
-              
             </div>
             <div className={classes.sectionMobile}>
               <IconButton
