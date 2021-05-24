@@ -31,8 +31,6 @@ export const Step1 = () => {
     setValues(data);
   };
 
-  
-
   return (
     <MainContainer>
       <Typography component="h2" variant="h5">
@@ -60,7 +58,6 @@ export const Step1 = () => {
 
         <InputLabel htmlFor="productType">Product type</InputLabel>
         <NativeSelect
-          
           className={styles.selector}
           variant="outlined"
           margin="normal"
@@ -78,105 +75,6 @@ export const Step1 = () => {
           <option value={"recordplayer"}>Record Player</option>
         </NativeSelect>
         <FormHelperText>Product type</FormHelperText>
-        
-        <div id="consola" hidden="hidden">
-        <Input
-          ref={register}
-          id="year"
-          type="number"
-          label="Product year"
-          name="year"
-          error={!!errors.name}
-          helperText={errors?.name?.message}
-        />
-         </div>
-
-         <div id="juegos">
-        <Input
-          ref={register}
-          id="developer"
-          type="text"
-          label="Product developer"
-          name="developer"
-          error={!!errors.name}
-          helperText={errors?.name?.message}
-        />
-
-        <Input
-          ref={register}
-          id="gender"
-          type="text"
-          label="Product gender"
-          name="gender"
-          error={!!errors.name}
-          helperText={errors?.name?.message}
-        />
-         </div>
-
-         
-         <div id="vinilos" hidden="hidden">
-         <Input
-          ref={register}
-          id="year"
-          type="number"
-          label="Product year"
-          name="year"
-          error={!!errors.name}
-          helperText={errors?.name?.message}
-        />
-
-          <Input
-          ref={register}
-          id="artist"
-          type="text"
-          label="Artists separate with ,"
-          name="artist"
-          error={!!errors.name}
-          helperText={errors?.name?.message}
-        />
-
-        <Input
-          ref={register}
-          id="songs"
-          type="text"
-          label="Songs separate with ,"
-          name="songs"
-          error={!!errors.name}
-          helperText={errors?.name?.message}
-        />
-        
-         </div>
-
-         <div id="tocadiscos" hidden="hidden">
-        <Input
-          ref={register}
-          id="brand"
-          type="text"
-          label="Product brand"
-          name="brand"
-          error={!!errors.name}
-          helperText={errors?.name?.message}
-        />
-
-        <Input
-          ref={register}
-          id="model"
-          type="model"
-          label="Product model"
-          name="model"
-          error={!!errors.name}
-          helperText={errors?.name?.message}
-        />
-        <Input
-          ref={register}
-          id="year"
-          type="number"
-          label="Product year"
-          name="year"
-          error={!!errors.name}
-          helperText={errors?.name?.message}
-        />
-         </div>
         <PrimaryButton>Next</PrimaryButton>
       </Form>
     </MainContainer>
