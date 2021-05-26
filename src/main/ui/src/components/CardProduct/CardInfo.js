@@ -10,6 +10,10 @@ import {
 import EuroSymbolIcon from "@material-ui/icons/EuroSymbol";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import AuthService from "../../Service/Auth/AuthService";
+import RestroshareService from "../../Service/RetroshareService";
+import IconButton from "@material-ui/core/IconButton";
+import Delete from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -58,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 const CardProduct = ({ product }) => {
   const history = useHistory();
   const classes = useStyles();
+  const currentUser = AuthService.getCurrentUser();
 
   return (
     <Card className="custom-card">
@@ -110,6 +115,17 @@ const CardProduct = ({ product }) => {
         <Typography align="right" field="price" gutterBottom variant="h5" component="h2">
           Vendido
         </Typography>
+        }
+
+        {product.userOwner.id===currentUser.id&&
+        <IconButton
+        aria-label="delete"
+        color="inherit"
+        onClick={() => RestroshareService.deleteProduct(product.id)}
+        
+      >
+        <Delete />
+      </IconButton>
 }
       </CardActions>
     </Card>

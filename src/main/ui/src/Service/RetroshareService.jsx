@@ -99,6 +99,15 @@ const createProduct = (data, tproduct, idUser, idProductStatus) => {
   });
 };
 
+const deleteProduct = (id) => {
+  return http.post(`/pr-delete/${id}`, {
+    headers: {
+      Authorization: AuthHeader(),
+    },
+  });
+  
+};
+
 const addToCart = (idProduct) => {
   return http.post(`/addtocart/${idProduct}/1`, {
     headers: {
@@ -128,6 +137,7 @@ const services = {
   getProducts,
   findByProductName,
   createProduct,
+  deleteProduct,
   findByEmail,
   addToCart,
   getCurrentCart
