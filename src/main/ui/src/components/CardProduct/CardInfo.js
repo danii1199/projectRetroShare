@@ -11,6 +11,7 @@ import EuroSymbolIcon from "@material-ui/icons/EuroSymbol";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
+
 const useStyles = makeStyles((theme) => ({
   button: {
     marginLeft: theme.spacing(3),
@@ -104,17 +105,7 @@ const CardProduct = ({ product }) => {
         >
           {product.price} <EuroSymbolIcon />
         </Typography>
-        {product.userBuyer !== null && (
-          <Typography
-            align="right"
-            field="price"
-            gutterBottom
-            variant="h5"
-            component="h2"
-          >
-            Vendido
-          </Typography>
-        )}
+
       </CardActions>
     </Card>
   );

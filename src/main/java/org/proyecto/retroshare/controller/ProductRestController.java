@@ -50,7 +50,7 @@ public class ProductRestController {
 	}
 
 	// BORRAR UN JUEGO
-	@GetMapping(value = "/p-delete/{id}")
+	@PostMapping(value = "/pr-delete/{id}")
 	public String delete(@PathVariable Long id) {
 		Product product = productRepository.getOne(id);
 		if (product != null) {
