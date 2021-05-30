@@ -1,5 +1,5 @@
 import "./App.css";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //import UserDataComponent from "./components/DataComponent/UserDataComponent";
 //import GameDataComponent from "./components/DataComponent/GameDataComponent";

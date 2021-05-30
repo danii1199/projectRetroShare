@@ -62,7 +62,6 @@ const CardProduct = ({ product }) => {
   const { cartItems } = useContext(CartContext);
 
   const isInCart = (product) => {
-    console.log(product);
     return !!cartItems.find((item) => item.id === product.id);
   };
 

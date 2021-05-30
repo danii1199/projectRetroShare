@@ -60,7 +60,7 @@ export const CartButton = () => {
   const history = useHistory();
   return (
     <Button
-    children= "Al Carro"
+      children="Al Carro"
       className={classes.buttonCart}
       size="small"
       color="secondary"
@@ -70,7 +70,6 @@ export const CartButton = () => {
         history.go();
       }}
     />
-      
   );
 };
 
@@ -94,23 +93,22 @@ export const AddCartButton = (props) => {
   const classes = useStyles();
   const { addProduct } = useContext(CartContext);
   const currentUser = AuthService.getCurrentUser();
-  
 
-  const isBuy = props.product?.userBuyer?.id === currentUser.id;
+  const isBuy =
+    props.product?.userBuyer?.id >= 0 ||
+    props.product?.userOwner?.id === currentUser?.id;
   //const isYour = props.product.userOwner.id !== user.id;
 
   return (
     <Button
-      children={ (isBuy) ? "Comprado":  <ShoppingCart className={classes.icon} /> }
+      children={isBuy ? "Comprado" : <ShoppingCart className={classes.icon} />}
       className={classes.buttonCart}
       variant="contained"
       size="small"
       color="secondary"
       onClick={() => addProduct(props.product)}
       disabled={isBuy}
-    >
-      
-    </Button>
+    ></Button>
   );
 };
 

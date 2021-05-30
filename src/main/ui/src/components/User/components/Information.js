@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const Information = () => {
   const classes = useStyles();
   const currentUser = AuthService.getCurrentUser();
-  const user = OneUser(currentUser.id);
+  const user = OneUser(currentUser?.id);
   const fechaReg = user.date;
 
   return (

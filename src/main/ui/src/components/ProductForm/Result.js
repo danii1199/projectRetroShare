@@ -17,9 +17,10 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
-import { useData } from "./DataContext"
+import { useData } from "./DataContext";
 import RetroshareService from "../../Service/RetroshareService";
 import AuthService from "../../Service/Auth/AuthService";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -35,6 +36,7 @@ export const Result = () => {
   const styles = useStyles();
   const { data } = useData();
   const currentUser = AuthService.getCurrentUser().id;
+  const history = useHistory();
 
   const entries = Object.entries(data).filter((entry) => entry[0] !== "files");
   const { files } = data;
@@ -42,26 +44,38 @@ export const Result = () => {
   const onSubmit = async () => {
     const formData = new FormData();
     if (data.files) {
+      
       data.files.forEach((file) => {
         formData.append("files", file, file.name);
+        
       });
     }
-
     entries.forEach((entry) => {
-      formData.append(entry[0], entry[1]);  
+      console.log("ESTAMOS DENTRO")
+      formData.append(entry[0], entry[1]);
+      console.log()
     });
+    
 
-    const res = RetroshareService.createProduct(data, data.productType,currentUser,data.status)
+    data.image = files[0].name
 
-    if (res.status === 200) {
-      Swal.fire("Great job!", "You've passed the challenge!", "success");
-      setSuccess(true);
-    }
+    RetroshareService.createProduct(
+      data,
+      data.productType,
+      currentUser,
+      data.status
+    ).then((res) => {
+      
+      if (res.status === 200) {
+        Swal.fire("Great job!", "Has registrado un producto", "success");
+        setSuccess(true);
+      }
+    });
   };
 
   if (success) {
-    return <h1>Regisrtado</h1>;
-  };
+    history.push("./");
+  }
 
   return (
     <>
@@ -112,4 +126,3 @@ export const Result = () => {
     </>
   );
 };
-
