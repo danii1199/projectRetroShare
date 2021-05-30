@@ -5,8 +5,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import CardInfo from "../CardProduct/CardInfo";
 import { useContext } from "react";
 import { ProductsContext } from "../../contexts/ProductsContext";
+import Information from "./components/Information"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   avatar: {
     marginTop: "20px",
     width: "160px",
@@ -16,71 +17,35 @@ const useStyles = makeStyles({
   texto: {
     marginTop: "20px",
     paddingLeft: "30px",
+    color: theme.palette.common.white,
   },
   titulo: {
+    color: theme.palette.common.white,
     marginBottom: "30px",
   },
   infoUser: {
+    color: theme.palette.common.white,
     display: "flex",
     justifyContent: "space-around",
   },
   messageArea: {
+    color: theme.palette.common.white,
     height: "65vh",
     overflowY: "auto",
   },
   background: {
     marginTop: "90px",
   },
-});
+}));
 
 const UserProfile = () => {
   const classes = useStyles();
   const currentUser = AuthService.getCurrentUser();
   const user = OneUser(currentUser.id);
   const { products } = useContext(ProductsContext);
-  const fechaReg = user.date;
   return (
     <Container>
-      <Grid>
-        <Grid className={classes.infoUser}>
-          <Grid item>
-            <img
-              alt={user.avatar}
-              className={classes.avatar}
-              src={user.avatar}
-            />
-          </Grid>
-          <Grid container>
-            <Typography variant="h5" className={classes.texto}>
-              UserName: {user.userName}
-            </Typography>
-            <Grid container>
-              <Typography className={classes.texto}>
-                Name: {user.firstName} {user.lastName}
-              </Typography>
-              <Typography className={classes.texto}>
-                Email: {user.email}
-              </Typography>
-              <Typography className={classes.texto}>
-                City: {user.city}
-              </Typography>
-              <Typography className={classes.texto}>
-                Registrado en: {fechaReg}
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-
-        <Grid
-          className="file-field input-field"
-          style={{ margin: "10px" }}
-        ></Grid>
-      </Grid>
-      <Grid item>
-        <Typography variant="h4" className={classes.titulo}>
-          Productos Subidos:
-        </Typography>
-      </Grid>
+      <Information/>
       <Grid container spacing={2}>
         {products.map((product) => {
           if (product.userOwner.id === user.id)
@@ -89,7 +54,7 @@ const UserProfile = () => {
                 <CardInfo product={product} />
               </Grid>
             );
-          return(<></>)
+          return <></>;
         })}
       </Grid>
       <Grid item>

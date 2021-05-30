@@ -74,9 +74,9 @@ const getRecordPlayer = () => {
 
 const getGameConsole = () => {
   return http.get("/gc-all", {
-    /*headers: {
+    headers: {
       Authorization: AuthHeader(),
-    },*/
+    },
   });
 };
 

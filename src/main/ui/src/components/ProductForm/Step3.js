@@ -28,7 +28,7 @@ export const Step3 = () => {
         🦄 Step 3
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <FileInput name="image" control={control} />
+        <FileInput name="files" control={control} />
         <PrimaryButton>Next</PrimaryButton>
       </Form>
     </MainContainer>

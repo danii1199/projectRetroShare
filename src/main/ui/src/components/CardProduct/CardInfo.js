@@ -5,7 +5,7 @@ import {
   CardActions,
   Typography,
   CardActionArea,
-  fade
+  fade,
 } from "@material-ui/core";
 import EuroSymbolIcon from "@material-ui/icons/EuroSymbol";
 import { useHistory } from "react-router-dom";
@@ -49,10 +49,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   icon: {
-    color: theme.palette.primary.light
-    
+    color: theme.palette.primary.light,
   },
-
 }));
 
 const CardProduct = ({ product }) => {
@@ -106,16 +104,20 @@ const CardProduct = ({ product }) => {
         >
           {product.price} <EuroSymbolIcon />
         </Typography>
-        {product.userBuyer!==null&&
-        <Typography align="right" field="price" gutterBottom variant="h5" component="h2">
-          Vendido
-        </Typography>
-}
+        {product.userBuyer !== null && (
+          <Typography
+            align="right"
+            field="price"
+            gutterBottom
+            variant="h5"
+            component="h2"
+          >
+            Vendido
+          </Typography>
+        )}
       </CardActions>
     </Card>
   );
 };
 
 export default CardProduct;
-
-

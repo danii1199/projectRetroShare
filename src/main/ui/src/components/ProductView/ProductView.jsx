@@ -1,7 +1,6 @@
 import { Container, Grid } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import OneProduct from "./OneProduct";
-import "./StyleProductView.css";
 import Card from "../CardSlider/card/Card";
 import RetroshareService from "../../Service/RetroshareService";
 

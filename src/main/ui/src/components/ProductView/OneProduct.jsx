@@ -7,7 +7,6 @@ import {
   CardMedia,
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
-import "./StyleProductView.css";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import { makeStyles } from "@material-ui/core/styles";

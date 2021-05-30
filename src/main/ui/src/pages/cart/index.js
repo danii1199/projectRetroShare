@@ -16,16 +16,23 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import Main from "../../components/CheckOut/Views/Main";
 
-const useStyles = makeStyles({
-  Button: {
-    margin: "5px",
-    color: "purple",
-    background: "yellow",
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(6, 8, 6, 6),
+    padding: theme.spacing(2, 8),
+    boxShadow: "0 4px 10px 0 #D9B504",
+    float: "rigth",
+  },
+  buttonCart: {
+    boxShadow: "0 4px 10px 0 #D9B504",
+    float: "right",
   },
   text: {
-    color: "#ffffff",
+    margin: theme.spacing(2),
+    padding: theme.spacing(2),
+    color: theme.palette.common.white,
   },
-});
+}));
 
 const Cart = () => {
   const styles = useStyles();
@@ -43,64 +50,70 @@ const Cart = () => {
   };
 
   return (
-    <Container title="Cart" description="This is the Cart page">
-      <Grid>
-        <Grid item>
-          <Typography variant={"h2"}>Cart</Typography>
-        </Grid>
-
-        <Grid align="justify-center">
-          <Grid item>
-            {cartItems.length > 0 ? (
-              <CartProducts />
-            ) : (
-              <Grid className="p-3 text-center text-muted">
-                Your cart is empty
-              </Grid>
-            )}
-
-            {checkout && (
-              <Grid align="justify-center">
-                <p>Checkout successfull</p>
-                <Link to="/" className="btn btn-outline-success btn-sm">
-                  BUY MORE
-                </Link>
-              </Grid>
-            )}
-          </Grid>
-          {cartItems.length > 0 && (
-            <Grid container>
-              <Grid item xs={3} align="actions-content">
-                <Typography className={styles.text}>Total Items</Typography>
-                <Typography variant="h4">{itemCount}</Typography>
-                <Typography className={styles.text}>Total Payment</Typography>
-                <Typography variant="h3">{formatNumber(total)}</Typography>
-                <hr className="my-4" />
-                <Grid className="text-center">
-                  <Button className={styles.Button} onClick={handleClickOpen}>
-                    CHECKOUT
-                  </Button>
-                  <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="form-dialog-title"
-                  >
-                    <DialogTitle id="form-dialog-title">
-                      Pasarela de Pago
-                    </DialogTitle>
-                    <DialogContent>
-                      <Main />
-                    </DialogContent>
-                  </Dialog>
-                  <Button className={styles.Button} onClick={clearCart}>
-                    CLEAR
-                  </Button>
-                </Grid>
-              </Grid>
-            </Grid>
-          )}
-        </Grid>
+    <Container >
+      <Grid >
+        <Typography className={styles.text} variant={"h2"}>
+          Cart
+        </Typography>
       </Grid>
+
+      <Grid >
+        {cartItems.length > 0 ? (
+          <CartProducts />
+        ) : (
+          <Grid className="p-3 text-center text-muted">Your cart is empty</Grid>
+        )}
+
+        {checkout && (
+          <Grid >
+            <Typography>Checkout successfull</Typography>
+            <Link children="BUY MORE" to="/" className="btn btn-outline-success btn-sm"/>
+          </Grid>
+        )}
+      </Grid>
+      {cartItems.length > 0 && (
+        <Grid >
+          <Grid >
+            <Typography className={styles.text}>Total Items</Typography>
+            <Typography className={styles.text} variant="h4">
+              {itemCount}
+            </Typography>
+            <Typography className={styles.text}>Total Payment</Typography>
+            <Typography className={styles.text} variant="h3">
+              {formatNumber(total)}
+            </Typography>
+            <Grid item>
+              <Button
+                children="CHECKOUT"
+                variant="contained"
+                color="secondary"
+                className={styles.button}
+                onClick={handleClickOpen}
+              />
+
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                
+              >
+                <DialogTitle>
+                  Pasarela de Pago
+                </DialogTitle>
+                <DialogContent>
+                  <Main />
+                </DialogContent>
+              </Dialog>
+              <Button
+                children="VACIAR"
+                variant="contained"
+                color="secondary"
+                className={styles.button}
+                onClick={clearCart}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      )}
     </Container>
   );
 };

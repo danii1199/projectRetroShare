@@ -5,17 +5,15 @@ import {
   CardActions,
   Typography,
   CardActionArea,
-  Button,
   fade,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { ShoppingCart } from "@material-ui/icons";
-import { Person } from "@material-ui/icons";
 import EuroSymbolIcon from "@material-ui/icons/EuroSymbol";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
-import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { AddCartButton, CartButton } from "../Buttons/PrincipalButtons";
+import { UserButton } from "../Buttons/PrincipalButtons";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -55,16 +53,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   icon: {
-    color: theme.palette.primary.light
-    
+    color: theme.palette.primary.light,
   },
-
 }));
 
 const CardProduct = ({ product }) => {
   const classes = useStyles();
-  const { addProduct, cartItems } = useContext(CartContext);
-  const history = useHistory();
+  const { cartItems } = useContext(CartContext);
 
   const isInCart = (product) => {
     console.log(product);
@@ -114,46 +109,10 @@ const CardProduct = ({ product }) => {
           {product.price} <EuroSymbolIcon />
         </Typography>
 
-        <Button
-          className={classes.button}
-          variant="contained"
-          size="large"
-          color="secondary"
-          component={Link}
-          to={`user/${product.userOwner.id}`}
-        >
-          <Person className={classes.icon} />
-        </Button>
+        <UserButton product={product} />
 
-        {!isInCart(product) && (
-          <>
-            <Button
-              className={classes.button}
-              variant="contained"
-              size="large"
-              color="secondary"
-              onClick={() => addProduct(product)}
-            >
-              <ShoppingCart className={classes.icon} />
-            </Button>
-          </>
-        )}
-        {isInCart(product) && (
-          <>
-            <Button
-              className={classes.button}
-              variant="contained"
-              size="large"
-              color="secondary"
-              onClick={() => {
-                history.push(`/cart`);
-                history.go();
-              }}
-            >
-              To Cart
-            </Button>
-          </>
-        )}
+        {!isInCart(product) && <AddCartButton product={product}/>}
+        {isInCart(product) && <CartButton />}
       </CardActions>
     </Card>
   );

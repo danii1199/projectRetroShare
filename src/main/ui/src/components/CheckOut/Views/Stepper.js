@@ -9,6 +9,7 @@ import {
   Typography,
   Box,
   Grid,
+  Container,
 } from "@material-ui/core";
 import ContactForm from "../Views/Forms/ContactForm";
 import ServiceForm from "../Views/Forms/ServiceForm";
@@ -162,7 +163,7 @@ const FormStepper = () => {
   };
 
   return (
-    <>
+    <Container>
       <Stepper
         alternativeLabel
         className={classes.stepper}
@@ -237,7 +238,7 @@ const FormStepper = () => {
           </form>
         )}
       </Box>
-    </>
+    </Container>
   );
 };
 
