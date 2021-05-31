@@ -3,11 +3,25 @@ import { DataGrid } from "@material-ui/data-grid";
 import Button from "@material-ui/core/Button";
 import RetroshareService from "../../Service/RetroshareService";
 import React,{ useState } from "react";
-
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import ContactForm from "../CheckOut/Views/Forms/ContactForm"
 
 const UserComponent = () => {
   const [disabled,setDisabled] = useState(true);
-  
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   var miarray =[];
   function eliminarSeleccionados() {
 
@@ -16,10 +30,6 @@ const UserComponent = () => {
       RetroshareService.remove(miarray[i]);
     }
     window.location.reload();
-  }
-
-  function editarSeleccionado() {
-   console.log("Estas pulsando editar");
   }
 
   function desactivarboton(x){
@@ -89,9 +99,29 @@ const UserComponent = () => {
        marginTop: "20px",
        marginLeft: "10px"
      }}
-     onClick={editarSeleccionado}
+     onClick={handleClickOpen}
      >Editar seleccionado</Button>
+
+<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Editar Perfil</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Inserta los nuevos datos
+          </DialogContentText>
+          <TextField label="Introduce tu nombre"></TextField>
+          {/*<ContactForm/>*/}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>
+            Cancelar
+          </Button>
+          <Button onClick={handleClose}>
+            Aceptar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
+    
   );
 };
 
