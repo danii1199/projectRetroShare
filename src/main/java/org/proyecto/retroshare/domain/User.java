@@ -48,18 +48,18 @@ public class User {
 	private Calendar date;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "userOwner", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userOwner", cascade=CascadeType.REMOVE,fetch = FetchType.LAZY)
 	private Collection<Product> productOwner;
 	@JsonIgnore
-	@OneToMany(mappedBy = "userBuyer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userBuyer",cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private Collection<Product> productBuyer;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "userOwner", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-	private Collection<Product> productSend;
+	@OneToMany(mappedBy = "userOwner", fetch = FetchType.LAZY)
+	private Collection<Chat> messageOwner;
 	@JsonIgnore
-	@OneToMany(mappedBy = "userBuyer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Collection<Product> productReceive;
+	@OneToMany(mappedBy = "userBuyer", fetch = FetchType.LAZY)
+	private Collection<Chat> messageBuyer;
 
 	
 	/*
@@ -257,20 +257,20 @@ public class User {
 		this.productBuyer = productBuyer;
 	}
 
-	public Collection<Product> getProductSend() {
-		return productSend;
+	public Collection<Chat> getMessageOwner() {
+		return messageOwner;
 	}
 
-	public void setProductSend(Collection<Product> productSend) {
-		this.productSend = productSend;
+	public void setMessageOwner(Collection<Chat> messageOwner) {
+		this.messageOwner = messageOwner;
 	}
 
-	public Collection<Product> getProductReceive() {
-		return productReceive;
+	public Collection<Chat> getMessageBuyer() {
+		return messageBuyer;
 	}
 
-	public void setProductReceive(Collection<Product> productReceive) {
-		this.productReceive = productReceive;
+	public void setMessageBuyer(Collection<Chat> messageBuyer) {
+		this.messageBuyer = messageBuyer;
 	}
 
 

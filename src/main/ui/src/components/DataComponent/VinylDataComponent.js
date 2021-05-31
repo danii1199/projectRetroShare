@@ -1,7 +1,18 @@
 import * as React from "react";
 import { DataGrid } from "@material-ui/data-grid";
+import Button from "@material-ui/core/Button";
+import RetroshareService from "../../Service/RetroshareService";
 
 const VinylComponentAdmin = () => {
+  var miarray =[];
+  function eliminarSeleccionados() {
+
+    for(var i=0;i<miarray.length;i++){
+      console.log(miarray[i]);
+      RetroshareService.deleteProduct(miarray[i]);
+    }
+    window.location.reload();
+  }
   const [vinyl, setVinyl] = React.useState([]);
 
   React.useEffect(() => {
@@ -27,7 +38,19 @@ const VinylComponentAdmin = () => {
 
   return (
     <div style={{ height: 400, width: "100%",backgroundColor:"white" }}>
-      <DataGrid rows={vinyl} columns={columns} pageSize={5} checkboxSelection />
+      <DataGrid rows={vinyl} 
+      columns={columns} 
+      pageSize={5} 
+      checkboxSelection 
+      onSelectionModelChange={itm => miarray=itm.selectionModel}
+      />
+       <Button
+       style={{
+        backgroundColor:"white",
+        marginTop: "20px"
+      }}
+     onClick={eliminarSeleccionados}
+     >Borrar seleccionados</Button>
     </div>
   );
 };

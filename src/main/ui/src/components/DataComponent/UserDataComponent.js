@@ -2,10 +2,11 @@ import UserAPI from "../../lib/UserAPI";
 import { DataGrid } from "@material-ui/data-grid";
 import Button from "@material-ui/core/Button";
 import RetroshareService from "../../Service/RetroshareService";
-
+import React,{ useState } from "react";
 
 
 const UserComponent = () => {
+  const [disabled,setDisabled] = useState(true);
   
   var miarray =[];
   function eliminarSeleccionados() {
@@ -16,6 +17,25 @@ const UserComponent = () => {
     }
     window.location.reload();
   }
+
+  function editarSeleccionado() {
+   console.log("Estas pulsando editar");
+  }
+
+  function desactivarboton(x){
+   var long=x.length;
+    if(long===1){
+      setDisabled(false);
+
+    }
+    else{
+      setDisabled(true);
+
+    }
+    console.log(miarray.length);
+  }
+  
+
   const columns = [
     { dataField:"id", field: "id", headerName: "ID", width: 70 },
     { field: "userName", headerName: "User name", width: 130 },
@@ -50,7 +70,7 @@ const UserComponent = () => {
         columns={columns}
         pageSize={5}
         checkboxSelection
-        onSelectionModelChange={itm => miarray=itm.selectionModel}
+        onSelectionModelChange={itm => desactivarboton(miarray=itm.selectionModel)}
         
       />
       
@@ -61,6 +81,16 @@ const UserComponent = () => {
      }}
      onClick={eliminarSeleccionados}
      >Borrar seleccionados</Button>
+
+<Button
+    disabled={disabled}
+     style={{
+       backgroundColor:"white",
+       marginTop: "20px",
+       marginLeft: "10px"
+     }}
+     onClick={editarSeleccionado}
+     >Editar seleccionado</Button>
     </div>
   );
 };
