@@ -46,7 +46,7 @@ const schema = yup.object().shape({
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(16),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -129,6 +129,36 @@ export default function SignUp() {
                 name="lastName"
                 autoComplete="lname"
               />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="uname"
+                name="userName"
+                variant="outlined"
+                fullWidth
+                id="userName"
+                label="User Name"
+                autoFocus
+                inputRef={register({
+                  required: { value: true, message: "Valor requerido" },
+                })}
+              />
+              <div color="black">{errors?.userName?.message}</div>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="city"
+                name="city"
+                variant="outlined"
+                fullWidth
+                id="city"
+                label="City"
+                autoFocus
+                inputRef={register({
+                  required: { value: true, message: "Valor requerido" },
+                })}
+              />
+              <div color="black">{errors?.city?.message}</div>
             </Grid>
             <Grid item xs={12}>
               <TextField

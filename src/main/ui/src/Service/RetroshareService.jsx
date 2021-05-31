@@ -25,7 +25,7 @@ const update = (id, data) => {
 };
 
 const remove = (id) => {
-  return http.delete(`/delete/${id}`, {
+  return http.post(`/delete/${id}`, {
     headers: {
       Authorization: AuthHeader(),
     },
@@ -99,6 +99,15 @@ const createProduct = (data, tproduct, idUser, idProductStatus) => {
   });
 };
 
+const deleteProduct = (id) => {
+  return http.post(`/pr-delete/${id}`, {
+    headers: {
+      Authorization: AuthHeader(),
+    },
+  });
+  
+};
+
 const addToCart = (idProduct) => {
   return http.post(`/addtocart/${idProduct}/1`, {
     headers: {
@@ -106,6 +115,13 @@ const addToCart = (idProduct) => {
     },
   });
 };
+
+
+const getCurrentCart = () => {
+  return JSON.parse(localStorage.getItem("cart"));
+};
+
+
 
 const services = {
   getAll,
@@ -121,8 +137,10 @@ const services = {
   getProducts,
   findByProductName,
   createProduct,
+  deleteProduct,
   findByEmail,
-  addToCart
+  addToCart,
+  getCurrentCart
 };
 
 export default services;

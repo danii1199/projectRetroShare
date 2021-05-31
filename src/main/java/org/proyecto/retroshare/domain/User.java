@@ -1,7 +1,8 @@
 package org.proyecto.retroshare.domain;
 
+import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +20,7 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -43,30 +45,46 @@ public class User {
 	private String email;
 	@Column(unique = true)
 	private String avatar;
-	@JsonFormat(pattern = "dd-MM-YYYY", shape = Shape.STRING)
-	private Date date;
+	private Calendar date;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "userOwner", cascade=CascadeType.REMOVE,fetch = FetchType.LAZY)
+	private Collection<Product> productOwner;
+	@JsonIgnore
+	@OneToMany(mappedBy = "userBuyer",cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
+	private Collection<Product> productBuyer;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "userOwner", fetch = FetchType.LAZY)
+	private Collection<Chat> messageOwner;
+	@JsonIgnore
+	@OneToMany(mappedBy = "userBuyer", fetch = FetchType.LAZY)
+	private Collection<Chat> messageBuyer;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	private Collection<Product> products;
+	
+	/*
+	 * @JsonIgnore
+	 * 
+	 * @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST, fetch =
+	 * FetchType.LAZY) private Historial historial;
+	 */
 
 	@JsonIgnoreProperties(value = "users", allowSetters = true)
 	@JoinColumn(name = "role_id")
 	@ManyToOne(cascade = CascadeType.PERSIST, optional = true)
 	private Role role;
-	
-	@JsonIgnoreProperties(value="users",allowSetters = true)
+
+	@JsonIgnoreProperties(value = "users", allowSetters = true)
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Collection<Valuation> valuations;
-	
+
 	@JsonIgnoreProperties(value = "comments", allowSetters = true)
 	@OneToMany(mappedBy = "productComment", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Collection<Comment> comments;
-	
-	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	private ShoppingCart shoppingCart;
 
 	public User(String firstName, String lastName, String userName, String password, String sex, String address,
-			Integer zipCode, String city, String country, Integer phoneNumber, String email, String avatar, Date date) {
+			Integer zipCode, String city, String country, Integer phoneNumber, String email, String avatar,
+			Calendar date) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -191,11 +209,11 @@ public class User {
 		this.avatar = avatar;
 	}
 
-	public Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
 	}
 
@@ -205,14 +223,6 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public Collection<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Collection<Product> products) {
-		this.products = products;
 	}
 
 	public Collection<Valuation> getValuations() {
@@ -231,13 +241,39 @@ public class User {
 		this.comments = comments;
 	}
 
-	public ShoppingCart getShoppingCart() {
-		return shoppingCart;
+	public Collection<Product> getProductOwner() {
+		return productOwner;
 	}
 
-	public void setShoppingCart(ShoppingCart shoppingCart) {
-		this.shoppingCart = shoppingCart;
+	public void setProductOwner(Collection<Product> productOwner) {
+		this.productOwner = productOwner;
 	}
+
+	public Collection<Product> getProductBuyer() {
+		return productBuyer;
+	}
+
+	public void setProductBuyer(Collection<Product> productBuyer) {
+		this.productBuyer = productBuyer;
+	}
+
+	public Collection<Chat> getMessageOwner() {
+		return messageOwner;
+	}
+
+	public void setMessageOwner(Collection<Chat> messageOwner) {
+		this.messageOwner = messageOwner;
+	}
+
+	public Collection<Chat> getMessageBuyer() {
+		return messageBuyer;
+	}
+
+	public void setMessageBuyer(Collection<Chat> messageBuyer) {
+		this.messageBuyer = messageBuyer;
+	}
+
+
 	
 	
 	

@@ -7,18 +7,22 @@ import { DataProvider } from "./components/ProductForm/DataContext";
 import ProductsContextProvider from "./contexts/ProductsContext";
 import CartContextProvider from "./contexts/CartContext";
 import UsersContextProvider from "./contexts/UsersContext";
+import DataContextProvider from "./components/CheckOut/StateContext/DataContext";
+
 
 ReactDOM.render(
   <BrowserRouter>
-      <DataProvider>
-        <UsersContextProvider>
-          <ProductsContextProvider>
+    <DataProvider>
+      <UsersContextProvider>
+        <ProductsContextProvider>
+          <DataContextProvider>
             <CartContextProvider>
               <App />
             </CartContextProvider>
-          </ProductsContextProvider>
-        </UsersContextProvider>
-      </DataProvider>
+          </DataContextProvider>
+        </ProductsContextProvider>
+      </UsersContextProvider>
+    </DataProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );

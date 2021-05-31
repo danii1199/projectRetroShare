@@ -82,8 +82,8 @@ export const CartForm = () => {
           type="tel"
           label="Phone Number*"
           name="phoneNumber"
-          onChange={(event) => {
-            event.target.value = normalizePhoneNumber(event.target.value);
+          onChange={(Input) => {
+            Input.target.value = normalizePhoneNumber(Input.target.value);
           }}
           error={!!errors.phoneNumber}
           helperText={errors?.phoneNumber?.message}

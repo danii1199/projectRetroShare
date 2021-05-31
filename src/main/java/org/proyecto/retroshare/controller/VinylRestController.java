@@ -51,8 +51,8 @@ public class VinylRestController {
 	public ResponseEntity<Vinyl> save(@RequestBody Vinyl vinyl, @PathVariable Long idUser,
 			@PathVariable Long idProductStatus) {
 		User user = userRepository.getOne(idUser);
-		vinyl.setUser(user);
-		user.getProducts().add(vinyl);
+		vinyl.setUserOwner(user);
+		user.getProductOwner().add(vinyl);
 
 		ProductStatus productStatus = productStatusRepository.getOne(idProductStatus);
 		vinyl.setProductStatus(productStatus);

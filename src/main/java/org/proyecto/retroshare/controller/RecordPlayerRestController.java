@@ -51,8 +51,8 @@ public class RecordPlayerRestController {
 	public ResponseEntity<RecordPlayer> save(@RequestBody RecordPlayer recordPlayer, @PathVariable Long idUser,
 			@PathVariable Long idProductStatus) {
 		User user = userRepository.getOne(idUser);
-		recordPlayer.setUser(user);
-		user.getProducts().add(recordPlayer);
+		recordPlayer.setUserOwner(user);
+		user.getProductOwner().add(recordPlayer);
 
 		ProductStatus productStatus = productStatusRepository.getOne(idProductStatus);
 		recordPlayer.setProductStatus(productStatus);

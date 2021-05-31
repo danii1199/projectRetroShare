@@ -36,24 +36,26 @@ export const Step2 = () => {
         🦄 Step 2
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
-      <InputLabel htmlFor="status">Product type</InputLabel>
-          <NativeSelect 
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            inputRef={register}
-            inputProps={{
-              name: "status",
-              id: "status",
-              label: "status"
-            }}
-          >
-            <option value={1}>New</option>
-            <option value={2}>Old</option>
-            <option value={3}>Worm Out</option>
-            <option value={4}>Used</option>
-          </NativeSelect>
-          <FormHelperText>Product type</FormHelperText>
+        <InputLabel htmlFor="status">Estado del producto</InputLabel>
+        <NativeSelect
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          inputRef={register({
+            required: { value: true, message: "Valor requerido" },
+          })}
+          inputProps={{
+            name: "status",
+            id: "status",
+            label: "status",
+          }}
+        >
+          <option value={1}>Nuevo</option>
+          <option value={2}>Viejo</option>
+          <option value={3}>Desgastado</option>
+          <option value={4}>Usado</option>
+        </NativeSelect>
+        <FormHelperText>Espero que le hayas dado buen uso</FormHelperText>
 
         <FormControlLabel
           control={
@@ -65,7 +67,7 @@ export const Step2 = () => {
               name="hasDescription"
             />
           }
-          label="Do you have a Description"
+          label="Cuentanos algo sobre tu producto"
         />
 
         {hasDescription && (
@@ -73,14 +75,12 @@ export const Step2 = () => {
             ref={register}
             id="description"
             type="text"
-            label="Description"
+            label="Descripción"
             name="description"
-            
           />
         )}
-        <PrimaryButton>Next</PrimaryButton>
+        <PrimaryButton>Siguiente</PrimaryButton>
       </Form>
     </MainContainer>
   );
 };
-

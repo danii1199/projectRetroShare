@@ -4,15 +4,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.proyecto.retroshare.domain.Role;
-import org.proyecto.retroshare.domain.ShoppingCart;
 import org.proyecto.retroshare.domain.User;
 import org.proyecto.retroshare.repositories.RoleRepository;
-import org.proyecto.retroshare.repositories.ShoppingCartRepository;
 import org.proyecto.retroshare.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -41,7 +42,7 @@ import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping(value = "/retroshare/")
 public class UserRestController {
-
+	
 	private static Logger log = LoggerFactory.getLogger(UserRestController.class);
 	// ENLACE BBDD
 	@Autowired
@@ -82,8 +83,12 @@ public class UserRestController {
 				.orElseThrow(() -> new ResourceNotFoundException("No existe el rol" + idRole));
 		user.setRole(role);
 		role.getUsers().add(user);
+		
+		
+		Calendar fecha=Calendar.getInstance();
+		
+		user.setDate(fecha);
 		User obj = userRepository.save(user);
-
 		return new ResponseEntity<User>(obj, HttpStatus.OK);
 	}
 
@@ -129,7 +134,7 @@ public class UserRestController {
 	}
 
 	// BORRAR UN USUARIO
-	@GetMapping(value = "/delete/{id}")
+	@PostMapping(value = "/delete/{id}")
 	public String delete(@PathVariable Long id) {
 		User user = userRepository.getOne(id);
 		if (user != null) {

@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin("*")
 @RestController
@@ -53,10 +55,11 @@ public class GameConsoleRestController {
 		// User user = userRepository.getOne(idUser);
 		User user = userRepository.findById(idUser)
 				.orElseThrow(() -> new ResourceNotFoundException("No existe el usuario" + idUser));
-		gameConsole.setUser(user);
-		user.getProducts().add(gameConsole);
+		gameConsole.setUserOwner(user);
+		user.getProductOwner().add(gameConsole);
 
 		ProductStatus productStatus = productStatusRepository.getOne(idProductStatus);
+		
 		gameConsole.setProductStatus(productStatus);
 		productStatus.getProducts().add(gameConsole);
 

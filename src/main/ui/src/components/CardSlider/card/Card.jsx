@@ -9,11 +9,38 @@ import {
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./style.css";
 import ProductsAPI from "../../../lib/ProductsAPI";
 import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles((theme) => ({
+  title: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    color: theme.palette.common.black
+  },
+  slider: {
+    margin: theme.spacing(5),
+    width: "auto%",
+  },
+  text: {
+    margin: "30px",
+    color: theme.palette.common.white,
+  },
+  item: {
+    margin: theme.spacing(1),
+  },
+  button: {
+    float: "right",
+    boxShadow: "0 4px 10px 0 #D9B504",
+  },
+}));
 
 const Cards = () => {
+  const classes = useStyles();
+
   let settings = {
     infinite: true,
     speed: 100,
@@ -21,16 +48,14 @@ const Cards = () => {
     slideToScroll: 1,
   };
   const history = useHistory();
-
   const products = ProductsAPI();
 
   return (
     <Container>
-      <Slider {...settings}>
+      <Slider {...settings} className={classes.slider}>
         {products.map((product) => {
           return (
-            
-            <Card key={product} className="card-design">
+            <Card key={product} className={classes.item}>
               <CardActionArea
                 onClick={() => {
                   history.push(`/pr/${product.id}`);
@@ -48,15 +73,12 @@ const Cards = () => {
                 <CardContent className="content">
                   <Typography
                     align="left"
-                    className="title"
+                    className={classes.title}
                     gutterBottom
                     variant="h5"
-                    
                   >
                     {product.name}
                   </Typography>
-                  
-                
                 </CardContent>
               </CardActionArea>
             </Card>

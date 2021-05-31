@@ -9,9 +9,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     root: {
-      backgroundColor: "#121212",
+      background: theme.palette.secondary.main,
       textAlign: "center",
       cursor: "pointer",
       color: "#ffffff",
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
     },
     icon: {
       marginTop: "16px",
-      color: "#ffffff",
+      color: theme.palette.primary.light,
       fontSize: "42px",
     },
   }));
@@ -44,7 +44,7 @@ const useStyles = makeStyles(() => ({
                 >
                   <CloudUpload className={styles.icon} />
                   <input {...getInputProps()} name={name} onBlur={onBlur} />
-                  <p>Drag 'n' drop files here, or click to select files</p>
+                  <p>Arrastra una foto de tu producto</p>
                 </Paper>
               )}
             </Dropzone>

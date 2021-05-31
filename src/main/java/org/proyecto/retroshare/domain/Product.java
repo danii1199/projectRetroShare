@@ -13,7 +13,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,32 +26,34 @@ public class Product {
 	private Long id;
 	private String description;
 	private String image;
-
-
-	@JsonIgnoreProperties(value = { "products", "hibernateLazyInitializer" }, allowSetters = true)
-	@JoinColumn(name = "user_id")
-	@ManyToOne(cascade = CascadeType.PERSIST, optional = true)
-	private User user;
 	
+	@JsonIgnoreProperties(value = { "products", "hibernateLazyInitializer" }, allowSetters = true)
+	@JoinColumn(name = "userOwner_id")
+	@ManyToOne( optional = true)
+	private User userOwner;
+	
+	@JsonIgnoreProperties(value = { "products", "hibernateLazyInitializer" }, allowSetters = true)
+	@JoinColumn(name = "userBuyer_id")
+	@ManyToOne(optional = true)
+	private User userBuyer;
+	
+	
+	/*@JsonIgnore
+	@OneToOne(mappedBy = "product", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private Historial historial;*/
+
 	@JsonIgnoreProperties(value = { "products", "hibernateLazyInitializer" }, allowSetters = true)
 	@JoinColumn(name = "productStatus_id")
 	@ManyToOne(cascade = CascadeType.PERSIST, optional = true)
 	private ProductStatus productStatus;
 
-	
 	@JsonIgnoreProperties(value = "products", allowSetters = true)
 	@OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Collection<StoreStatus> store_status;
-	
+
 	@JsonIgnoreProperties(value = "comments", allowSetters = true)
 	@OneToMany(mappedBy = "productComment", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Collection<Comment> comments;
-	
-	@JsonIgnoreProperties(value = "products", allowSetters = true)
-	@ManyToOne(cascade = CascadeType.PERSIST, optional = true)
-	private ShoppingCart shoppingCart;
-	
-	
 
 	public Product(String description, String image) {
 
@@ -61,9 +65,6 @@ public class Product {
 	public Product() {
 		super();
 	}
-
-
-
 
 	public String getImage() {
 		return image;
@@ -89,12 +90,20 @@ public class Product {
 		this.description = description;
 	}
 
-	public User getUser() {
-		return user;
+	public User getUserOwner() {
+		return userOwner;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserOwner(User userOwner) {
+		this.userOwner = userOwner;
+	}
+
+	public User getUserBuyer() {
+		return userBuyer;
+	}
+
+	public void setUserBuyer(User userBuyer) {
+		this.userBuyer = userBuyer;
 	}
 
 	public ProductStatus getProductStatus() {
@@ -120,15 +129,6 @@ public class Product {
 	public void setComments(Collection<Comment> comments) {
 		this.comments = comments;
 	}
-
-	public ShoppingCart getShoppingCart() {
-		return shoppingCart;
-	}
-
-	public void setShoppingCart(ShoppingCart shoppingCart) {
-		this.shoppingCart = shoppingCart;
-	}
-	
 	
 
 }

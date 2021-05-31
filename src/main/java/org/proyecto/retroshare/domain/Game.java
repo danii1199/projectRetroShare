@@ -13,16 +13,11 @@ public class Game extends Product {
 	private String gender;
 	private String developer;
 	private Float price;
-	
 
 	@JsonIgnoreProperties(value = { "games", "hibernateLazyInitializer" }, allowSetters = true)
-	
-	
-
 	public Game() {
 		super();
 	}
-
 
 	public Game(String description, String name, String gender, String developer, Float price) {
 		super();
@@ -31,8 +26,6 @@ public class Game extends Product {
 		this.developer = developer;
 		this.price = price;
 	}
-
-
 
 	public String getName() {
 		return name;
@@ -65,7 +58,5 @@ public class Game extends Product {
 	public void setPrice(Float price) {
 		this.price = price;
 	}
-
-
 
 }

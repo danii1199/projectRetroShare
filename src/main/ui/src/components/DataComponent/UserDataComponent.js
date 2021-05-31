@@ -1,9 +1,52 @@
 import UserAPI from "../../lib/UserAPI";
 import { DataGrid } from "@material-ui/data-grid";
+import Button from "@material-ui/core/Button";
+import RetroshareService from "../../Service/RetroshareService";
+import React,{ useState } from "react";
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const UserComponent = () => {
+  const [disabled,setDisabled] = useState(true);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  var miarray =[];
+  function eliminarSeleccionados() {
+
+    for(var i=0;i<miarray.length;i++){
+      console.log(miarray[i]);
+      RetroshareService.remove(miarray[i]);
+    }
+    window.location.reload();
+  }
+
+  function desactivarboton(x){
+   var long=x.length;
+    if(long===1){
+      setDisabled(false);
+
+    }
+    else{
+      setDisabled(true);
+
+    }
+    console.log(miarray.length);
+  }
+  
+
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { dataField:"id", field: "id", headerName: "ID", width: 70 },
     { field: "userName", headerName: "User name", width: 130 },
     { field: "date", headerName: "Register Date", width: 150 },
     {
@@ -26,17 +69,58 @@ const UserComponent = () => {
     { field: "city", headerName: "City", width: 100 },
     { field: "country", headerName: "Country", width: 150 },
     { field: "zipCode", headerName: "Zip Code", type: "number", width: 110 },
+  
   ];
-
   return (
+    
     <div style={{ height: 400, width: "100%",backgroundColor:"white" }}>
       <DataGrid
         rows={UserAPI()}
         columns={columns}
         pageSize={5}
         checkboxSelection
+        onSelectionModelChange={itm => desactivarboton(miarray=itm.selectionModel)}
+        
       />
+      
+     <Button
+     style={{
+       backgroundColor:"white",
+       marginTop: "20px"
+     }}
+     onClick={eliminarSeleccionados}
+     >Borrar seleccionados</Button>
+
+<Button
+    disabled={disabled}
+     style={{
+       backgroundColor:"white",
+       marginTop: "20px",
+       marginLeft: "10px"
+     }}
+     onClick={handleClickOpen}
+     >Editar seleccionado</Button>
+
+<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Editar Perfil</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Inserta los nuevos datos
+          </DialogContentText>
+          <TextField label="Introduce tu nombre"></TextField>
+          {/*<ContactForm/>*/}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>
+            Cancelar
+          </Button>
+          <Button onClick={handleClose}>
+            Aceptar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
+    
   );
 };
 

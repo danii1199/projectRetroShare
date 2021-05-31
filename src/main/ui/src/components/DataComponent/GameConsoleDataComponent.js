@@ -1,10 +1,21 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
+import Button from "@material-ui/core/Button";
+import RetroshareService from "../../Service/RetroshareService";
 
 const GameConsoleDataComponentAdmin = () => {
-  const [gameConsole, setGameConsole] = React.useState([]);
+  var miarray =[];
+  function eliminarSeleccionados() {
 
-  React.useEffect(() => {
+    for(var i=0;i<miarray.length;i++){
+      console.log(miarray[i]);
+      RetroshareService.deleteProduct(miarray[i]);
+    }
+    window.location.reload();
+  }
+  const [gameConsole, setGameConsole] =useState([]);
+
+ useEffect(() => {
     obtenerDatos();
   }, []);
 
@@ -19,7 +30,13 @@ const GameConsoleDataComponentAdmin = () => {
     { field: "name", headerName: "Name", width: 130 },
     { field: "year", headerName: "Year", width: 150 },
     { field: "price", headerName: "Price", width: 150 },
-    { field: "firstName", headerName: "Owner user", width: 130, valueFormatter: (gameConsole) => gameConsole.row?.user?.userName},
+    { field: "useName", headerName: "Buy user", width: 130, valueFormatter: (game) => game.row?.userBuyer?.userName},
+    {
+      field: "userName",
+      headerName: "Owner user",
+      width: 130,
+      valueFormatter: (game) => game.row?.userOwner?.userName,
+    },
     { field: "productStatus", headerName: "Product Status", width: 150 ,valueFormatter: (gameConsole) => gameConsole.row?.productStatus?.status},
   ];
 
@@ -31,8 +48,18 @@ const GameConsoleDataComponentAdmin = () => {
         columns={columns}
         pageSize={5}
         checkboxSelection
+        onSelectionModelChange={itm => miarray=itm.selectionModel}
       />
+
+       <Button
+       style={{
+        backgroundColor:"white",
+        marginTop: "20px"
+      }}
+     onClick={eliminarSeleccionados}
+     >Borrar seleccionados</Button>
     </div>
+    
   );
 };
 

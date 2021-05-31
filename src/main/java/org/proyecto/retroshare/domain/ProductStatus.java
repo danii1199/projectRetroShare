@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class ProductStatus {
 	@Id
@@ -19,8 +18,7 @@ public class ProductStatus {
 	private Long id;
 	@Column(unique = true)
 	private String status;
-	
-	
+
 	@OneToMany(mappedBy = "productStatus", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Collection<Product> products;
 

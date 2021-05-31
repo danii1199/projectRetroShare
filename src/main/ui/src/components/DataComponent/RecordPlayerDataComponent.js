@@ -1,7 +1,18 @@
 import * as React from "react";
 import { DataGrid } from "@material-ui/data-grid";
+import Button from "@material-ui/core/Button";
+import RetroshareService from "../../Service/RetroshareService";
 
 const RecordPlayerComponentAdmin = () => {
+  var miarray =[];
+  function eliminarSeleccionados() {
+
+    for(var i=0;i<miarray.length;i++){
+      console.log(miarray[i]);
+      RetroshareService.deleteProduct(miarray[i]);
+    }
+    window.location.reload();
+  }
   const [recordPlayer, setRecordPlayer] = React.useState([]);
 
   React.useEffect(() => {
@@ -9,7 +20,7 @@ const RecordPlayerComponentAdmin = () => {
   }, []);
 
   const obtenerDatos = async () => {
-    const data = await fetch("http://localhost:8080/retroshare/v-all");
+    const data = await fetch("http://localhost:8080/retroshare/rp-all");
     const recordPlayers = await data.json();
     setRecordPlayer(recordPlayers);
   };
@@ -32,7 +43,15 @@ const RecordPlayerComponentAdmin = () => {
         columns={columns}
         pageSize={5}
         checkboxSelection
+        onSelectionModelChange={itm => miarray=itm.selectionModel}
       />
+       <Button
+       style={{
+        backgroundColor:"white",
+        marginTop: "20px"
+      }}
+     onClick={eliminarSeleccionados}
+     >Borrar seleccionados</Button>
     </div>
   );
 };
