@@ -7,9 +7,10 @@ import {
     LocalShipping,
     Payment,
 } from '@material-ui/icons';
+import { Grid } from "@material-ui/core";
 
 
-const style = makeStyles(theme => ({
+const useStyle = makeStyles(theme => ({
     root: {
         backgroundColor: '#ccc',
         zIndex: 1,
@@ -31,7 +32,7 @@ const style = makeStyles(theme => ({
 }));
 
 const StepperIcon = props => {
-    const classes = style();
+    const classes = useStyle();
     const { active, completed } = props;
 
     const icons = {
@@ -42,14 +43,14 @@ const StepperIcon = props => {
     };
 
     return (
-        <div
+        <Grid
             className={clsx(classes.root, {
                 [classes.active]: active,
                 [classes.completed]: completed,
             })}
         >
             {icons[String(props.icon)]}
-        </div>
+        </Grid>
     );
 }
 

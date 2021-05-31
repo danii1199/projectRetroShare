@@ -16,9 +16,7 @@ import ProductView from "./components/ProductView/ProductView";
 import VinylDataComponent from "./components/DataComponent/VinylDataComponent";
 import RecordPlayerDataComponent from "./components/DataComponent/RecordPlayerDataComponent";
 import UserProfile from "./components/User/UserProfile";
-import Game from "./components/ProductsPage/Game";
-import Vinyl from "./components/ProductsPage/Vinyl";
-import RecordPlayer from "./components/ProductsPage/RecordPlayer";
+import CategoriasProductos from "./components/ProductsPage/CategoriasProductos";
 import OneUser from "./components/User/OneUser";
 import Cart from "./pages/cart";
 import Chat from "./components/Chat/Chat";
@@ -40,9 +38,7 @@ const GameDataComponent = lazy(() =>
 const GameConsoleDataComponent = lazy(() =>
   import("./components/DataComponent/GameConsoleDataComponent")
 );
-const GameConsole = lazy(() =>
-  import("./components/ProductsPage/GameConsole")
-);
+
 const SingIn = lazy(() => import("./components/UserAuth/SingIn"));
 const SingUp = lazy(() => import("./components/UserAuth/SingUp"));
 
@@ -63,23 +59,23 @@ const App = () => {
                 exact
                 component={GameDataComponent}
               />
-              <Route path="/videogames" exact component={Game} />
+              <Route path="/videogames" exact component={CategoriasProductos} />
 
               <Route
                 path="/gameconsole-admin"
                 exact
                 component={GameConsoleDataComponent}
               />
-              <Route path="/gameconsole" exact component={GameConsole} />
+              <Route path="/gameconsole" exact component={CategoriasProductos} />
 
               <Route
                 path="/rplayer-admin"
                 exact
                 component={RecordPlayerDataComponent}
               />
-              <Route path="/rplayer" exact component={RecordPlayer} />
+              <Route path="/rplayer" exact component={CategoriasProductos} />
               <Route path="/vinyl-admin" exact component={VinylDataComponent} />
-              <Route path="/vinyl" exact component={Vinyl} />
+              <Route path="/vinyl" exact component={CategoriasProductos} />
               <Route path="/" exact component={Products} />
               <Route path="/cart" component={Cart} />
               <Route path="/chat" component={Chat} />

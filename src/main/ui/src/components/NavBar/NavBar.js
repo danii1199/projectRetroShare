@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import SearchBar from "../Search/SearchBar";
 import AuthService from "../../Service/Auth/AuthService";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { CartContext } from "../../contexts/CartContext";
 import MenuIcon from "@material-ui/icons/Menu";
 import {
@@ -214,89 +213,89 @@ const NavBar = () => {
     </Menu>
   );
   return (
-    <Grid className={classes.grow}>
-      {renderSideMenu}
-      <AppBar position="fixed" className={classes.background}>
-        <Toolbar>
-          <Grid className={classes.sectionMobile}>
-            <IconButton
-              onClick={handleSideMenuOpen}
-              {...{
-                edge: "start",
-                color: "inherit",
-                "aria-label": "menu",
-                "aria-haspopup": "true",
-              }}
-            >
-              <MenuIcon />
+      <Grid className={classes.grow}>
+        {renderSideMenu}
+        <AppBar position="fixed" className={classes.background}>
+          <Toolbar>
+            <Grid className={classes.sectionMobile}>
+              <IconButton
+                onClick={handleSideMenuOpen}
+                {...{
+                  edge: "start",
+                  color: "inherit",
+                  "aria-label": "menu",
+                  "aria-haspopup": "true",
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Grid>
+            <IconButton component={Link} to="/">
+              <img
+                alt={"pokeball"}
+                width={"50"}
+                src={
+                  "https://www.pikpng.com/pngl/b/59-590145_pokeball-8-bit-pixel-art-pokemon-clipart.png"
+                }
+              />{" "}
             </IconButton>
-          </Grid>
-          <IconButton component={Link} to="/">
-            <img
-              alt={"pokeball"}
-              width={"50"}
-              src={
-                "https://www.pikpng.com/pngl/b/59-590145_pokeball-8-bit-pixel-art-pokemon-clipart.png"
-              }
-            />{" "}
-          </IconButton>
-          <SearchBar />
-          <Grid className={classes.sectionDesktop}>
-            {(isAdmin || isUser) && <AdminButtons isAdmin={isAdmin} />}
-          </Grid>
-          <Grid className={classes.grow} />
-          <Grid className={classes.sectionDesktop}>
-            <IconButton
-              aria-label="chat"
-              color="inherit"
-              component={Link}
-              to="/chat"
-              disabled={!(isAdmin || isUser)}
-            >
-              <Badge badgeContent={1} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
+            <SearchBar />
+            <Grid className={classes.sectionDesktop}>
+              {(isAdmin || isUser) && <AdminButtons isAdmin={isAdmin} />}
+            </Grid>
+            <Grid className={classes.grow} />
+            <Grid className={classes.sectionDesktop}>
+              <IconButton
+                aria-label="chat"
+                color="inherit"
+                component={Link}
+                to="/chat"
+                disabled={!(isAdmin || isUser)}
+              >
+                <Badge badgeContent={1} color="secondary">
+                  <MailIcon />
+                </Badge>
+              </IconButton>
 
-            <IconButton
-              aria-label="cart"
-              color="inherit"
-              component={Link}
-              to="/cart"
-              disabled={!(isAdmin || isUser)}
-            >
-              <Badge badgeContent={itemCount} color="secondary">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
+              <IconButton
+                aria-label="cart"
+                color="inherit"
+                component={Link}
+                to="/cart"
+                disabled={!(isAdmin || isUser)}
+              >
+                <Badge badgeContent={itemCount} color="secondary">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
 
-            <IconButton
-              aria-label="profile"
-              color="inherit"
-              component={Link}
-              to="/profile"
-              disabled={!(isAdmin || isUser)}
-            >
-              <Person />
-            </IconButton>
-            <LogedButtons isUser={isAdmin || isUser} />
-          </Grid>
-          <Grid className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    </Grid>
+              <IconButton
+                aria-label="profile"
+                color="inherit"
+                component={Link}
+                to="/profile"
+                disabled={!(isAdmin || isUser)}
+              >
+                <Person />
+              </IconButton>
+              <LogedButtons isUser={isAdmin || isUser} />
+            </Grid>
+            <Grid className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </Grid>
+          </Toolbar>
+        </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </Grid>
   );
 };
 

@@ -4,12 +4,12 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(4),
+    marginTop: "100px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    color: "#ffffff",
-    
+    background: theme.palette.primary.light,
+    borderRadius: "20px" 
     
   },
 }));
@@ -21,7 +21,7 @@ export const MainContainer = ({ children, ...props }) => {
     <Container
       className={styles.root}
       component="main"
-      maxWidth="xs"
+      maxWidth="sm"
       {...props}
     >
       {children}

@@ -12,8 +12,8 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  selector: {
-    background: "#ffffff"
+  label: {
+    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -24,7 +24,7 @@ export const Step1 = () => {
     defaultValues: { name: data.name, price: data.price },
     mode: "onBlur",
   });
-  const styles = useStyles();
+  const classes = useStyles();
 
   const onSubmit = (data) => {
     history.push("./step2");
@@ -34,48 +34,58 @@ export const Step1 = () => {
   return (
     <MainContainer>
       <Typography component="h2" variant="h5">
-        New Product
+        ¿Que vas a subir?
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          ref={register}
+          ref={register({
+            required: { value: true, message: "Valor requerido" },
+          })}
           id="name"
           type="text"
-          label="Product name*"
+          label="Nombre de Producto*"
           name="name"
           error={!!errors.name}
           helperText={errors?.name?.message}
         />
         <Input
-          ref={register}
+          ref={register({
+            required: { value: true, message: "Valor requerido" },
+          })}
           id="price"
           type="number"
-          label="Price*"
+          label="Precio*"
           name="price"
           error={!!errors.price}
           helperText={errors?.price?.message}
         />
 
-        <InputLabel htmlFor="productType">Product type</InputLabel>
+        <InputLabel className={classes.label} htmlFor="productType">
+          Tipo de producto
+        </InputLabel>
         <NativeSelect
-          className={styles.selector}
+          className={classes.selector}
           variant="outlined"
           margin="normal"
           fullWidth
-          inputRef={register}
+          inputRef={register({
+            required: { value: true, message: "Valor requerido" },
+          })}
           inputProps={{
             name: "productType",
             id: "productType",
             label: "productType",
           }}
         >
-          <option value={"game"}>Game</option>
-          <option value={"gameconsole"}>Game Console</option>
-          <option value={"vinyl"}>Vinyl</option>
-          <option value={"recordplayer"}>Record Player</option>
+          <option value={"game"}>Juego</option>
+          <option value={"gameconsole"}>Video Consola</option>
+          <option value={"vinyl"}>Vinilo</option>
+          <option value={"recordplayer"}>Tocadiscos</option>
         </NativeSelect>
-        <FormHelperText>Product type</FormHelperText>
-        <PrimaryButton>Next</PrimaryButton>
+        <FormHelperText>
+          ¿Eres un jugón, o un amante de la musica?
+        </FormHelperText>
+        <PrimaryButton>Siguiente</PrimaryButton>
       </Form>
     </MainContainer>
   );
