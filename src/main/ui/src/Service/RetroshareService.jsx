@@ -121,6 +121,10 @@ const getCurrentCart = () => {
   return JSON.parse(localStorage.getItem("cart"));
 };
 
+const getMessages = () => {
+  return http.get(`/chat-all`);
+}
+
 
 
 const services = {
@@ -140,7 +144,8 @@ const services = {
   deleteProduct,
   findByEmail,
   addToCart,
-  getCurrentCart
+  getCurrentCart,
+  getMessages
 };
 
 export default services;

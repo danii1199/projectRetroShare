@@ -1,12 +1,11 @@
 package org.proyecto.retroshare.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.proyecto.retroshare.domain.Chat;
-import org.proyecto.retroshare.domain.Role;
 import org.proyecto.retroshare.domain.User;
 import org.proyecto.retroshare.repositories.ChatRepository;
-import org.proyecto.retroshare.repositories.RoleRepository;
 import org.proyecto.retroshare.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -45,9 +43,12 @@ public class ChatRestController {
 	@PostMapping(value = "/chat-save/{idUserOwner}/{idUserBuyer}")
 	public ResponseEntity<Chat> save(@RequestBody Chat chat,@PathVariable Long idUserOwner,@PathVariable Long idUserBuyer ) {
 		
+		Calendar fecha=Calendar.getInstance();
+		chat.setDate(fecha);
 		User user = userRepository.getOne(idUserOwner);
-
+		
 		chat.setUserOwner(user);
+		
 		user.getMessageOwner().add(chat);
 		
 		User user2 = userRepository.getOne(idUserBuyer);

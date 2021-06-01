@@ -36,14 +36,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors();
 		http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authorizeRequests()
-				.antMatchers("/retroshare/update/{idUser}","/retroshare/pr-buy/{id}/{userId}","/retroshare/h-save/{idUser}/{idProduct}",
-						"/retroshare/update/{id}", "/retroshare/pr-update/{id}/{idUser}", "/retroshare/pr-all",
-						"/retroshare/login", "/retroshare/save/2", "/retroshare/v-all", "/retroshare/g-all",
-						"/retroshare/gc-all", "/retroshare/rp-all", "/retroshare/pr/{id}",
-						"/retroshare/sc-save/{idUser}", "/retroshare/sc-update/{idUser}",
-						"/retroshare/init","/retroshare/pr-delete/{idProduct}","/retroshare/delete/{idUser}")
-				.permitAll().antMatchers("/retroshare/all").hasRole("ADMIN")
-				.antMatchers("/retroshare/delete/{idProduct}").hasRole("USER").anyRequest().authenticated();
+				.antMatchers("/retroshare/update/{idUser}", "/retroshare/pr-buy/{id}/{userId}",
+						"/retroshare/h-save/{idUser}/{idProduct}", "/retroshare/update/{id}",
+						"/retroshare/pr-update/{id}/{idUser}", "/retroshare/pr-all", "/retroshare/login",
+						"/retroshare/save/2", "/retroshare/v-all", "/retroshare/g-all", "/retroshare/gc-all",
+						"/retroshare/rp-all", "/retroshare/pr/{id}", "/retroshare/sc-save/{idUser}",
+						"/retroshare/sc-update/{idUser}", "/retroshare/init", "/retroshare/pr-delete/{idProduct}",
+						"/retroshare/delete/{idUser}", "/retroshare/all",
+						"/retroshare/chat-save/{idUserOwner}/{idUserBuyer}", "/retroshare//chat-all")
+				.permitAll().antMatchers().hasRole("ADMIN").antMatchers("/retroshare/delete/{idProduct}")
+				.hasRole("USER").anyRequest().authenticated();
 		http.apply(new JwtTokenConfigurer(tokenProvider));
 	}
 

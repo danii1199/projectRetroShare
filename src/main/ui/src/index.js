@@ -8,6 +8,7 @@ import ProductsContextProvider from "./contexts/ProductsContext";
 import CartContextProvider from "./contexts/CartContext";
 import UsersContextProvider from "./contexts/UsersContext";
 import DataContextProvider from "./components/CheckOut/StateContext/DataContext";
+import MessagesContextProvider from "./components/Chat/context/MessagesContext";
 
 
 ReactDOM.render(
@@ -17,7 +18,9 @@ ReactDOM.render(
         <ProductsContextProvider>
           <DataContextProvider>
             <CartContextProvider>
+              <MessagesContextProvider>
               <App />
+              </MessagesContextProvider>
             </CartContextProvider>
           </DataContextProvider>
         </ProductsContextProvider>

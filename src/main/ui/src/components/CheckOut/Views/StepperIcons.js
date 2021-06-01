@@ -7,7 +7,6 @@ import {
     LocalShipping,
     Payment,
 } from '@material-ui/icons';
-import { Grid } from "@material-ui/core";
 
 
 const useStyle = makeStyles(theme => ({

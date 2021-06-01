@@ -51,7 +51,6 @@ export const Result = () => {
       });
     }
     entries.forEach((entry) => {
-      console.log("ESTAMOS DENTRO")
       formData.append(entry[0], entry[1]);
       console.log()
     });

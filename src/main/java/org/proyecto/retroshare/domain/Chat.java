@@ -1,5 +1,7 @@
 package org.proyecto.retroshare.domain;
 
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,7 @@ public class Chat {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String message;
+	private Calendar date;
 	
 	@JsonIgnoreProperties(value = { "products", "hibernateLazyInitializer" }, allowSetters = true)
 	@JoinColumn(name = "userOwner_id")
@@ -30,9 +33,10 @@ public class Chat {
 		super();
 	}
 
-	public Chat(String message) {
+	public Chat(String message, Calendar date) {
 		super();
 		this.message = message;
+		this.date = date;
 	}
 
 	public Long getId() {
@@ -51,6 +55,14 @@ public class Chat {
 		this.message = message;
 	}
 
+	public Calendar getDate() {
+		return date;
+	}
+
+	public void setDate(Calendar date) {
+		this.date = date;
+	}
+
 	public User getUserOwner() {
 		return userOwner;
 	}
@@ -66,6 +78,9 @@ public class Chat {
 	public void setUserBuyer(User userBuyer) {
 		this.userBuyer = userBuyer;
 	}
+	
+	
+
 	
 	
 

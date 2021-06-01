@@ -4,7 +4,6 @@ import CardInfo from "../CardProduct/CardInfo";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import AuthService from "../../Service/Auth/AuthService";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -33,7 +32,6 @@ const UserProfile = () => {
   const user = OneUser(window.location.pathname.split("/")[2]);
   const { products } = useContext(ProductsContext);
   const classes = useStyles();
-  const currentUser = AuthService.getCurrentUser();
   const fechaReg = user.date;
   //const fecha=fechaReg.substring(8,10)+"-"+fechaReg.substring(5,7)+"-"+fechaReg.substring(0,4);
   return (

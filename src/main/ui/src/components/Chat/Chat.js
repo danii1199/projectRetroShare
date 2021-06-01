@@ -13,8 +13,14 @@ import Fab from "@material-ui/core/Fab";
 import SendIcon from "@material-ui/icons/Send";
 import AuthService from "../../Service/Auth/AuthService";
 import OneUser from "../../lib/OneUser";
-import UserAPI from "../../lib/UserAPI";
-import "./style.css";
+import { useEffect, useState, useContext } from "react";
+import { UsersContext } from "../../contexts/UsersContext";
+import http from "../../Http-common";
+import { useForm } from "react-hook-form";
+import { MessagesContext } from "./context/MessagesContext";
+import { useHistory } from "react-router-dom";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 const useStyles = makeStyles({
   table: {
@@ -38,18 +44,38 @@ const useStyles = makeStyles({
     marginTop: "90px",
   },
 });
-function handleClick(e) {
-  e.preventDefault();
-}
 
 const Chat = () => {
   const classes = useStyles();
   const currentUser = AuthService.getCurrentUser();
-  const users = UserAPI();
-  
+  const { users } = useContext(UsersContext);
+  const [sendUser, setSendUser] = useState();
+  //const [mensaje, setMensaje] = useState("");
+  const { reset, register, handleSubmit } = useForm();
+  const history = useHistory();
+
+  const { messages } = useContext(MessagesContext);
+
+  console.log(sendUser);
+  //console.log(mensaje);
+
+  const handleSelectUser = (props) => {
+    //props.preventDefault()
+    setSendUser(props);
+  };
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    http.post(`/chat-save/${currentUser.id}/${sendUser}`, data).then(reset);
+    history.go();
+  };
+
+  useEffect(() => {
+    handleSelectUser();
+  }, []);
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container className={classes.background}>
         <Grid item xs={12}>
           <Typography variant="h5" className="header-message">
@@ -84,39 +110,44 @@ const Chat = () => {
             {users.map((user) => {
               if (currentUser.name !== user.firstName) {
                 return (
-                  <ListItem button key={user.id}>
-                    <ListItemIcon>
-                      <Avatar alt={user.avatar} src={user.avatar} />
-                    </ListItemIcon>
-                    <ListItemText primary={user.firstName}>
-                      {user.firstName}
-                    </ListItemText>
-                  </ListItem>
+                  <ToggleButtonGroup
+                    value={sendUser}
+                    exclusive
+                    onClick={() => {
+                      handleSelectUser(user.id);
+                    }}
+                    key={user.id}
+                  >
+                    <ToggleButton value={user.id}>
+                      <ListItemIcon>
+                        <Avatar alt={user.avatar} src={user.avatar} />
+                      </ListItemIcon>
+
+                      <ListItemText primary={user.firstName}>
+                        {user.firstName}
+                      </ListItemText>
+                    </ToggleButton>
+                  </ToggleButtonGroup>
                 );
               }
-              return (
-                <ListItem button key={user.id}>
-                  <ListItemIcon>
-                    <Avatar alt={user.avatar} src={user.avatar} />
-                  </ListItemIcon>
-                  <ListItemText primary={user.firstName}>
-                    {user.firstName}
-                  </ListItemText>
-                </ListItem>
-              );
+              return <></>;
             })}
           </List>
         </Grid>
         <Grid item xs={9}>
           <List className={classes.messageArea}>
-            <ListItem key="1">
-              <Grid container>
+            {messages.map((message) => {
+              return (
                 <Grid item xs={12}>
                   <ListItemText
                     align="right"
-                    primary="Hey man, What's up ?"
+                    primary={message.message}
                   ></ListItemText>
                 </Grid>
+              );
+            })}
+            <ListItem key="1">
+              <Grid container>
                 <Grid item xs={12}>
                   <ListItemText align="right" secondary="09:30"></ListItemText>
                 </Grid>
@@ -156,17 +187,21 @@ const Chat = () => {
                 id="outlined-basic-email"
                 label="Escribe tu mensaje..."
                 fullWidth
+                name="message"
+                inputRef={register({
+                  required: { value: true, message: "Valor requerido" },
+                })}
               />
             </Grid>
             <Grid xs={1} align="right">
-              <Fab color="primary" onClick={handleClick} aria-label="add">
+              <Fab type="submit" color="secondary" aria-label="add">
                 <SendIcon />
               </Fab>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </form>
   );
 };
 
