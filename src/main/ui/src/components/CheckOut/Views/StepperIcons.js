@@ -43,14 +43,14 @@ const StepperIcon = props => {
     };
 
     return (
-        <Grid
+        <div
             className={clsx(classes.root, {
                 [classes.active]: active,
                 [classes.completed]: completed,
             })}
         >
             {icons[String(props.icon)]}
-        </Grid>
+        </div>
     );
 }
 

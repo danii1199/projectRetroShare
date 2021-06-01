@@ -12,7 +12,7 @@ const ContactForm = ({ formContent }) => {
   }, [reset, formContent]);
 
   return (
-    <Grid>
+    <>
       <Grid item xs={12}>
         <Typography variant="h6">Informacion de Contacto</Typography>
       </Grid>
@@ -72,7 +72,7 @@ const ContactForm = ({ formContent }) => {
           )}
         />
       </Grid>
-    </Grid>
+    </>
   );
 };
 

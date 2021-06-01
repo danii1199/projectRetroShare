@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CardInfo from "../CardProduct/CardInfo";
 import { useContext } from "react";
 import { ProductsContext } from "../../contexts/ProductsContext";
-import Information from "./components/Information"
+import Information from "./components/Information";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -45,18 +45,7 @@ const UserProfile = () => {
   const { products } = useContext(ProductsContext);
   return (
     <Container>
-      <Information/>
-      <Grid container spacing={2}>
-        {products.map((product) => {
-          if (product.userOwner.id === user.id)
-            return (
-              <Grid key={product.id} item sm={6} md={3}>
-                <CardInfo product={product} />
-              </Grid>
-            );
-          return <></>;
-        })}
-      </Grid>
+      <Information />
       <Grid item>
         <Typography variant="h4" className={classes.titulo}>
           Tus Compras:
@@ -73,6 +62,22 @@ const UserProfile = () => {
                 </Grid>
               );
 
+          return <></>;
+        })}
+      </Grid>
+      <Grid item>
+        <Typography variant="h4" className={classes.titulo}>
+          Productos subidos por {user.userName}
+        </Typography>
+      </Grid>
+      <Grid container spacing={2}>
+        {products.map((product) => {
+          if (product.userOwner.id === user.id)
+            return (
+              <Grid key={product.id} item sm={6} md={3}>
+                <CardInfo product={product} />
+              </Grid>
+            );
           return <></>;
         })}
       </Grid>

@@ -56,11 +56,6 @@ const Information = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item>
-        <Typography variant="h4" className={classes.titulo}>
-          Productos subidos por {user.userName}
-        </Typography>
-      </Grid>
     </Grid>
   );
 };
