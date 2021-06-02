@@ -45,6 +45,8 @@ const useStyles = makeStyles({
   },
 });
 
+
+
 const Chat = () => {
   const classes = useStyles();
   const currentUser = AuthService.getCurrentUser();
@@ -56,7 +58,11 @@ const Chat = () => {
 
   const { messages } = useContext(MessagesContext);
 
-  console.log(sendUser);
+  const isSender = (sendUser === currentUser.id) ? "left" : "right"
+  
+  console.log(messages)
+  
+ 
   //console.log(mensaje);
 
   const handleSelectUser = (props) => {
@@ -108,7 +114,7 @@ const Chat = () => {
           <Divider />
           <List>
             {users.map((user) => {
-              if (currentUser.name !== user.firstName) {
+              if (currentUser.id !== user.id) {
                 return (
                   <ToggleButtonGroup
                     value={sendUser}
@@ -137,48 +143,38 @@ const Chat = () => {
         <Grid item xs={9}>
           <List className={classes.messageArea}>
             {messages.map((message) => {
+              console.log(sendUser)
+              if((message.userReciber.id === sendUser) || (message.userReciber.id === currentUser.id))
               return (
-                <Grid item xs={12}>
-                  <ListItemText
-                    align="right"
-                    primary={message.message}
-                  ></ListItemText>
-                </Grid>
+                <ListItem key={message.id}>
+                  <Grid container>
+                    <Grid item xs={12}>
+                      <ListItemText
+                        align={(message.userSend.id === currentUser.id) ? "right" : "left"}
+                        primary={message.message}
+                      ></ListItemText>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <ListItemText
+                        align={(message.userSend.id === currentUser.id) ? "right" : "left"}
+                        secondary={message.date}
+                      ></ListItemText>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+
               );
+              return(<></>)
             })}
-            <ListItem key="1">
-              <Grid container>
-                <Grid item xs={12}>
-                  <ListItemText align="right" secondary="09:30"></ListItemText>
-                </Grid>
-              </Grid>
-            </ListItem>
-            <ListItem key="2">
-              <Grid container>
-                <Grid item xs={12}>
-                  <ListItemText
-                    align="left"
-                    primary="Hey, Iam Good! What about you ?"
-                  ></ListItemText>
-                </Grid>
-                <Grid item xs={12}>
-                  <ListItemText align="left" secondary="09:31"></ListItemText>
-                </Grid>
-              </Grid>
-            </ListItem>
-            <ListItem key="3">
-              <Grid container>
-                <Grid item xs={12}>
-                  <ListItemText
-                    align="right"
-                    primary="Cool. i am good, let's catch up!"
-                  ></ListItemText>
-                </Grid>
-                <Grid item xs={12}>
-                  <ListItemText align="right" secondary="10:30"></ListItemText>
-                </Grid>
-              </Grid>
-            </ListItem>
+            <Grid item xs={12}>
+              <ListItemText
+                align="left"
+                primary="Hey, Iam Good! What about you ?"
+              ></ListItemText>
+            </Grid>
+            <Grid item xs={12}>
+              <ListItemText align="left" secondary="09:31"></ListItemText>
+            </Grid>
           </List>
           <Divider />
           <Grid container style={{ padding: "20px" }}>

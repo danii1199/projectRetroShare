@@ -2,7 +2,6 @@ package org.proyecto.retroshare.domain;
 
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,12 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
@@ -57,10 +53,10 @@ public class User {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "userSend", fetch = FetchType.LAZY)
-	private Collection<Chat> messageOwner;
+	private Collection<Chat> messageSender;
 	@JsonIgnore
 	@OneToMany(mappedBy = "userReciber", fetch = FetchType.LAZY)
-	private Collection<Chat> messageBuyer;
+	private Collection<Chat> messageReciber;
 
 	
 	/*
@@ -218,6 +214,46 @@ public class User {
 		this.date = date;
 	}
 
+	public String getVerificate() {
+		return verificate;
+	}
+
+	public void setVerificate(String verificate) {
+		this.verificate = verificate;
+	}
+
+	public Collection<Product> getProductOwner() {
+		return productOwner;
+	}
+
+	public void setProductOwner(Collection<Product> productOwner) {
+		this.productOwner = productOwner;
+	}
+
+	public Collection<Product> getProductBuyer() {
+		return productBuyer;
+	}
+
+	public void setProductBuyer(Collection<Product> productBuyer) {
+		this.productBuyer = productBuyer;
+	}
+
+	public Collection<Chat> getMessageSender() {
+		return messageSender;
+	}
+
+	public void setMessageSender(Collection<Chat> messageSender) {
+		this.messageSender = messageSender;
+	}
+
+	public Collection<Chat> getMessageReciber() {
+		return messageReciber;
+	}
+
+	public void setMessageReciber(Collection<Chat> messageReciber) {
+		this.messageReciber = messageReciber;
+	}
+
 	public Role getRole() {
 		return role;
 	}
@@ -242,45 +278,7 @@ public class User {
 		this.comments = comments;
 	}
 
-	public Collection<Product> getProductOwner() {
-		return productOwner;
-	}
-
-	public void setProductOwner(Collection<Product> productOwner) {
-		this.productOwner = productOwner;
-	}
-
-	public Collection<Product> getProductBuyer() {
-		return productBuyer;
-	}
-
-	public void setProductBuyer(Collection<Product> productBuyer) {
-		this.productBuyer = productBuyer;
-	}
-
-	public Collection<Chat> getMessageOwner() {
-		return messageOwner;
-	}
-
-	public void setMessageOwner(Collection<Chat> messageOwner) {
-		this.messageOwner = messageOwner;
-	}
-
-	public Collection<Chat> getMessageBuyer() {
-		return messageBuyer;
-	}
-
-	public void setMessageBuyer(Collection<Chat> messageBuyer) {
-		this.messageBuyer = messageBuyer;
-	}
-
-	public String getVerificate() {
-		return verificate;
-	}
-
-	public void setVerificate(String verificate) {
-		this.verificate = verificate;
-	}
+	
 
 
 	

@@ -47,14 +47,14 @@ public class ChatRestController {
 		chat.setDate(fecha);
 		User user = userRepository.getOne(idUserSend);
 		
-		chat.setUserOwner(user);
+		chat.setUserSend(user);
 		
-		user.getMessageOwner().add(chat);
+		user.getMessageSender().add(chat);
 		
 		User user2 = userRepository.getOne(idUserReciber);
 
-		chat.setUserBuyer(user2);
-		user2.getMessageBuyer().add(chat);
+		chat.setUserReciber(user2);
+		user2.getMessageReciber().add(chat);
 		
 		Chat obj = chatRepository.save(chat);
 
