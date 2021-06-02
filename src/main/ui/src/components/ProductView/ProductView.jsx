@@ -12,7 +12,8 @@ const ProductView = () => {
   }, []);
 
   const obtenerDatos = async () => {
-    const id = window.location.pathname.split("/")[2];
+    const ruta = window.location.pathname.split("/");
+    const id = ruta[ruta.length-1];
     RetroshareService.getOneProduct(id).then((response) => {
       const { data } = response;
       setProduct(data);

@@ -47,13 +47,13 @@ export const SignUpResult = () => {
 
     const res = http.post("/save/2", data).then((res) => {
       if (res.status === 200) {
-        Swal.fire("Great job!", "You've been register", "success");
+        Swal.fire("Registro con éxito!", "Por favor, verifica tu cuenta de correo", "success");
         setSuccess(true);
       }
     });
 
     if (res.status === 200) {
-      Swal.fire("Great job!", "You've been register", "success");
+      Swal.fire("Registro con éxito!", "Por favor, verifica tu cuenta de correo", "success");
       setSuccess(true);
     }
   };

@@ -46,6 +46,7 @@ public class User {
 	@Column(unique = true)
 	private String avatar;
 	private Calendar date;
+	private String verificate;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "userOwner", cascade=CascadeType.REMOVE,fetch = FetchType.LAZY)
@@ -271,6 +272,14 @@ public class User {
 
 	public void setMessageBuyer(Collection<Chat> messageBuyer) {
 		this.messageBuyer = messageBuyer;
+	}
+
+	public String getVerificate() {
+		return verificate;
+	}
+
+	public void setVerificate(String verificate) {
+		this.verificate = verificate;
 	}
 
 

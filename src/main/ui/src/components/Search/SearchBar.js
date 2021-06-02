@@ -55,7 +55,13 @@ const useStyles = makeStyles((theme) => ({
 const SearchBar = () => {
   const classes = useStyles();
 
-  const product = ProductsAPI();
+  var product = ProductsAPI();
+
+  let hash = {};
+  product = product.filter(o => hash[o.name] ? false : hash[o.name] = true);
+  console.log(JSON.stringify(product));
+
+
 
   const history = useHistory();
 
@@ -71,7 +77,7 @@ const SearchBar = () => {
           <Grid
             item
             onClick={() => {
-              history.push(`/pr/${product.id}`);
+              history.push(`/search/`+product.name);
               history.go();
             }}
           >

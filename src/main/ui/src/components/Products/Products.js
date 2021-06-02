@@ -7,6 +7,10 @@ import { useContext, Suspense } from "react";
 import Caru1 from "../Carousel/Caru1";
 import PrincipalButtons from "../Buttons/PrincipalButtons";
 
+import AuthService from "../../Service/Auth/AuthService";
+import OneUser from "../../lib/OneUser";
+
+
 const useStyles = makeStyles((theme) => ({
   carousel: {
     height: "auto",
@@ -17,8 +21,13 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     position: "absolute",
   },
-  h3: {
+  h6: {
     margin: "30px",
+    color: theme.palette.text.secondary,
+    backgroundColor: "white",
+    opacity:0.5,
+  },
+  h3: {
     color: theme.palette.text.secondary,
   },
   product: {
@@ -29,10 +38,24 @@ const useStyles = makeStyles((theme) => ({
 const Products = () => {
   const { products } = useContext(ProductsContext);
 
+  const currentUser = AuthService.getCurrentUser();
+
+  if(currentUser!==null){var user= OneUser(currentUser.id);}
+
   const classes = useStyles();
+
 
   return (
     <Suspense fallback={<Grid>Loading...</Grid>}>
+      {currentUser!==null ?
+      (user.verificate === "false" ?
+      (<Grid>
+        <Typography variant="h6" className={classes.h6} align="center">
+           Por favor, verifica tu cuenta de correo
+        </Typography>
+      </Grid>):null
+      ):null
+  }
       <Grid className={classes.carousel}>
         <Container maxWidth="lg">
           <Caru1 />

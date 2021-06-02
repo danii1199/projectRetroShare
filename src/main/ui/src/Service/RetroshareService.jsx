@@ -108,6 +108,11 @@ const deleteProduct = (id) => {
   
 };
 
+const verification = (userName) => {
+  return http.post(`/verification/${userName}`);
+  
+};
+
 const addToCart = (idProduct) => {
   return http.post(`/addtocart/${idProduct}/1`, {
     headers: {
@@ -145,7 +150,8 @@ const services = {
   findByEmail,
   addToCart,
   getCurrentCart,
-  getMessages
+  getMessages,
+  verification
 };
 
 export default services;

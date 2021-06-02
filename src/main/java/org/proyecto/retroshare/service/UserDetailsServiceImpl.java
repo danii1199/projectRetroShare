@@ -35,6 +35,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (user.getRole().getType().equalsIgnoreCase("admin")) {
 			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		}
+		if (user.getRole().getType().equalsIgnoreCase("disabled")) {
+			authorities.add(new SimpleGrantedAuthority("ROLE_DISABLED"));
+		}
 		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return authorities;
 	}

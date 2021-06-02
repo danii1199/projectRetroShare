@@ -11,7 +11,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const UserComponent = () => {
-  const [disabled,setDisabled] = useState(true);
+  const [disabledBorrar,setDisabledBorrar] = useState(true);
+  const [disabledEditar,setDisabledEditar] = useState(true);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -34,12 +35,19 @@ const UserComponent = () => {
   function desactivarboton(x){
    var long=x.length;
     if(long===1){
-      setDisabled(false);
+      setDisabledEditar(false);
 
     }
     else{
-      setDisabled(true);
+      setDisabledEditar(true);
 
+    }
+
+    if(long>=1){
+      setDisabledBorrar(false);
+    }
+    else{
+      setDisabledBorrar(true);
     }
     console.log(miarray.length);
   }
@@ -84,6 +92,7 @@ const UserComponent = () => {
       />
       
      <Button
+    disabled={disabledBorrar}
      style={{
        backgroundColor:"white",
        marginTop: "20px"
@@ -92,7 +101,7 @@ const UserComponent = () => {
      >Borrar seleccionados</Button>
 
 <Button
-    disabled={disabled}
+     disabled={disabledEditar}
      style={{
        backgroundColor:"white",
        marginTop: "20px",
@@ -108,7 +117,6 @@ const UserComponent = () => {
             Inserta los nuevos datos
           </DialogContentText>
           <TextField label="Introduce tu nombre"></TextField>
-          {/*<ContactForm/>*/}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>

@@ -20,6 +20,8 @@ import CategoriasProductos from "./components/ProductsPage/CategoriasProductos";
 import OneUser from "./components/User/OneUser";
 import Cart from "./pages/cart";
 import Chat from "./components/Chat/Chat";
+import ResultSearch from "./components/Search/ResultSearch"
+import Verification from "./components/Verification/Verification"
 import { SignUpResult } from "./components/UserAuth/SignUpResult";
 import { CartForm } from "./pages/cart/CartForm";
 import { CartFormResult } from "./pages/cart/CartFormResult";
@@ -28,6 +30,7 @@ import { Container } from "@material-ui/core";
 import Main from "./components/CheckOut/Views/Main";
 import theme from "./constans/theme";
 import { ThemeProvider } from "@material-ui/core/styles";
+import NotFound from "./pages/NotFound"
 
 const UserDataComponent = lazy(() =>
   import("./components/DataComponent/UserDataComponent")
@@ -80,6 +83,7 @@ const App = () => {
               <Route path="/cart" component={Cart} />
               <Route path="/chat" component={Chat} />
               <Route path="/pr/:id" component={ProductView} />
+              <Route path="/search/pr/:id" component={ProductView} />
               <Route path="/user/:id" component={OneUser} />
               <Route path="/step1" exact component={Step1} />
               <Route path="/step2" component={Step2} />
@@ -89,6 +93,9 @@ const App = () => {
               <Route path="/profile" exact component={UserProfile} />
               <Route path="/cartForm" exact component={CartForm} />
               <Route path="/cartFormResult" exact component={CartFormResult} />
+              <Route path="/search/:name" exact component={ResultSearch} />
+              <Route path="/verification/:name" exact component={Verification} />
+              <Route component={NotFound} />
             </Switch>
           </Container>
         </Suspense>
