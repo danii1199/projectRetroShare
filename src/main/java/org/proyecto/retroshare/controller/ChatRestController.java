@@ -34,24 +34,24 @@ public class ChatRestController {
 	}
 
 	// BUSCAR UN USUARIO
-	@GetMapping(value = "/char-find/{id}")
+	@GetMapping(value = "/chat-find/{id}")
 	public Chat find(@PathVariable Long id) {
 		return chatRepository.getOne(id);
 	}
 
 	// GUARDAR NUEVO USUARIO
-	@PostMapping(value = "/chat-save/{idUserOwner}/{idUserBuyer}")
-	public ResponseEntity<Chat> save(@RequestBody Chat chat,@PathVariable Long idUserOwner,@PathVariable Long idUserBuyer ) {
+	@PostMapping(value = "/chat-save/{idUserSend}/{idUserReciber}")
+	public ResponseEntity<Chat> save(@RequestBody Chat chat,@PathVariable Long idUserSend,@PathVariable Long idUserReciber ) {
 		
 		Calendar fecha=Calendar.getInstance();
 		chat.setDate(fecha);
-		User user = userRepository.getOne(idUserOwner);
+		User user = userRepository.getOne(idUserSend);
 		
 		chat.setUserOwner(user);
 		
 		user.getMessageOwner().add(chat);
 		
-		User user2 = userRepository.getOne(idUserBuyer);
+		User user2 = userRepository.getOne(idUserReciber);
 
 		chat.setUserBuyer(user2);
 		user2.getMessageBuyer().add(chat);

@@ -26,26 +26,31 @@ const useStyles = makeStyles((theme) => ({
 
 const botonesAdmin = [
   {
+    id: "1",
     nombre: "Users",
     enlace: "/users",
     icono: <Person />,
   },
   {
+    id: "2",
     nombre: "Games",
     enlace: "/videogames-admin",
     icono: <SportsEsportsIcon />,
   },
   {
+    id: "3",
     nombre: "Player",
     enlace: "/rplayer-admin",
     icono: <RadioIcon />,
   },
   {
+    id: "4",
     nombre: "Consoles",
     enlace: "/gameconsole-admin",
     icono: <VideogameAssetIcon />,
   },
   {
+    id: "5",
     nombre: "Vinyl",
     enlace: "/vinyl-admin",
     icono: <AlbumIcon />,
@@ -73,7 +78,7 @@ export const AdminButtonsIcons = (props) => {
 
   return esAdmin.map((boton) => {
     return (
-      <MenuItem>
+      <MenuItem key={boton.id}>
         <Button
           children={boton.icono}
           className={classes.buttonIcon}
@@ -98,7 +103,7 @@ export const AdminButtons = (props) => {
   
   return esAdmin.map((boton) => {
     return (
-      <MenuItem>
+      <MenuItem key={boton.id}>
         <Button
           children={boton.nombre}
           className={classes.buttonIcon}

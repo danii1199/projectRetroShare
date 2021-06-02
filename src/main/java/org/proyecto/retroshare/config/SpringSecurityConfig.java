@@ -42,9 +42,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/retroshare/gc-all", "/retroshare/rp-all", "/retroshare/pr/{id}",
 						"/retroshare/sc-save/{idUser}", "/retroshare/sc-update/{idUser}",
 						"/retroshare/init","/retroshare/pr-delete/{idProduct}","/retroshare/delete/{idUser}",
-						"/retroshare/verification/{userName}","/retroshare/disabled/{id}")
+						"/retroshare/verification/{userName}","/retroshare/disabled/{id}","/retroshare/chat-save/{idUserSend}/{idUserReciber}", "/retroshare/all", "/retroshare/chat-all")
 				.permitAll().antMatchers().hasRole("ADMIN")
-				.antMatchers("/retroshare/delete/{idProduct}", "/retroshare/all").hasRole("USER").antMatchers("/retroshare").hasRole("DISABLED").anyRequest().authenticated();
+				.antMatchers("/retroshare/delete/{idProduct}").hasRole("USER").antMatchers("/retroshare").hasRole("DISABLED").anyRequest().authenticated();
 		http.apply(new JwtTokenConfigurer(tokenProvider));
 	}
 

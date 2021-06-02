@@ -56,10 +56,10 @@ public class User {
 	private Collection<Product> productBuyer;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "userOwner", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userSend", fetch = FetchType.LAZY)
 	private Collection<Chat> messageOwner;
 	@JsonIgnore
-	@OneToMany(mappedBy = "userBuyer", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userReciber", fetch = FetchType.LAZY)
 	private Collection<Chat> messageBuyer;
 
 	

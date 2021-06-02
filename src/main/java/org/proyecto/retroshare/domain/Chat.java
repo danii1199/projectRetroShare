@@ -19,15 +19,15 @@ public class Chat {
 	private String message;
 	private Calendar date;
 	
-	@JsonIgnoreProperties(value = { "products", "hibernateLazyInitializer" }, allowSetters = true)
-	@JoinColumn(name = "userOwner_id")
+	@JsonIgnoreProperties(value = { "users", "hibernateLazyInitializer" }, allowSetters = true)
+	@JoinColumn(name = "userSend_id")
 	@ManyToOne( optional = true)
-	private User userOwner;
+	private User userSend;
 	
-	@JsonIgnoreProperties(value = { "products", "hibernateLazyInitializer" }, allowSetters = true)
-	@JoinColumn(name = "userBuyer_id")
+	@JsonIgnoreProperties(value = { "users", "hibernateLazyInitializer" }, allowSetters = true)
+	@JoinColumn(name = "userReciber_id")
 	@ManyToOne(optional = true)
-	private User userBuyer;
+	private User userReciber;
 
 	public Chat() {
 		super();
@@ -64,19 +64,19 @@ public class Chat {
 	}
 
 	public User getUserOwner() {
-		return userOwner;
+		return userSend;
 	}
 
-	public void setUserOwner(User userOwner) {
-		this.userOwner = userOwner;
+	public void setUserOwner(User userSend) {
+		this.userSend = userSend;
 	}
 
 	public User getUserBuyer() {
-		return userBuyer;
+		return userReciber;
 	}
 
-	public void setUserBuyer(User userBuyer) {
-		this.userBuyer = userBuyer;
+	public void setUserBuyer(User userReciber) {
+		this.userReciber = userReciber;
 	}
 	
 	

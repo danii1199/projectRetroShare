@@ -59,7 +59,6 @@ const SearchBar = () => {
 
   let hash = {};
   product = product.filter(o => hash[o.name] ? false : hash[o.name] = true);
-  console.log(JSON.stringify(product));
 
 
 
