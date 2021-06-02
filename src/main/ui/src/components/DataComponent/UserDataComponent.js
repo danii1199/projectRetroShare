@@ -13,8 +13,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 const UserComponent = () => {
   const [disabledBorrar,setDisabledBorrar] = useState(true);
   const [disabledEditar,setDisabledEditar] = useState(true);
+  const [miarray,setmiarray] = useState([]);
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -22,14 +22,17 @@ const UserComponent = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  var miarray =[];
+  
   function eliminarSeleccionados() {
+    
 
     for(var i=0;i<miarray.length;i++){
       console.log(miarray[i]);
-      RetroshareService.remove(miarray[i]);
+      RetroshareService.disabled(miarray[i]);
     }
     window.location.reload();
+      
+    
   }
 
   function desactivarboton(x){
@@ -49,7 +52,9 @@ const UserComponent = () => {
     else{
       setDisabledBorrar(true);
     }
-    console.log(miarray.length);
+
+    setmiarray(x);
+    console.log(x);
   }
   
 
@@ -87,7 +92,7 @@ const UserComponent = () => {
         columns={columns}
         pageSize={5}
         checkboxSelection
-        onSelectionModelChange={itm => desactivarboton(miarray=itm.selectionModel)}
+        onSelectionModelChange={itm => desactivarboton(itm.selectionModel)}
         
       />
       
@@ -98,7 +103,7 @@ const UserComponent = () => {
        marginTop: "20px"
      }}
      onClick={eliminarSeleccionados}
-     >Borrar seleccionados</Button>
+     >Deshabilitar seleccionados</Button>
 
 <Button
      disabled={disabledEditar}

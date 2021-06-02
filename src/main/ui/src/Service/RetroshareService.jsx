@@ -131,6 +131,15 @@ const getMessages = () => {
 }
 
 
+const disabled = (id) => {
+  return http.post(`/disabled/${id}`, {
+    headers: {
+      Authorization: AuthHeader(),
+    },
+  });
+  
+};
+
 
 const services = {
   getAll,
@@ -151,7 +160,8 @@ const services = {
   addToCart,
   getCurrentCart,
   getMessages,
-  verification
+  verification,
+  disabled
 };
 
 export default services;
