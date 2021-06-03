@@ -131,6 +131,8 @@ const getMessages = () => {
 }
 
 
+
+
 const disabled = (id) => {
   return http.post(`/disabled/${id}`, {
     headers: {
@@ -161,7 +163,7 @@ const services = {
   getCurrentCart,
   getMessages,
   verification,
-  disabled
+  disabled,
 };
 
 export default services;

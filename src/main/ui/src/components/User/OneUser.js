@@ -33,7 +33,7 @@ const UserProfile = () => {
   const { products } = useContext(ProductsContext);
   const classes = useStyles();
   const fechaReg = user.date;
-  //const fecha=fechaReg.substring(8,10)+"-"+fechaReg.substring(5,7)+"-"+fechaReg.substring(0,4);
+  //const fecha=fechaReg?.substring(8,10)+"-"+fechaReg.substring(5,7)+"-"+fechaReg.substring(0,4);
   return (
     <Container>
       <Grid>
