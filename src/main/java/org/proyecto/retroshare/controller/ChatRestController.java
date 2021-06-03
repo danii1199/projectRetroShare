@@ -39,26 +39,50 @@ public class ChatRestController {
 		return chatRepository.getOne(id);
 	}
 
-	// GUARDAR NUEVO USUARIO
+	// GUARDAR NUEVO MENSAJE
 	@PostMapping(value = "/chat-save/{idUserSend}/{idUserReciber}")
-	public ResponseEntity<Chat> save(@RequestBody Chat chat,@PathVariable Long idUserSend,@PathVariable Long idUserReciber ) {
-		
-		Calendar fecha=Calendar.getInstance();
+	public ResponseEntity<Chat> save(@RequestBody Chat chat, @PathVariable Long idUserSend,
+			@PathVariable Long idUserReciber) {
+
+		Calendar fecha = Calendar.getInstance();
 		chat.setDate(fecha);
+		chat.setLeido(false);
 		User user = userRepository.getOne(idUserSend);
-		
+
 		chat.setUserSend(user);
-		
+
 		user.getMessageSender().add(chat);
-		
+
 		User user2 = userRepository.getOne(idUserReciber);
 
 		chat.setUserReciber(user2);
 		user2.getMessageReciber().add(chat);
-		
+
 		Chat obj = chatRepository.save(chat);
 
 		return new ResponseEntity<Chat>(obj, HttpStatus.OK);
+	}
+
+	// LEER UN MENSAJE
+	@PostMapping(value = "/chat-read/{idUserSend}")
+	public ResponseEntity<Chat> update(@PathVariable Long idUserSend) {
+
+		List<Chat> establecerLeido = chatRepository.findAll();
+
+		for (Chat chatLeido : establecerLeido) {
+
+			if ((chatLeido.getUserSend().getId() == idUserSend)) {
+
+				chatLeido.setLeido(true);
+
+				Chat estaLeido = chatRepository.save(chatLeido);
+				
+
+			}
+
+		}
+
+		return new ResponseEntity<Chat>(HttpStatus.OK);
 	}
 
 }

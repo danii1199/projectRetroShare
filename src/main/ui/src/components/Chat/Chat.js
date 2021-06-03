@@ -19,8 +19,6 @@ import http from "../../Http-common";
 import { useForm } from "react-hook-form";
 import { MessagesContext } from "./context/MessagesContext";
 import { useHistory } from "react-router-dom";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 const useStyles = makeStyles({
   table: {
@@ -45,34 +43,26 @@ const useStyles = makeStyles({
   },
 });
 
-
-
 const Chat = () => {
   const classes = useStyles();
   const currentUser = AuthService.getCurrentUser();
   const { users } = useContext(UsersContext);
-  const [sendUser, setSendUser] = useState();
+  const [reciberUser, setReciberUser] = useState();
   //const [mensaje, setMensaje] = useState("");
   const { reset, register, handleSubmit } = useForm();
   const history = useHistory();
 
   const { messages } = useContext(MessagesContext);
 
-  const isSender = (sendUser === currentUser.id) ? "left" : "right"
   
-  console.log(messages)
-  
- 
-  //console.log(mensaje);
 
   const handleSelectUser = (props) => {
     //props.preventDefault()
-    setSendUser(props);
+    setReciberUser(props);
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
-    http.post(`/chat-save/${currentUser.id}/${sendUser}`, data).then(reset);
+    http.post(`/chat-save/${currentUser.id}/${reciberUser}`, data).then(reset);
     history.go();
   };
 
@@ -92,7 +82,7 @@ const Chat = () => {
       <Grid container component={Paper} className={classes.chatSection}>
         <Grid item xs={3} className={classes.borderRight500}>
           <List>
-            <ListItem button key="RemySharp">
+            <ListItem button key={currentUser.id}>
               <ListItemIcon>
                 <Avatar
                   alt={currentUser.name}
@@ -116,15 +106,15 @@ const Chat = () => {
             {users.map((user) => {
               if (currentUser.id !== user.id) {
                 return (
-                  <ToggleButtonGroup
-                    value={sendUser}
+                  <List
+                    value={reciberUser}
                     exclusive
                     onClick={() => {
                       handleSelectUser(user.id);
                     }}
                     key={user.id}
                   >
-                    <ToggleButton value={user.id}>
+                    <ListItem button value={user.id}>
                       <ListItemIcon>
                         <Avatar alt={user.avatar} src={user.avatar} />
                       </ListItemIcon>
@@ -132,8 +122,8 @@ const Chat = () => {
                       <ListItemText primary={user.firstName}>
                         {user.firstName}
                       </ListItemText>
-                    </ToggleButton>
-                  </ToggleButtonGroup>
+                    </ListItem>
+                  </List>
                 );
               }
               return <></>;
@@ -143,38 +133,46 @@ const Chat = () => {
         <Grid item xs={9}>
           <List className={classes.messageArea}>
             {messages.map((message) => {
-              console.log(sendUser)
-              if((message.userReciber.id === sendUser) || (message.userReciber.id === currentUser.id))
-              return (
-                <ListItem key={message.id}>
-                  <Grid container>
-                    <Grid item xs={12}>
-                      <ListItemText
-                        align={(message.userSend.id === currentUser.id) ? "right" : "left"}
-                        primary={message.message}
-                      ></ListItemText>
+              let fecha =
+                message.date?.substring(11, 16) +
+                " " +
+                message.date?.substring(8, 10) +
+                "-" +
+                message.date?.substring(5, 7);
+              if (
+                (message.userSend.id === currentUser.id &&
+                  message.userReciber.id === reciberUser) ||
+                (message.userReciber.id === currentUser.id &&
+                  reciberUser === message.userSend.id)
+              )
+                return (
+                  <ListItem key={message.id}>
+                    <Grid container>
+                      <Grid item xs={12}>
+                        <ListItemText
+                          align={
+                            message.userSend.id === currentUser.id
+                              ? "right"
+                              : "left"
+                          }
+                          primary={message.message}
+                        ></ListItemText>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <ListItemText
+                          align={
+                            message.userSend.id === currentUser.id
+                              ? "right"
+                              : "left"
+                          }
+                          secondary={fecha}
+                        ></ListItemText>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                      <ListItemText
-                        align={(message.userSend.id === currentUser.id) ? "right" : "left"}
-                        secondary={message.date}
-                      ></ListItemText>
-                    </Grid>
-                  </Grid>
-                </ListItem>
-
-              );
-              return(<></>)
+                  </ListItem>
+                );
+              return <></>;
             })}
-            <Grid item xs={12}>
-              <ListItemText
-                align="left"
-                primary="Hey, Iam Good! What about you ?"
-              ></ListItemText>
-            </Grid>
-            <Grid item xs={12}>
-              <ListItemText align="left" secondary="09:31"></ListItemText>
-            </Grid>
           </List>
           <Divider />
           <Grid container style={{ padding: "20px" }}>

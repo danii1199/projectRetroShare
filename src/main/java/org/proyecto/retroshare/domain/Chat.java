@@ -18,6 +18,7 @@ public class Chat {
 	private Long id;
 	private String message;
 	private Calendar date;
+	private boolean leido;
 	
 	@JsonIgnoreProperties(value = { "chats", "hibernateLazyInitializer" }, allowSetters = true)
 	@JoinColumn(name = "userSend_id")
@@ -33,10 +34,11 @@ public class Chat {
 		super();
 	}
 
-	public Chat(String message, Calendar date) {
+	public Chat(String message, Calendar date, boolean leido) {
 		super();
 		this.message = message;
 		this.date = date;
+		this.leido = leido;
 	}
 
 	public Long getId() {
@@ -63,6 +65,14 @@ public class Chat {
 		this.date = date;
 	}
 
+	public boolean isLeido() {
+		return leido;
+	}
+
+	public void setLeido(boolean leido) {
+		this.leido = leido;
+	}
+
 	public User getUserSend() {
 		return userSend;
 	}
@@ -78,6 +88,8 @@ public class Chat {
 	public void setUserReciber(User userReciber) {
 		this.userReciber = userReciber;
 	}
+
+	
 
 	
 	

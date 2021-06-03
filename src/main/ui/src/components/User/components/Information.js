@@ -30,8 +30,12 @@ const Information = () => {
   const classes = useStyles();
   const currentUser = AuthService.getCurrentUser();
   const user = OneUser(currentUser?.id);
-  const fechaReg = user.date;
-
+  let fecha =
+  user.date?.substring(8, 10) +
+  "-" +
+  user.date?.substring(5, 7)+
+  "-" +
+  user.date?.substring(0, 4);
   return (
     <Grid>
       <Grid className={classes.infoUser}>
@@ -50,7 +54,7 @@ const Information = () => {
               Email: {user.email}
             </Typography>
             <Typography className={classes.texto}>
-              Registrado en: {fechaReg}
+              Registrado en: {fecha}
             </Typography>
           </Grid>
         </Grid>
