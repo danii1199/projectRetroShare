@@ -5,6 +5,7 @@ import PrincipalButtons from "../Buttons/PrincipalButtons";
 import RecordPlayerAPI from "../../lib/RecordPlayerAPI";
 import GameConsoleAPI from "../../lib/GameConsoleAPI";
 import VinylAPI from "../../lib/VinylAPI";
+import AuthService from "../../Service/Auth/AuthService";
 
 
 
@@ -26,6 +27,8 @@ const CategoriasProductos = (props) => {
 
   const RESPUESTA = RESPUESTAS_POSIBLES[localizacion];
 
+  const currentUser = AuthService.getCurrentUser();
+
   return (
     <>
       <PrincipalButtons />
@@ -39,11 +42,21 @@ const CategoriasProductos = (props) => {
           )}
           <Grid container spacing={2}>
             {RESPUESTA.map((product) => {
+              if(currentUser!==null&&product.userBuyer===null)
+              if(product.userOwner.email!==currentUser.name)
               return (
                 <Grid key={RESPUESTA.id} item sm={6} md={3}>
                   <CardProduct product={product} />
                 </Grid>
               );
+
+              if(currentUser===null)
+            return (
+              <Grid item sm={6} md={3}>
+                <CardProduct product={product} />
+              </Grid>
+            );
+
             })}
           </Grid>
         </Grid>

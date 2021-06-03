@@ -94,7 +94,7 @@ const SearchBar = () => {
                   width: 150,
                   marginLeft: 40,
                 }}
-                placeholder="Search..."
+                placeholder="Buscar"
               />
             </Grid>
           </Grid>

@@ -49,7 +49,6 @@ const Information = () => {
             <Typography className={classes.texto}>
               Email: {user.email}
             </Typography>
-            <Typography className={classes.texto}>City: {user.city}</Typography>
             <Typography className={classes.texto}>
               Registrado en: {fechaReg}
             </Typography>

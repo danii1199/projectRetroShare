@@ -15,7 +15,7 @@ const ServiceForm = ({ formContent }) => {
   return (
     <>
       <Grid item xs={12}>
-        <Typography variant="h6">Additional data</Typography>
+        <Typography variant="h6">Información adicional</Typography>
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
@@ -47,27 +47,6 @@ const ServiceForm = ({ formContent }) => {
           )}
         />
       </Grid>
-      <Grid item xs={12}>
-        <Typography variant="h6">Redes Sociales?</Typography>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <TextField
-          label="Facebook"
-          name="facebook"
-          variant="outlined"
-          fullWidth
-          inputRef={register}
-        />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <TextField
-          label="Twitter"
-          name="twitter"
-          variant="outlined"
-          fullWidth
-          inputRef={register}
-        />
-      </Grid>
     </>
   );
 };
@@ -77,7 +56,7 @@ export default ServiceForm;
 const deliveris = [
   { name: "Correos", code: "COR" },
   { name: "Seur", code: "SEU" },
-  { name: "Recogida en tienda", code: "TIEN" },
+  { name: "Recogida en persona", code: "TIEN" },
   { name: "MRW", code: "MRW" },
   { name: "Correos Express", code: "EXP" },
 ]

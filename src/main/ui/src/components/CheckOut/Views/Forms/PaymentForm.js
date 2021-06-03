@@ -29,7 +29,7 @@ const PaymentForm = ({ formContent }) => {
     <>
       <Grid container item xs={12}>
         <Grid item xs={12} sm={3}>
-          <Typography variant="h6">Payment Data</Typography>
+          <Typography variant="h6">Datos de Pago</Typography>
         </Grid>
         <Grid container item xs={12} sm={9} justify="space-between">
           {cardsLogo.map((e) => (
@@ -45,7 +45,7 @@ const PaymentForm = ({ formContent }) => {
           ))}
         </Grid>
       </Grid>
-      <Grid item xs={6} sm={3}>
+      <Grid item xs={6} sm={6}>
         <Autocomplete
           options={currencies}
           getOptionLabel={(option) => option.code}
@@ -56,7 +56,7 @@ const PaymentForm = ({ formContent }) => {
           )}
           renderInput={(params) => (
             <TextField
-              label="Currency"
+              label="Moneda"
               name="currency"
               variant="outlined"
               fullWidth
@@ -66,9 +66,9 @@ const PaymentForm = ({ formContent }) => {
           inputRef={register}
         />
       </Grid>
-      <Grid item xs={6} sm={3}>
+      <Grid item xs={6} sm={6}>
         <TextField
-          label="Amount"
+          label="Precio"
           name="amount"
           variant="outlined"
           required
@@ -76,10 +76,20 @@ const PaymentForm = ({ formContent }) => {
           inputRef={register}
         />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={12}>
         <TextField
           inputRef={register}
-          label="Credit Card Number"
+          label="Titular de la Tarjeta"
+          name="ccname"
+          variant="outlined"
+          required
+          fullWidth
+        />
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        <TextField
+          inputRef={register}
+          label="Número de la tarjeta de Crédito"
           name="ccnumber"
           variant="outlined"
           required
@@ -89,7 +99,7 @@ const PaymentForm = ({ formContent }) => {
       <Grid item xs={6} sm={6}>
         <TextField
           inputRef={register}
-          label="Expiration Date"
+          label="Caducidad"
           name="ccexp"
           variant="outlined"
           required

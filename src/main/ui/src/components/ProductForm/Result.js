@@ -66,8 +66,10 @@ export const Result = () => {
     ).then((res) => {
       
       if (res.status === 200) {
-        Swal.fire("Great job!", "Has registrado un producto", "success");
+        Swal.fire("Felicidades!", "Has registrado un producto con éxito", "success");
         setSuccess(true);
+        history.push("./");
+        history.go();
       }
     });
   };
@@ -80,7 +82,7 @@ export const Result = () => {
     <>
       <MainContainer>
         <Typography component="h2" variant="h5">
-          📋 Form Values
+          Datos del producto
         </Typography>
         <TableContainer className={styles.root} component={Paper}>
           <Table className={styles.table} aria-label="simple table">
@@ -105,7 +107,7 @@ export const Result = () => {
         {files && (
           <>
             <Typography component="h2" variant="h5">
-              📦 Files
+              Archivos subidos
             </Typography>
             <List>
               {files.map((f, index) => (
@@ -119,8 +121,8 @@ export const Result = () => {
             </List>
           </>
         )}
-        <PrimaryButton onClick={onSubmit}>Submit</PrimaryButton>
-        <Link to="/">Start over</Link>
+        <PrimaryButton onClick={onSubmit}>Aceptar</PrimaryButton>
+        <Link to="/">Ir al menú principal</Link>
       </MainContainer>
     </>
   );

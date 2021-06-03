@@ -29,6 +29,9 @@ const getRoles = () => {
   if(role && role.authorities[0] === "ROLE_USER") {
     return "User";
   }
+  if(role && role.authorities[0] === "ROLE_DISABLED") {
+    return "Disabled";
+  }
   else{}
 }
 

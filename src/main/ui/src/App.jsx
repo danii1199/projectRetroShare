@@ -30,7 +30,9 @@ import { Container } from "@material-ui/core";
 import Main from "./components/CheckOut/Views/Main";
 import theme from "./constans/theme";
 import { ThemeProvider } from "@material-ui/core/styles";
-import NotFound from "./pages/NotFound"
+import NotFound from "./pages/NotFound";
+import AuthService from "./Service/Auth/AuthService";
+import Disabled from "./components/User/Disabled"
 
 const UserDataComponent = lazy(() =>
   import("./components/DataComponent/UserDataComponent")
@@ -44,6 +46,8 @@ const GameConsoleDataComponent = lazy(() =>
 
 const SingIn = lazy(() => import("./components/UserAuth/SingIn"));
 const SingUp = lazy(() => import("./components/UserAuth/SingUp"));
+const isAdmin = AuthService.getRoles() === "Admin";
+const isDisabled = AuthService.getRoles() === "Disabled";
 
 const App = () => {
   return (
@@ -54,32 +58,55 @@ const App = () => {
           <Container>
             <Switch>
               <Route exact path="/check" component={Main} />
+
+              {(isAdmin)?
               <Route exact path="/users" component={UserDataComponent} />
+              :null
+            }
+
               <Route path="/login" exact component={SingIn} />
               <Route path="/singup" exact component={SingUp} />
+              {(isAdmin)?
               <Route
                 path="/videogames-admin"
                 exact
                 component={GameDataComponent}
               />
+              :null
+}
               <Route path="/videogames" exact component={CategoriasProductos} />
-
+              {(isAdmin)?
               <Route
                 path="/gameconsole-admin"
                 exact
                 component={GameConsoleDataComponent}
               />
+              :null
+            }
               <Route path="/gameconsole" exact component={CategoriasProductos} />
-
+              {(isAdmin)?
               <Route
                 path="/rplayer-admin"
                 exact
                 component={RecordPlayerDataComponent}
               />
+              :null
+            }
               <Route path="/rplayer" exact component={CategoriasProductos} />
+
+              {(isAdmin)?
               <Route path="/vinyl-admin" exact component={VinylDataComponent} />
+              :null
+            }
+
+
               <Route path="/vinyl" exact component={CategoriasProductos} />
+
+              {(!isDisabled)?
               <Route path="/" exact component={Products} />
+              :null
+              }
+
               <Route path="/cart" component={Cart} />
               <Route path="/chat" component={Chat} />
               <Route path="/pr/:id" component={ProductView} />
@@ -95,6 +122,7 @@ const App = () => {
               <Route path="/cartFormResult" exact component={CartFormResult} />
               <Route path="/search/:name" exact component={ResultSearch} />
               <Route path="/verification/:name" exact component={Verification} />
+              <Route path="/disabled" exact component={Disabled} />
               <Route component={NotFound} />
             </Switch>
           </Container>

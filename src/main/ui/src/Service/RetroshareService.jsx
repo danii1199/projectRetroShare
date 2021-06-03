@@ -49,35 +49,19 @@ const findByEmail = (email) => {
 };
 
 const getVinyl = () => {
-  return http.get("/v-all", {
-    headers: {
-      Authorization: AuthHeader(),
-    },
-  });
+  return http.get("/v-all");
 };
 
 const getGame = () => {
-  return http.get("/g-all", {
-    headers: {
-      Authorization: AuthHeader(),
-    },
-  });
+  return http.get("/g-all");
 };
 
 const getRecordPlayer = () => {
-  return http.get("/rp-all", {
-    headers: {
-      Authorization: AuthHeader(),
-    },
-  });
+  return http.get("/rp-all");
 };
 
 const getGameConsole = () => {
-  return http.get("/gc-all", {
-    headers: {
-      Authorization: AuthHeader(),
-    },
-  });
+  return http.get("/gc-all");
 };
 
 const getProducts = () => {
@@ -129,7 +113,9 @@ const getCurrentCart = () => {
 const getMessages = () => {
   return http.get(`/chat-all`);
 }
-
+const findEmail = (email) => {
+  return http.get(`/find-email/${email}`);
+};
 
 const disabled = (id) => {
   return http.post(`/disabled/${id}`, {
@@ -137,6 +123,8 @@ const disabled = (id) => {
       Authorization: AuthHeader(),
     },
   });
+
+
   
 };
 
@@ -161,7 +149,8 @@ const services = {
   getCurrentCart,
   getMessages,
   verification,
-  disabled
+  disabled,
+  findEmail
 };
 
 export default services;

@@ -70,6 +70,13 @@ public class UserRestController {
 	public User find(@PathVariable Long id) {
 		return userRepository.getOne(id);
 	}
+	
+	//BUSCAR POR CORREO
+	@GetMapping(value = "/find-email/{email}")
+	public User find(@PathVariable String email) {
+		return userRepository.findByEmail(email);
+	}
+	
 
 	// GUARDAR NUEVO USUARIO
 	@PostMapping(value = "/save/{idRole}")

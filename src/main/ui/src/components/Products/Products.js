@@ -44,11 +44,11 @@ const Products = () => {
 
   const classes = useStyles();
 
-
   return (
+    
     <Suspense fallback={<Grid>Loading...</Grid>}>
       {currentUser!==null ?
-      (user.verificate === "false" ?
+      (user.verificate !== "true"?
       (<Grid>
         <Typography variant="h6" className={classes.h6} align="center">
            Por favor, verifica tu cuenta de correo
@@ -73,11 +73,20 @@ const Products = () => {
           </Grid>
           <Grid container spacing={2}>
             {products.map((product) => {
+            if(currentUser!==null&&product.userBuyer===null)
+             if(product.userOwner.email!==currentUser.name)
               return (
                 <Grid item sm={6} md={3}>
                   <CardProduct product={product} />
                 </Grid>
               );
+
+            if(currentUser===null)
+            return (
+              <Grid item sm={6} md={3}>
+                <CardProduct product={product} />
+              </Grid>
+            );
             })}
           </Grid>
         </Grid>

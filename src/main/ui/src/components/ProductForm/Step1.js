@@ -34,7 +34,7 @@ export const Step1 = () => {
   return (
     <MainContainer>
       <Typography component="h2" variant="h5">
-        ¿Que vas a subir?
+        Producto que quieres añadir
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
@@ -83,7 +83,7 @@ export const Step1 = () => {
           <option value={"recordplayer"}>Tocadiscos</option>
         </NativeSelect>
         <FormHelperText>
-          ¿Eres un jugón, o un amante de la musica?
+          Elige una de las 4 categorías
         </FormHelperText>
         <PrimaryButton>Siguiente</PrimaryButton>
       </Form>

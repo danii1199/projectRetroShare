@@ -53,7 +53,7 @@ const Cart = () => {
     <Container >
       <Grid >
         <Typography className={styles.text} variant={"h2"}>
-          Cart
+          Carro
         </Typography>
       </Grid>
 
@@ -61,7 +61,7 @@ const Cart = () => {
         {cartItems.length > 0 ? (
           <CartProducts />
         ) : (
-          <Grid className="p-3 text-center text-muted">Your cart is empty</Grid>
+          <Grid className={styles.text}>Tu carrito esta vacío</Grid>
         )}
 
         {checkout && (
@@ -73,18 +73,18 @@ const Cart = () => {
       </Grid>
       {cartItems.length > 0 && (
         <Grid >
-          <Grid >
-            <Typography className={styles.text}>Total Items</Typography>
+          <Grid>
+            <Typography className={styles.text}>Total de productos</Typography>
             <Typography className={styles.text} variant="h4">
               {itemCount}
             </Typography>
-            <Typography className={styles.text}>Total Payment</Typography>
+            <Typography className={styles.text}>Pago Total</Typography>
             <Typography className={styles.text} variant="h3">
               {formatNumber(total)}
             </Typography>
             <Grid item>
               <Button
-                children="CHECKOUT"
+                children="Realizar compra"
                 variant="contained"
                 color="secondary"
                 className={styles.button}

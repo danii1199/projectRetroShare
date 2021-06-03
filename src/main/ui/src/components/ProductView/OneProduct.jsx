@@ -70,7 +70,8 @@ const OneProduct = ({ product }) => {
           </Typography>
         </Grid>
         <Grid item xs={12} className="action-part">
-          {!isInCart(product) && (
+          
+          {!isInCart(product) && product.userBuyer===null&& (
             <>
               <Button
                 className={classes.button}

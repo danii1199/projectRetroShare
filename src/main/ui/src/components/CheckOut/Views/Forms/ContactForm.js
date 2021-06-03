@@ -20,7 +20,7 @@ const ContactForm = ({ formContent }) => {
         <TextField
           inputRef={register}
           type="text"
-          label="User Name*"
+          label="Nombre usuario*"
           name="userName"
           defaultValue={formContent.userName}
         />
@@ -28,7 +28,7 @@ const ContactForm = ({ formContent }) => {
       <Grid item xs={12} sm={4}>
         <TextField
           type="tel"
-          label="Phone Number*"
+          label="Teléfono*"
           name="phoneNumber"
           inputRef={register}
         />
@@ -37,7 +37,7 @@ const ContactForm = ({ formContent }) => {
         <TextField
           inputRef={register}
           type="text"
-          label="Address*"
+          label="Domicilio*"
           name="address"
         />
       </Grid>
@@ -45,15 +45,15 @@ const ContactForm = ({ formContent }) => {
         <TextField
           inputRef={register}
           type="number"
-          label="Zip Code*"
+          label="Código postal*"
           name="zipCode"
         />
       </Grid>
       <Grid item xs={12} sm={4}>
-        <TextField inputRef={register} type="text" label="City*" name="city" />
+        <TextField inputRef={register} type="text" label="Ciudad*" name="city" />
       </Grid>
       <Grid item xs={12} sm={4}>
-        <TextField inputRef={register} type="text" label="Sex*" name="sex" />
+        <TextField inputRef={register} type="text" label="Sexo*" name="sex" />
       </Grid>
       <Grid item xs={12} sm={4}>
         <Autocomplete
@@ -61,7 +61,7 @@ const ContactForm = ({ formContent }) => {
           getOptionLabel={(option) => option.name}
           renderInput={(params) => (
             <TextField
-              label="Country"
+              label="País"
               name="country"
               variant="outlined"
               required

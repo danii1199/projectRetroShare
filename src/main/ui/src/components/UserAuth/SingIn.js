@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useForm } from "react-hook-form";
 import AuthService from "../../Service/Auth/AuthService";
+import RetroService from "../../Service/RetroshareService"
 import { isEmail } from "validator";
 import { useHistory } from "react-router-dom";
 import { useData } from "../ProductForm/DataContext";
@@ -34,7 +35,7 @@ const emailVer = (value) => {
   if (!isEmail(value)) {
     return (
       <div className="alert alert-danger" role="alert">
-        This is not a valid email.
+        Esto no es un correo válido
       </div>
     );
   }
@@ -69,14 +70,24 @@ export default function SingIn() {
   });
   const history = useHistory();
 
+
+
   const onSubmit = (data) => {
     AuthService.login(data).then(() => {
-      history.push("/profile");
+      var correo=document.getElementById("email").value;
+       RetroService.findEmail(correo).then((x) => {
+    if(x.data.role.id===3){
+      history.push("/disabled");
       history.go()
+    }else{
+      history.push("/");
+      history.go()
+    }
+  });
       setValues(data);
     });
   };
-
+  console.log(RetroService.findByEmail(data.email))
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -85,7 +96,7 @@ export default function SingIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Log in
+          Inicio de Sesión
         </Typography>
         <form
           className={classes.form}
@@ -100,7 +111,7 @@ export default function SingIn() {
             })}
             fullWidth
             id="email"
-            label="Email Address"
+            label="Correo Electrónico"
             name="email"
             autoComplete="email"
             autoFocus
@@ -115,7 +126,7 @@ export default function SingIn() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -129,7 +140,7 @@ export default function SingIn() {
                 defaultValue={false}
               />
             }
-            label="Remember me"
+            label="Recuérdame"
           />
           <Button
             type="submit"
@@ -138,17 +149,16 @@ export default function SingIn() {
             color="primary"
             className={classes.submit}
           >
-            Log In
+            INICIAR SESIÓN
           </Button>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Forgot password?
               </Link>
             </Grid>
             <Grid item>
               <Link href="/singup" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"¿Aún no te has resgistrado? Registrarse"}
               </Link>
             </Grid>
           </Grid>

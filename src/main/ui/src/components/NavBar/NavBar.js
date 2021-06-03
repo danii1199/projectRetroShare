@@ -102,6 +102,7 @@ const NavBar = () => {
 
   const isAdmin = AuthService.getRoles() === "Admin";
   const isUser = AuthService.getRoles() === "User";
+  const isDisabled = AuthService.getRoles() === "Disabled";
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -239,7 +240,9 @@ const NavBar = () => {
                 }
               />{" "}
             </IconButton>
+            {(isDisabled===false)&&
             <SearchBar />
+            }
             <Grid className={classes.sectionDesktop}>
               {(isAdmin || isUser) && <AdminButtons isAdmin={isAdmin} />}
             </Grid>
@@ -278,7 +281,7 @@ const NavBar = () => {
               >
                 <Person />
               </IconButton>
-              <LogedButtons isUser={isAdmin || isUser} />
+              <LogedButtons isUser={isAdmin || isUser || isDisabled} />
             </Grid>
             <Grid className={classes.sectionMobile}>
               <IconButton
