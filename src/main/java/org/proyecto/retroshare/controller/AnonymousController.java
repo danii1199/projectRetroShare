@@ -57,8 +57,10 @@ public class AnonymousController {
 
 		Role admin = new Role("ADMIN");
 		Role usuario = new Role("USER");
+		Role disabled = new Role("DISABLED");
 		roleRepository.save(admin);
 		roleRepository.save(usuario);
+		roleRepository.save(disabled);
 
 		Calendar fecha = Calendar.getInstance();
 

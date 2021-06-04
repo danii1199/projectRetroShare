@@ -13,16 +13,25 @@ const useStyles = makeStyles((theme) => ({
   texto: {
     margin: theme.spacing(2),
     padding: theme.spacing(2),
-    color: theme.palette.common.white,
+    color: theme.palette.common.black,
+    fontSize:"20px"
   },
   titulo: {
-    color: theme.palette.common.white,
-    marginBottom: theme.spacing(5),
+    margin: theme.spacing(2),
+    padding: theme.spacing(2),
+    color: theme.palette.common.black,
+    fontSize:"30px"
   },
   infoUser: {
     color: theme.palette.common.white,
     display: "flex",
     justifyContent: "space-around",
+    backgroundColor: theme.palette.primary.main,
+    borderRadius:"6px",
+    marginTop:"100px"
+  },
+  linea: {
+    borderTop:"1px solid black"
   }
 }));
 
@@ -39,19 +48,25 @@ const Information = () => {
   return (
     <Grid>
       <Grid className={classes.infoUser}>
+      {user.avatar!==null?
         <Grid item>
           <img alt={user.avatar} className={classes.avatar} src={user.avatar} />
         </Grid>
+        :
+        <Grid item>
+        <img alt="anonymous" className={classes.avatar} src="https://c1.klipartz.com/pngpicture/74/8/sticker-png-circle-silhouette-user-logo-user-profile-avatar-head-line-art-oval.png" />
+      </Grid>
+          }
         <Grid container>
-          <Typography variant="h5" className={classes.texto}>
-            UserName: {user.userName}
+          <Typography variant="h5" className={classes.titulo}>
+            {user.userName}
           </Typography>
-          <Grid container>
+          <Grid container className={classes.linea}>
             <Typography className={classes.texto}>
-              Name: {user.firstName} {user.lastName}
+              {user.firstName} {user.lastName}
             </Typography>
             <Typography className={classes.texto}>
-              Email: {user.email}
+              Correo: {user.email}
             </Typography>
             <Typography className={classes.texto}>
               Registrado en: {fecha}

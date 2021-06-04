@@ -10,8 +10,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   image: {
-    height: "auto",
+    height: "100%",
     boxShadow: "0 4px 15px 5px #D9B504",
+    backgroundSize: "100%"
   },
 }));
 
@@ -24,14 +25,14 @@ const Item = (props) => {
         <CardActionArea
           component={Link}
           className={classes.padding}
-          to={`pr/${props.item.id}`}
+          to={`${props.item.to}`}
         >
           <CardMedia
             component="img"
-            alt={props.item.image}
+            alt={props.item.alt}
             className={classes.image}
-            image={props.item.image}
-            title={props.item.name}
+            image={props.item.src}
+            title={props.item.caption}
           ></CardMedia>
         </CardActionArea>
       </Paper>

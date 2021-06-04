@@ -25,6 +25,33 @@ const Caru1 = () => {
 
   const { products } = useContext(ProductsContext);
 
+  const items = [
+    {
+      src: process.env.PUBLIC_URL+'/juegos.jpg',
+      altText: 'Juegos',
+      caption: 'Juegos',
+      to:"videogames"
+    },
+    {
+      src: process.env.PUBLIC_URL+'/consolas.jpg',
+      altText: 'Consolas',
+      caption: 'Consolas',
+      to:"gameconsole"
+    },
+    {
+      src:  process.env.PUBLIC_URL+'/vinilos.jpg',
+      altText: 'Vinilos',
+      caption: 'Vinilos',
+      to:"Vinyl"
+    },
+    {
+      src: process.env.PUBLIC_URL+'/tocadiscos.jpg',
+      altText: 'Tocadiscos',
+      caption: 'Tocadiscos',
+      to:"rplayer"
+    }
+  ];
+
   return (
     <div style={{ marginTop: "50px", color: "#494949" }}>
       <Carousel
@@ -49,7 +76,7 @@ const Caru1 = () => {
           )
         }
       >
-        {products.map((item, i) => (
+        {items.map((item, i) => (
           <Item key={i} item={item} />
         ))}
       </Carousel>

@@ -43,6 +43,8 @@ const Products = () => {
   if(currentUser!==null){var user= OneUser(currentUser.id);}
 
   const classes = useStyles();
+  var cont=0;
+ 
 
   return (
     
@@ -71,6 +73,7 @@ const Products = () => {
               Ultimas Subidas
             </Typography>
           </Grid>
+
           <Grid container spacing={2}>
             {products.map((product) => {
             if(currentUser!==null&&product.userBuyer===null)
