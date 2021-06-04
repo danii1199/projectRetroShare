@@ -248,7 +248,7 @@ const NavBar = () => {
                 <MenuIcon />
               </IconButton>
             </Grid>
-            <IconButton component={Link} to="/">
+            <IconButton component={Link} to="/home">
               <img
                 alt={"pokeball"}
                 width={"50"}

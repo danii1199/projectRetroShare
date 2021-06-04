@@ -132,7 +132,7 @@ const FormStepper = () => {
   };
 
   if (success) {
-    history.push("./");
+    history.push("./home");
     history.go();
   }
 

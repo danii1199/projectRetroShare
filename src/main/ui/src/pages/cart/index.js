@@ -61,13 +61,17 @@ const Cart = () => {
         {cartItems.length > 0 ? (
           <CartProducts />
         ) : (
-          <Grid className={styles.text}>Tu carrito esta vacío</Grid>
+          <Grid>
+             <Typography className={styles.text} variant={"h5"}>
+             Tu carrito esta vacío
+            </Typography>
+        </Grid>
         )}
 
         {checkout && (
           <Grid >
             <Typography>Checkout successfull</Typography>
-            <Link children="BUY MORE" to="/" className="btn btn-outline-success btn-sm"/>
+            <Link children="BUY MORE" to="/home" className="btn btn-outline-success btn-sm"/>
           </Grid>
         )}
       </Grid>
