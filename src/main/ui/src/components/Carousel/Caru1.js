@@ -1,7 +1,5 @@
 import Carousel from "react-material-ui-carousel";
 import { useState } from "react";
-import { ProductsContext } from "../../contexts/ProductsContext";
-import { useContext } from "react";
 import Item from "./Item";
 
 const Caru1 = () => {
@@ -23,7 +21,6 @@ const Caru1 = () => {
     setIndicators(indicators);
   };
 
-  const { products } = useContext(ProductsContext);
 
   const items = [
     {
