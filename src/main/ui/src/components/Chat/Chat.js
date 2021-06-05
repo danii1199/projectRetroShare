@@ -133,8 +133,14 @@ const Chat = () => {
         <Grid item xs={9}>
           <List className={classes.messageArea}>
             {messages.map((message) => {
+              console.log(message.date)
+              var dia=parseInt((message.date?.substring(11, 13)));
+              var x=dia+2;
+
               let fecha =
-                message.date?.substring(11, 16) +
+                x +
+                ":" +
+                message.date?.substring(14, 16) +
                 " " +
                 message.date?.substring(8, 10) +
                 "-" +
