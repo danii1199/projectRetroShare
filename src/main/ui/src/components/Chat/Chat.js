@@ -135,10 +135,10 @@ const Chat = () => {
             {messages.map((message) => {
               console.log(message.date)
               var dia=parseInt((message.date?.substring(11, 13)));
-              var x=dia+2;
+              var numerodia=dia+2;
 
               let fecha =
-                x +
+                numerodia +
                 ":" +
                 message.date?.substring(14, 16) +
                 " " +
