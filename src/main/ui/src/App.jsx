@@ -33,6 +33,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import NotFound from "./pages/NotFound";
 import AuthService from "./Service/Auth/AuthService";
 import Disabled from "./components/User/Disabled"
+import HomePage from "./components/HomePage/HomePage"
 
 const UserDataComponent = lazy(() =>
   import("./components/DataComponent/UserDataComponent")
@@ -102,10 +103,9 @@ const App = () => {
 
               <Route path="/vinyl" exact component={CategoriasProductos} />
 
-              {(!isDisabled)?
-              <Route path="/" exact component={Products} />
-              :null
-              }
+             
+              <Route path="/" exact component={HomePage} />
+              
 
               <Route path="/cart" component={Cart} />
               <Route path="/chat" component={Chat} />
@@ -122,7 +122,11 @@ const App = () => {
               <Route path="/cartFormResult" exact component={CartFormResult} />
               <Route path="/search/:name" exact component={ResultSearch} />
               <Route path="/verification/:name" exact component={Verification} />
-              <Route path="/disabled" exact component={Disabled} />
+              <Route path="/disabled" exact component={Disabled} />   
+              {(!isDisabled)?           
+              <Route path="/home" exact component={Products} />
+              :null
+              }
               <Route component={NotFound} />
             </Switch>
           </Container>

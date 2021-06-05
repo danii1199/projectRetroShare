@@ -67,14 +67,14 @@ export const Result = () => {
       if (res.status === 200) {
         Swal.fire("Felicidades!", "Has registrado un producto con éxito", "success");
         setSuccess(true);
-        history.push("./");
+        history.push("./home");
         history.go();
       }
     });
   };
 
   if (success) {
-    history.push("./");
+    history.push("./home");
   }
 
   return (

@@ -14,6 +14,7 @@ import { CartContext } from "../../contexts/CartContext";
 import { makeStyles } from "@material-ui/core/styles";
 import { AddCartButton, CartButton } from "../Buttons/PrincipalButtons";
 import { UserButton } from "../Buttons/PrincipalButtons";
+import AuthService from "../../Service/Auth/AuthService";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -60,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
 const CardProduct = ({ product }) => {
   const classes = useStyles();
   const { cartItems } = useContext(CartContext);
+  const currentUser = AuthService.getCurrentUser();
 
   const isInCart = (product) => {
     return !!cartItems.find((item) => item.id === product.id);
@@ -110,8 +112,8 @@ const CardProduct = ({ product }) => {
 
         <UserButton product={product} />
 
-        {!isInCart(product) && <AddCartButton product={product}/>}
-        {isInCart(product) && <CartButton />}
+        {!isInCart(product) && currentUser!==null&& <AddCartButton product={product}/>}
+        {isInCart(product) && currentUser!==null&& <CartButton />}
       </CardActions>
     </Card>
   );

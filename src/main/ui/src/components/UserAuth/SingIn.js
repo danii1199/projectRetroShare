@@ -80,7 +80,7 @@ export default function SingIn() {
       history.push("/disabled");
       history.go()
     }else{
-      history.push("/");
+      history.push("/home");
       history.go()
     }
   });

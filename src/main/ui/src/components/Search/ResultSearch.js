@@ -4,6 +4,7 @@ import CardProduct from "../CardProduct/CardProduct";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import { useContext, Suspense } from "react";
 import PrincipalButtons from "../Buttons/PrincipalButtons";
+import AuthService from "../../Service/Auth/AuthService";
 
 const useStyles = makeStyles((theme) => ({
   carousel: {
@@ -31,6 +32,7 @@ const Products = (props) => {
   
   const classes = useStyles();
   const searchName=localizacion[(localizacion.length)-1];
+  const currentUser = AuthService.getCurrentUser();
 
   return (
     <Suspense fallback={<Grid>Loading...</Grid>}>
@@ -46,7 +48,9 @@ const Products = (props) => {
           </Grid>
           <Grid container spacing={2}>
             {products.map((product) => {
-              if(product.name===searchName)
+              if(product.name===searchName) 
+              if(currentUser!==null&&product.userBuyer===null)
+              if(product.userOwner.email!==currentUser.name)
               return (
                 <Grid item sm={6} md={3}>
                   <CardProduct product={product} />

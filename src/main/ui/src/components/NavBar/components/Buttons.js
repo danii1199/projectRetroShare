@@ -27,31 +27,31 @@ const useStyles = makeStyles((theme) => ({
 const botonesAdmin = [
   {
     id: "1",
-    nombre: "Users",
+    nombre: <Person />,
     enlace: "/users",
     icono: <Person />,
   },
   {
     id: "2",
-    nombre: "Games",
+    nombre: <SportsEsportsIcon />,
     enlace: "/videogames-admin",
     icono: <SportsEsportsIcon />,
   },
   {
     id: "3",
-    nombre: "Player",
+    nombre: <RadioIcon />,
     enlace: "/rplayer-admin",
     icono: <RadioIcon />,
   },
   {
     id: "4",
-    nombre: "Consoles",
+    nombre: <VideogameAssetIcon />,
     enlace: "/gameconsole-admin",
     icono: <VideogameAssetIcon />,
   },
   {
     id: "5",
-    nombre: "Vinyl",
+    nombre: <AlbumIcon />,
     enlace: "/vinyl-admin",
     icono: <AlbumIcon />,
   },
@@ -59,7 +59,7 @@ const botonesAdmin = [
 
 const botonesUser = [
   {
-    nombre: "Nuevo",
+    nombre: <AddIcon />,
     enlace: "/step1",
     icono: <AddIcon />,
   },
@@ -123,7 +123,7 @@ export const LogedButtons = (props) => {
   if (props.isUser) {
     return (
       <MenuItem>
-        <Button color="inherit" onClick={logOut()} href={"/"}>
+        <Button color="inherit" onClick={logOut()} href={"/home"}>
           <ExitToAppIcon />
         </Button>
       </MenuItem>

@@ -32,7 +32,8 @@ const VinylComponentAdmin = () => {
     { field: "songs", headerName: "Songs", width: 150 },
     { field: "year", headerName: "Year", width: 150 },
     { field: "price", headerName: "Price", width: 150 },
-    { field: "firstName", headerName: "Owner user", width: 130, valueFormatter: (vinyl) => vinyl.row?.user?.userName},
+    { field: "Owner user", headerName: "Owner user", width: 130, valueFormatter: (vinyl) => vinyl.row?.userOwner?.userName},
+    { field: "Buy user", headerName: "Buy user", width: 130, valueFormatter: (vinyl) => vinyl.row?.userBuyer?.userName},
     { field: "productStatus", headerName: "Product Status", width: 150 ,valueFormatter: (vinyl) => vinyl.row?.productStatus?.status},
   ];
 
