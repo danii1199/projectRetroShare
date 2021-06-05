@@ -10,7 +10,6 @@ import PrincipalButtons from "../Buttons/PrincipalButtons";
 import AuthService from "../../Service/Auth/AuthService";
 import OneUser from "../../lib/OneUser";
 
-
 const useStyles = makeStyles((theme) => ({
   carousel: {
     height: "auto",
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "30px",
     color: theme.palette.text.secondary,
     backgroundColor: "white",
-    opacity:0.5,
+    opacity: 0.5,
   },
   h3: {
     color: theme.palette.text.secondary,
@@ -40,24 +39,23 @@ const Products = () => {
 
   const currentUser = AuthService.getCurrentUser();
 
-  if(currentUser!==null){var user= OneUser(currentUser.id);}
+  if (currentUser !== null) {
+    var user = OneUser(currentUser.id);
+  }
 
   const classes = useStyles();
-  var cont=0;
- 
 
   return (
-    
     <Suspense fallback={<Grid>Loading...</Grid>}>
-      {currentUser!==null ?
-      (user.verificate !== "true"?
-      (<Grid>
-        <Typography variant="h6" className={classes.h6} align="center">
-           Por favor, verifica tu cuenta de correo
-        </Typography>
-      </Grid>):null
-      ):null
-  }
+      {currentUser !== null ? (
+        user.verificate !== "true" ? (
+          <Container maxWidth="lg">
+            <Typography variant="h6" className={classes.h6}  align="center">
+              Por favor, verifica tu cuenta de correo
+            </Typography>
+          </Container>
+        ) : null
+      ) : null}
       <Grid className={classes.carousel}>
         <Container maxWidth="lg">
           <Caru1 />
@@ -76,20 +74,21 @@ const Products = () => {
 
           <Grid container spacing={2}>
             {products.map((product) => {
-            if(currentUser!==null&&product.userBuyer===null)
-             if(product.userOwner.email!==currentUser.name)
-              return (
-                <Grid item sm={6} md={3}>
-                  <CardProduct product={product} />
-                </Grid>
-              );
+              if (currentUser !== null && product.userBuyer === null)
+                if (product.userOwner.email !== currentUser.name)
+                  return (
+                    <Grid item sm={6} md={3}>
+                      <CardProduct product={product} />
+                    </Grid>
+                  );
 
-            if(currentUser===null)
-            return (
-              <Grid item sm={6} md={3}>
-                <CardProduct product={product} />
-              </Grid>
-            );
+              if (currentUser === null)
+                return (
+                  <Grid item sm={6} md={3}>
+                    <CardProduct product={product} />
+                  </Grid>
+                );
+              return <></>;
             })}
           </Grid>
         </Grid>

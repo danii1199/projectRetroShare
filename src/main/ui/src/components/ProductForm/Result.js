@@ -52,7 +52,6 @@ export const Result = () => {
     }
     entries.forEach((entry) => {
       formData.append(entry[0], entry[1]);
-      console.log()
     });
     
 
