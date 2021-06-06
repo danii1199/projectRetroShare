@@ -3,6 +3,7 @@ package org.proyecto.retroshare.domain;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,9 +14,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -25,22 +24,24 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String description;
-	private String image;
-	
+	private String images;
+
 	@JsonIgnoreProperties(value = { "products", "hibernateLazyInitializer" }, allowSetters = true)
 	@JoinColumn(name = "userOwner_id")
-	@ManyToOne( optional = true)
+	@ManyToOne(optional = true)
 	private User userOwner;
-	
+
 	@JsonIgnoreProperties(value = { "products", "hibernateLazyInitializer" }, allowSetters = true)
 	@JoinColumn(name = "userBuyer_id")
 	@ManyToOne(optional = true)
 	private User userBuyer;
-	
-	
-	/*@JsonIgnore
-	@OneToOne(mappedBy = "product", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	private Historial historial;*/
+
+	/*
+	 * @JsonIgnore
+	 * 
+	 * @OneToOne(mappedBy = "product", cascade = CascadeType.PERSIST, fetch =
+	 * FetchType.LAZY) private Historial historial;
+	 */
 
 	@JsonIgnoreProperties(value = { "products", "hibernateLazyInitializer" }, allowSetters = true)
 	@JoinColumn(name = "productStatus_id")
@@ -55,23 +56,14 @@ public class Product {
 	@OneToMany(mappedBy = "productComment", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Collection<Comment> comments;
 
-	public Product(String description, String image) {
-
-		super();
-		this.description = description;
-		this.image = image;
-	}
-
 	public Product() {
 		super();
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
+	public Product(String description, String images) {
+		super();
+		this.description = description;
+		this.images = images;
 	}
 
 	public Long getId() {
@@ -88,6 +80,14 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String images) {
+		this.images = images;
 	}
 
 	public User getUserOwner() {
@@ -129,6 +129,7 @@ public class Product {
 	public void setComments(Collection<Comment> comments) {
 		this.comments = comments;
 	}
+
 	
 
 }

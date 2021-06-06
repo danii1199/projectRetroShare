@@ -20,6 +20,7 @@
     "libphonenumber": "0.0.10",
     "libphonenumber-js": "^1.9.16",
     "material-ui-image": "^3.3.2",
+    "move-file": "^2.0.0",
     "react": "^17.0.2",
     "react-chat-engine": "^1.9.2",
     "react-dom": "^17.0.1",

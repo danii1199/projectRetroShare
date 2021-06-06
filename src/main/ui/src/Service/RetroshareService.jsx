@@ -79,6 +79,7 @@ const createProduct = (data, tproduct, idUser, idProductStatus) => {
   return http.post(`/${tproduct}/${idUser}/${idProductStatus}`, data, {
     headers: {
       Authorization: AuthHeader(),
+      'Content-Type': 'multipart/form-data'
     },
   });
 };

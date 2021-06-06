@@ -57,7 +57,7 @@ public class GameConsoleRestController {
 		user.getProductOwner().add(gameConsole);
 
 		ProductStatus productStatus = productStatusRepository.getOne(idProductStatus);
-		
+
 		gameConsole.setProductStatus(productStatus);
 		productStatus.getProducts().add(gameConsole);
 
@@ -78,7 +78,7 @@ public class GameConsoleRestController {
 		gameConsoleUpdate.setName(gameConsole.getName());
 		gameConsoleUpdate.setPrice(gameConsole.getPrice());
 		gameConsoleUpdate.setYear(gameConsole.getYear());
-		
+
 		ProductStatus productStatus = productStatusRepository.findById(idProductStatus)
 				.orElseThrow(() -> new ResourceNotFoundException("No existe el estado" + idProductStatus));
 		gameConsoleUpdate.setProductStatus(productStatus);

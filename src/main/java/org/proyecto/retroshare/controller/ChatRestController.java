@@ -75,7 +75,7 @@ public class ChatRestController {
 
 				chatLeido.setLeido(true);
 
-				Chat estaLeido = chatRepository.save(chatLeido);
+				//Chat estaLeido = chatRepository.save(chatLeido);
 				
 
 			}

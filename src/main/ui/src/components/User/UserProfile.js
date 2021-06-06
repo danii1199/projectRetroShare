@@ -53,7 +53,6 @@ const UserProfile = () => {
       </Grid>
       <Grid container spacing={2}>
         {products.map((product) => {
-          console.log(product.userBuyer);
           if (product.userBuyer !== null)
             if (product.userBuyer.id === user.id)
               return (

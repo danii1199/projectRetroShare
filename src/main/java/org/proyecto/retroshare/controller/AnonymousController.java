@@ -1,7 +1,6 @@
 package org.proyecto.retroshare.controller;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import org.proyecto.retroshare.domain.ProductStatus;
 import org.proyecto.retroshare.domain.Role;
@@ -14,8 +13,6 @@ import org.proyecto.retroshare.repositories.RoleRepository;
 import org.proyecto.retroshare.repositories.UserRepository;
 import org.proyecto.retroshare.repositories.VinylRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;

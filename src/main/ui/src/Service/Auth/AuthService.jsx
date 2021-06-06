@@ -5,7 +5,7 @@ const register = (data) => {
 };
 
 const login = async (data) => {
-  return http.post("/login", JSON.stringify(data)).then((response) => {
+  return http.post("/login", data).then((response) => {
     localStorage.setItem("user", JSON.stringify(response.data));
   });
 };

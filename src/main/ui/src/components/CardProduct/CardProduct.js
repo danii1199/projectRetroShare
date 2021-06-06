@@ -75,7 +75,7 @@ const CardProduct = ({ product }) => {
           alt={product.image}
           height="220"
           className={classes.image}
-          image={process.env.PUBLIC_URL + "/" + product.image}
+          image={process.env.PUBLIC_URL + "/" + product.images}
           title={product.name}
         />
         <CardContent className={classes.content}>

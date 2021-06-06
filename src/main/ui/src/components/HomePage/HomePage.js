@@ -1,67 +1,114 @@
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Button  from "@material-ui/core/Button";
+import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router";
-import Image from 'material-ui-image'
+import { useState, useRef, useEffect } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
- 
   titulo: {
-    color: theme.palette.common.white,
-    marginBottom: "30px",
-    width:"700px"
+    color: theme.palette.primary.light,
   },
   container: {
-    width:"auto",
-    height:"100px",
-    borderRadius:"8px",
-    marginTop: "350px",
-    marginLeft: "-200px"
+    alignItems: "center",
+    marginTop: "40vh",
+    marginLeft: "40vh",
   },
+
   button: {
-    padding: theme.spacing(2, 8),
+    marginLeft: "20%",
     boxShadow: "0 4px 10px 0 #D9B504",
-    backgroundColor:theme.palette.common.white,
-    color:theme.palette.primary.main,
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.primary.main,
   },
   foto: {
-    backgroundImage: "url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80')",
-    backgroundSize:"cover",
-    width:"900px",
-    height:"500px",
-    marginLeft:"550px",
-    marginTop:"-250px"
+    background: "url('./fondoHome.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "top center",
+    backgroundAttachment: "fixed",
+    backgroundRepeat: "no-repeat",
+    height: "100vh",
+    width: "100vw",
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: "relative",
+  },
 
-  }
+  fabProgress: {
+    color: theme.palette.primary.light,
+    top: -6,
+    left: -6,
+    zIndex: 1,
+  },
+  buttonProgress: {
+    color: theme.palette.primary.light,
+    top: "50%",
+    marginTop: -12,
+    marginLeft: -12,
+  },
+  buttonSuccess: {
+    backgroundColor: theme.palette.primary.light,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.light,
+    },
+  },
 }));
 
 const HomePage = () => {
   const classes = useStyles();
 
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const timer = useRef();
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, []);
+
+  const handleButtonClick = () => {
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+      timer.current = window.setTimeout(() => {
+        setSuccess(true);
+        setLoading(false);
+      }, 2000);
+    }
+  };
+
+  if (success) {
+    history.push(`/home`);
+    history.go();
+  }
 
   return (
-    <Container >
+    <Grid container className={classes.foto}>
       <Grid className={classes.container}>
-        <Typography variant="h2" className={classes.titulo}>
-          Bienvenido a Retroshare!
-        </Typography>
-      
-        <Typography variant="h4" className={classes.titulo}>
-          Aquí podrás comprar y vender cualquier consola retro, videojuego retro, tocadisco o vinilo. 
-        </Typography>
-        <Button
-        className={classes.button}
-      onClick={() => {
-        history.push(`/home`);
-        history.go();
-      }}
-     >Acceder al inicio</Button>
+        <Grid container>
+          <Typography variant="h4" className={classes.titulo}>
+            Empieza tú aventura
+          </Typography>
+        </Grid>
+        <Grid className={classes.wrapper}>
+          <Button
+            children="Inicio"
+            className={classes.button}
+            onClick={handleButtonClick}
+            disabled={loading}
+            variant="contained"
+            color="secondary"
+          />
+          {loading && (
+            <CircularProgress size={24} className={classes.buttonProgress} />
+          )}
+        </Grid>
       </Grid>
-      <Grid className={classes.foto}>
-      </Grid>
-      </Container>
+    </Grid>
   );
-}
+};
 
 export default HomePage;

@@ -44,31 +44,28 @@ export const Result = () => {
   const onSubmit = async () => {
     const formData = new FormData();
     if (data.files) {
-      
       data.files.forEach((file) => {
-        formData.append("files", file, file.name);
-        
+        formData.append("files", file);
+        formData.append("images", file.name);
       });
     }
     entries.forEach((entry) => {
       formData.append(entry[0], entry[1]);
     });
-    
-
-    data.image = files[0].name
 
     RetroshareService.createProduct(
-      data,
+      formData,
       data.productType,
       currentUser,
       data.status
     ).then((res) => {
-      
       if (res.status === 200) {
-        Swal.fire("Felicidades!", "Has registrado un producto con éxito", "success");
+        Swal.fire(
+          "Felicidades!",
+          "Has registrado un producto con éxito",
+          "success"
+        );
         setSuccess(true);
-        history.push("./home");
-        history.go();
       }
     });
   };
