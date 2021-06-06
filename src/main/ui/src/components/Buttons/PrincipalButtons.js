@@ -10,6 +10,7 @@ import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 import RadioIcon from "@material-ui/icons/Radio";
 import VideogameAssetIcon from "@material-ui/icons/VideogameAsset";
 import AlbumIcon from "@material-ui/icons/Album";
+import TelegramIcon from '@material-ui/icons/Telegram';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -89,6 +90,23 @@ export const UserButton = (props) => {
       to={`user/${props.product.userOwner.id}`}
     >
       <Person className={classes.icon} />
+    </Button>
+  );
+};
+
+export const ChatButton = (props) => {
+  
+  const classes = useStyles();
+  return (
+    <Button
+      className={classes.buttonCart}
+      variant="contained"
+      size="small"
+      color="secondary"
+      component={Link}
+      to={`chat/${props.product.userOwner.id}`}
+    >
+      <TelegramIcon className={classes.icon} />
     </Button>
   );
 };

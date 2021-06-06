@@ -12,7 +12,7 @@ import EuroSymbolIcon from "@material-ui/icons/EuroSymbol";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import { makeStyles } from "@material-ui/core/styles";
-import { AddCartButton, CartButton } from "../Buttons/PrincipalButtons";
+import { AddCartButton, CartButton, ChatButton } from "../Buttons/PrincipalButtons";
 import { UserButton } from "../Buttons/PrincipalButtons";
 import AuthService from "../../Service/Auth/AuthService";
 
@@ -109,11 +109,13 @@ const CardProduct = ({ product }) => {
         >
           {product.price} <EuroSymbolIcon />
         </Typography>
-
-        <UserButton product={product} />
+        {currentUser!==null&& <UserButton product={product} />}
+        
+        {currentUser!==null&& <ChatButton product={product}/>}
 
         {!isInCart(product) && currentUser!==null&& <AddCartButton product={product}/>}
         {isInCart(product) && currentUser!==null&& <CartButton />}
+        
       </CardActions>
     </Card>
   );

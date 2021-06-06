@@ -15,12 +15,11 @@ import Delete from "@material-ui/icons/Delete";
 import AuthService from "../../Service/Auth/AuthService";
 import RetroshareService from "../../Service/RetroshareService";
 
-
 const useStyles = makeStyles((theme) => ({
   button: {
-    marginLeft: theme.spacing(3),
+    margin: theme.spacing(0, 1, 0, 3),
     boxShadow: "5px 6px 15px 1px #0D0D0D",
-    float: "rigth",
+    float: "inline-end",
   },
   customCard: {
     transition: "all 0.2s ease-in-out",
@@ -62,8 +61,6 @@ const CardProduct = ({ product }) => {
   const history = useHistory();
   const classes = useStyles();
   const currentUser = AuthService.getCurrentUser();
-
- 
 
   return (
     <Card className="custom-card">
@@ -112,16 +109,21 @@ const CardProduct = ({ product }) => {
         >
           {product.price} <EuroSymbolIcon />
         </Typography>
-        {currentUser.name===product.userOwner.email &&
-        <Button 
-        className={classes.button}
-        onClick={() => {
-          RetroshareService.deleteProduct(product.id);
-          history.push(`/profile`);
-          history.go();
-        }}
-        ><Delete/></Button>
-        }
+        {currentUser.name === product.userOwner.email && (
+          <Button
+            variant="contained"
+            size="small"
+            color="secondary"
+            className={classes.button}
+            onClick={() => {
+              RetroshareService.deleteProduct(product.id);
+              history.push(`/profile`);
+              history.go();
+            }}
+          >
+            <Delete />
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

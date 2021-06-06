@@ -43,21 +43,21 @@ const useStyles = makeStyles({
   },
 });
 
-const Chat = () => {
+const Chat = (props) => {
+  const localizacion = props.location.pathname.split("/");
   const classes = useStyles();
   const currentUser = AuthService.getCurrentUser();
   const { users } = useContext(UsersContext);
-  const [reciberUser, setReciberUser] = useState();
+  const [reciberUser, setReciberUser] = useState(localizacion[2]);
   //const [mensaje, setMensaje] = useState("");
   const { reset, register, handleSubmit } = useForm();
   const history = useHistory();
 
   const { messages } = useContext(MessagesContext);
 
-  
+  console.log(localizacion[2]);
 
   const handleSelectUser = (props) => {
-    //props.preventDefault()
     setReciberUser(props);
   };
 
@@ -93,15 +93,7 @@ const Chat = () => {
             </ListItem>
           </List>
           <Divider />
-          <Grid item xs={12} style={{ padding: "10px" }}>
-            <TextField
-              id="outlined-basic-email"
-              label="Search"
-              variant="outlined"
-              fullWidth
-            />
-          </Grid>
-          <Divider />
+
           <List>
             {users.map((user) => {
               if (currentUser.id !== user.id) {
@@ -133,9 +125,8 @@ const Chat = () => {
         <Grid item xs={9}>
           <List className={classes.messageArea}>
             {messages.map((message) => {
-              console.log(message.date)
-              var dia=parseInt((message.date?.substring(11, 13)));
-              var numerodia=dia+2;
+              var dia = parseInt(message.date?.substring(11, 13));
+              var numerodia = dia + 2;
 
               let fecha =
                 numerodia +
