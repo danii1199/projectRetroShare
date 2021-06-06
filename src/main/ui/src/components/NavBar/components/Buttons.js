@@ -26,27 +26,32 @@ const useStyles = makeStyles((theme) => ({
 
 const botonesAdmin = [
   {
-    nombre: "Users",
+    id: "1",
+    nombre: <Person />,
     enlace: "/users",
     icono: <Person />,
   },
   {
-    nombre: "Games",
+    id: "2",
+    nombre: <SportsEsportsIcon />,
     enlace: "/videogames-admin",
     icono: <SportsEsportsIcon />,
   },
   {
-    nombre: "Player",
+    id: "3",
+    nombre: <RadioIcon />,
     enlace: "/rplayer-admin",
     icono: <RadioIcon />,
   },
   {
-    nombre: "Consoles",
+    id: "4",
+    nombre: <VideogameAssetIcon />,
     enlace: "/gameconsole-admin",
     icono: <VideogameAssetIcon />,
   },
   {
-    nombre: "Vinyl",
+    id: "5",
+    nombre: <AlbumIcon />,
     enlace: "/vinyl-admin",
     icono: <AlbumIcon />,
   },
@@ -54,7 +59,7 @@ const botonesAdmin = [
 
 const botonesUser = [
   {
-    nombre: "Nuevo",
+    nombre: <AddIcon />,
     enlace: "/step1",
     icono: <AddIcon />,
   },
@@ -73,7 +78,7 @@ export const AdminButtonsIcons = (props) => {
 
   return esAdmin.map((boton) => {
     return (
-      <MenuItem>
+      <MenuItem key={boton.id}>
         <Button
           children={boton.icono}
           className={classes.buttonIcon}
@@ -98,7 +103,7 @@ export const AdminButtons = (props) => {
   
   return esAdmin.map((boton) => {
     return (
-      <MenuItem>
+      <MenuItem key={boton.id}>
         <Button
           children={boton.nombre}
           className={classes.buttonIcon}
@@ -118,7 +123,7 @@ export const LogedButtons = (props) => {
   if (props.isUser) {
     return (
       <MenuItem>
-        <Button color="inherit" onClick={logOut()} href={"/"}>
+        <Button color="inherit" onClick={logOut()} href={"/home"}>
           <ExitToAppIcon />
         </Button>
       </MenuItem>

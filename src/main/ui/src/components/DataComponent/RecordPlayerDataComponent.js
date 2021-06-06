@@ -32,7 +32,8 @@ const RecordPlayerComponentAdmin = () => {
     { field: "brand", headerName: "Brand", width: 150 },
     { field: "year", headerName: "Year", width: 150 },
     { field: "price", headerName: "Price", width: 150 },
-    { field: "firstName", headerName: "Owner user", width: 130, valueFormatter: (recordPlayer) => recordPlayer.row?.user?.userName},
+    { field: "Owner User", headerName: "Owner user", width: 130, valueFormatter: (recordPlayer) => recordPlayer.row?.userOwner?.userName},
+    { field: "Buy User", headerName: "Buy user", width: 130, valueFormatter: (recordPlayer) => recordPlayer.row?.userBuyer?.userName},
     { field: "productStatus", headerName: "Product Status", width: 150 ,valueFormatter: (recordPlayer) => recordPlayer.row?.productStatus?.status},
   ];
 

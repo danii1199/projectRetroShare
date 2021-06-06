@@ -98,9 +98,9 @@ const CartItem = ({ product }) => {
             <Typography field="price" className={classes.title} variant="h5">
               {formatNumber(product.price)}
             </Typography>
-            <Typography field="cant" className={classes.title} variant="h5">
+           {/*  <Typography field="cant" className={classes.title} variant="h5">
               Qty: {product.quantity}
-            </Typography>
+            </Typography> */}
           </CardContent>
         </CardActionArea>
         <CardActions className="actions-content">

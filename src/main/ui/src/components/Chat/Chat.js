@@ -13,8 +13,12 @@ import Fab from "@material-ui/core/Fab";
 import SendIcon from "@material-ui/icons/Send";
 import AuthService from "../../Service/Auth/AuthService";
 import OneUser from "../../lib/OneUser";
-import UserAPI from "../../lib/UserAPI";
-import "./style.css";
+import { useEffect, useState, useContext } from "react";
+import { UsersContext } from "../../contexts/UsersContext";
+import http from "../../Http-common";
+import { useForm } from "react-hook-form";
+import { MessagesContext } from "./context/MessagesContext";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
@@ -38,18 +42,36 @@ const useStyles = makeStyles({
     marginTop: "90px",
   },
 });
-function handleClick(e) {
-  e.preventDefault();
-}
 
-const Chat = () => {
+const Chat = (props) => {
+  const localizacion = props.location.pathname.split("/");
   const classes = useStyles();
   const currentUser = AuthService.getCurrentUser();
-  const users = UserAPI();
-  
+  const { users } = useContext(UsersContext);
+  const [reciberUser, setReciberUser] = useState(localizacion[2]);
+  //const [mensaje, setMensaje] = useState("");
+  const { reset, register, handleSubmit } = useForm();
+  const history = useHistory();
+
+  const { messages } = useContext(MessagesContext);
+
+  console.log(localizacion[2]);
+
+  const handleSelectUser = (props) => {
+    setReciberUser(props);
+  };
+
+  const onSubmit = async (data) => {
+    http.post(`/chat-save/${currentUser.id}/${reciberUser}`, data).then(reset);
+    history.go();
+  };
+
+  useEffect(() => {
+    handleSelectUser();
+  }, []);
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container className={classes.background}>
         <Grid item xs={12}>
           <Typography variant="h5" className="header-message">
@@ -60,7 +82,7 @@ const Chat = () => {
       <Grid container component={Paper} className={classes.chatSection}>
         <Grid item xs={3} className={classes.borderRight500}>
           <List>
-            <ListItem button key="RemySharp">
+            <ListItem button key={currentUser.id}>
               <ListItemIcon>
                 <Avatar
                   alt={currentUser.name}
@@ -71,83 +93,83 @@ const Chat = () => {
             </ListItem>
           </List>
           <Divider />
-          <Grid item xs={12} style={{ padding: "10px" }}>
-            <TextField
-              id="outlined-basic-email"
-              label="Search"
-              variant="outlined"
-              fullWidth
-            />
-          </Grid>
-          <Divider />
+
           <List>
             {users.map((user) => {
-              if (currentUser.name !== user.firstName) {
+              if (currentUser.id !== user.id) {
                 return (
-                  <ListItem button key={user.id}>
-                    <ListItemIcon>
-                      <Avatar alt={user.avatar} src={user.avatar} />
-                    </ListItemIcon>
-                    <ListItemText primary={user.firstName}>
-                      {user.firstName}
-                    </ListItemText>
-                  </ListItem>
+                  <List
+                    value={reciberUser}
+                    exclusive
+                    onClick={() => {
+                      handleSelectUser(user.id);
+                    }}
+                    key={user.id}
+                  >
+                    <ListItem button value={user.id}>
+                      <ListItemIcon>
+                        <Avatar alt={user.avatar} src={user.avatar} />
+                      </ListItemIcon>
+
+                      <ListItemText primary={user.firstName}>
+                        {user.firstName}
+                      </ListItemText>
+                    </ListItem>
+                  </List>
                 );
               }
-              return (
-                <ListItem button key={user.id}>
-                  <ListItemIcon>
-                    <Avatar alt={user.avatar} src={user.avatar} />
-                  </ListItemIcon>
-                  <ListItemText primary={user.firstName}>
-                    {user.firstName}
-                  </ListItemText>
-                </ListItem>
-              );
+              return <></>;
             })}
           </List>
         </Grid>
         <Grid item xs={9}>
           <List className={classes.messageArea}>
-            <ListItem key="1">
-              <Grid container>
-                <Grid item xs={12}>
-                  <ListItemText
-                    align="right"
-                    primary="Hey man, What's up ?"
-                  ></ListItemText>
-                </Grid>
-                <Grid item xs={12}>
-                  <ListItemText align="right" secondary="09:30"></ListItemText>
-                </Grid>
-              </Grid>
-            </ListItem>
-            <ListItem key="2">
-              <Grid container>
-                <Grid item xs={12}>
-                  <ListItemText
-                    align="left"
-                    primary="Hey, Iam Good! What about you ?"
-                  ></ListItemText>
-                </Grid>
-                <Grid item xs={12}>
-                  <ListItemText align="left" secondary="09:31"></ListItemText>
-                </Grid>
-              </Grid>
-            </ListItem>
-            <ListItem key="3">
-              <Grid container>
-                <Grid item xs={12}>
-                  <ListItemText
-                    align="right"
-                    primary="Cool. i am good, let's catch up!"
-                  ></ListItemText>
-                </Grid>
-                <Grid item xs={12}>
-                  <ListItemText align="right" secondary="10:30"></ListItemText>
-                </Grid>
-              </Grid>
-            </ListItem>
+            {messages.map((message) => {
+              var dia = parseInt(message.date?.substring(11, 13));
+              var numerodia = dia + 2;
+
+              let fecha =
+                numerodia +
+                ":" +
+                message.date?.substring(14, 16) +
+                " " +
+                message.date?.substring(8, 10) +
+                "-" +
+                message.date?.substring(5, 7);
+              if (
+                (message.userSend.id === currentUser.id &&
+                  message.userReciber.id === reciberUser) ||
+                (message.userReciber.id === currentUser.id &&
+                  reciberUser === message.userSend.id)
+              )
+                return (
+                  <ListItem key={message.id}>
+                    <Grid container>
+                      <Grid item xs={12}>
+                        <ListItemText
+                          align={
+                            message.userSend.id === currentUser.id
+                              ? "right"
+                              : "left"
+                          }
+                          primary={message.message}
+                        ></ListItemText>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <ListItemText
+                          align={
+                            message.userSend.id === currentUser.id
+                              ? "right"
+                              : "left"
+                          }
+                          secondary={fecha}
+                        ></ListItemText>
+                      </Grid>
+                    </Grid>
+                  </ListItem>
+                );
+              return <></>;
+            })}
           </List>
           <Divider />
           <Grid container style={{ padding: "20px" }}>
@@ -156,17 +178,21 @@ const Chat = () => {
                 id="outlined-basic-email"
                 label="Escribe tu mensaje..."
                 fullWidth
+                name="message"
+                inputRef={register({
+                  required: { value: true, message: "Valor requerido" },
+                })}
               />
             </Grid>
             <Grid xs={1} align="right">
-              <Fab color="primary" onClick={handleClick} aria-label="add">
+              <Fab type="submit" color="secondary" aria-label="add">
                 <SendIcon />
               </Fab>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </form>
   );
 };
 

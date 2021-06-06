@@ -31,17 +31,31 @@ function Copyright() {
 const schema = yup.object().shape({
   email: yup
     .string()
-    .email("Email should have correct format")
-    .required("Email is a required field"),
+    .email("El correo debe tener el formato correcto")
+    .required("El email es un campo requerido"),
 
+    userName: yup
+    .string()
+    .min(3,"El mínimo de caracteres es 3")
+    .max(25,"El maximo de caracteres es 25")
+    .required("El nombre de usuario es obligatorio"),
   firstName: yup
     .string()
-    .matches(/^([^0-9]*)$/, "First name should not contain numbers")
-    .required("First name is a required field"),
+    .matches(/^([^0-9]*)$/, "El nombre no puede contener números")
+    .min(3,"El mínimo de caracteres es 3")
+    .max(25,"El maximo de caracteres es 25")
+    .required("El nombre es obligatorio"),
   lastName: yup
     .string()
-    .matches(/^([^0-9]*)$/, "Last name should not contain numbers")
-    .required("Last name is a required field"),
+    .matches(/^([^0-9]*)$/, "Los apellidos no pueden contener números")
+    .min(5,"El mínimo de caracteres es 5")
+    .max(50,"El maximo de caracteres es 50")
+    .required("Los apellidos son obligatorios"),
+  password: yup
+    .string()
+    .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    "Debe contener 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial")
+    .required('Por favor introduce una contraseña'),
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -94,7 +108,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Registro
         </Typography>
         <form
           className={classes.form}
@@ -107,15 +121,17 @@ export default function SignUp() {
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
                 inputRef={register({
                   required: { value: true, message: "Valor requerido" },
                 })}
+                fullWidth
+                id="firstName"
+                label="Nombre"
+                autoFocus
+                error={!!errors.firstName}
+                helperText={errors?.firstName?.message}
+                required
               />
-              <div color="black">{errors?.firstName?.message}</div>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -125,40 +141,29 @@ export default function SignUp() {
                 })}
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                label="Apellidos"
                 name="lastName"
                 autoComplete="lname"
+                error={!!errors.lastName}
+                helperText={errors?.lastName?.message}
+                required
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={12}>
               <TextField
                 autoComplete="uname"
                 name="userName"
                 variant="outlined"
                 fullWidth
                 id="userName"
-                label="User Name"
-                autoFocus
+                label="Nombre de usuario"
                 inputRef={register({
                   required: { value: true, message: "Valor requerido" },
                 })}
+                error={!!errors.userName}
+                helperText={errors?.userName?.message}
+                required
               />
-              <div color="black">{errors?.userName?.message}</div>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="city"
-                name="city"
-                variant="outlined"
-                fullWidth
-                id="city"
-                label="City"
-                autoFocus
-                inputRef={register({
-                  required: { value: true, message: "Valor requerido" },
-                })}
-              />
-              <div color="black">{errors?.city?.message}</div>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -169,10 +174,9 @@ export default function SignUp() {
                 })}
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Correo Electrónico"
                 name="email"
                 autoComplete="email"
-                autoFocus
                 error={!!errors.email}
                 helperText={errors?.email?.message}
                 required
@@ -186,18 +190,21 @@ export default function SignUp() {
                 })}
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                error={!!errors.password}
+                helperText={errors?.password?.message}
+                required
               />
             </Grid>
           </Grid>
-          <PrimaryButton>Sign Up</PrimaryButton>
+          <PrimaryButton>Resgistrar</PrimaryButton>
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/singin" variant="body2">
-                Already have an account? Sign in
+                ¿Ya estas registrado? Inica sesión
               </Link>
             </Grid>
           </Grid>

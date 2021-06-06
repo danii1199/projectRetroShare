@@ -1,5 +1,9 @@
 package org.proyecto.retroshare.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.proyecto.retroshare.domain.Game;
@@ -14,11 +18,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin("*")
 @RestController
@@ -49,9 +56,20 @@ public class GameRestController {
 
 	// GUARDAR NUEVO JUEGO
 	@PostMapping(value = "/game/{idUser}/{idProductStatus}")
-	public ResponseEntity<Game> save(@RequestBody Game game, @PathVariable Long idUser,
-			@PathVariable Long idProductStatus) {
-
+	public ResponseEntity<Game> save(@ModelAttribute Game game, @PathVariable Long idUser,
+			@PathVariable Long idProductStatus, @ModelAttribute("files") MultipartFile[] files) {
+		
+		for (MultipartFile file : files) {
+			
+				try {
+					saveUploadedFile(file);
+					//game.setImages(file.getName()
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}	
+		
 		// User user = userRepository.getOne(idUser);
 		User user = userRepository.findById(idUser)
 				.orElseThrow(() -> new ResourceNotFoundException("No existe el user" + idUser));
@@ -89,6 +107,14 @@ public class GameRestController {
 		Game obj = gameRepository.save(gameUpdate);
 		return new ResponseEntity<Game>(obj, HttpStatus.OK);
 
+	}
+
+	private void saveUploadedFile(MultipartFile file) throws IOException {
+		if (!file.isEmpty()) {
+			byte[] bytes = file.getBytes();
+			Path path = Paths.get("../retroshareProyect/src/main/ui/public/" + file.getOriginalFilename());
+			Files.write(path, bytes);
+		}
 	}
 
 }

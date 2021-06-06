@@ -6,11 +6,16 @@ import { Person, ShoppingCart } from "@material-ui/icons";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import AuthService from "../../Service/Auth/AuthService";
+import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
+import RadioIcon from "@material-ui/icons/Radio";
+import VideogameAssetIcon from "@material-ui/icons/VideogameAsset";
+import AlbumIcon from "@material-ui/icons/Album";
+import TelegramIcon from '@material-ui/icons/Telegram';
 
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(6, 8, 6, 6),
-    padding: theme.spacing(2, 8),
+    padding: theme.spacing(2, 10),
     boxShadow: "0 4px 10px 0 #D9B504",
   },
   buttonCart: {
@@ -22,19 +27,19 @@ const useStyles = makeStyles((theme) => ({
 
 const botones = [
   {
-    nombre: "Games",
+    nombre: <SportsEsportsIcon />,
     enlace: "/videogames",
   },
   {
-    nombre: "Player",
+    nombre: <RadioIcon />,
     enlace: "/rplayer",
   },
   {
-    nombre: "Consoles",
+    nombre: <VideogameAssetIcon />,
     enlace: "/gameconsole",
   },
   {
-    nombre: "Vinyl",
+    nombre: <AlbumIcon />,
     enlace: "/vinyl",
   },
 ];
@@ -60,7 +65,7 @@ export const CartButton = () => {
   const history = useHistory();
   return (
     <Button
-      children="Al Carro"
+      children="Ir al carro"
       className={classes.buttonCart}
       size="small"
       color="secondary"
@@ -85,6 +90,23 @@ export const UserButton = (props) => {
       to={`user/${props.product.userOwner.id}`}
     >
       <Person className={classes.icon} />
+    </Button>
+  );
+};
+
+export const ChatButton = (props) => {
+  
+  const classes = useStyles();
+  return (
+    <Button
+      className={classes.buttonCart}
+      variant="contained"
+      size="small"
+      color="secondary"
+      component={Link}
+      to={`chat/${props.product.userOwner.id}`}
+    >
+      <TelegramIcon className={classes.icon} />
     </Button>
   );
 };

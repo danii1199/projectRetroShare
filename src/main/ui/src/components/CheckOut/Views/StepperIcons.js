@@ -7,7 +7,6 @@ import {
     LocalShipping,
     Payment,
 } from '@material-ui/icons';
-import { Grid } from "@material-ui/core";
 
 
 const useStyle = makeStyles(theme => ({
@@ -43,14 +42,14 @@ const StepperIcon = props => {
     };
 
     return (
-        <Grid
+        <div
             className={clsx(classes.root, {
                 [classes.active]: active,
                 [classes.completed]: completed,
             })}
         >
             {icons[String(props.icon)]}
-        </Grid>
+        </div>
     );
 }
 

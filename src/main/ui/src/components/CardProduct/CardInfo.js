@@ -10,13 +10,16 @@ import {
 import EuroSymbolIcon from "@material-ui/icons/EuroSymbol";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-
+import Button from "@material-ui/core/Button";
+import Delete from "@material-ui/icons/Delete";
+import AuthService from "../../Service/Auth/AuthService";
+import RetroshareService from "../../Service/RetroshareService";
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    marginLeft: theme.spacing(3),
+    margin: theme.spacing(0, 1, 0, 3),
     boxShadow: "5px 6px 15px 1px #0D0D0D",
-    float: "rigth",
+    float: "inline-end",
   },
   customCard: {
     transition: "all 0.2s ease-in-out",
@@ -57,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 const CardProduct = ({ product }) => {
   const history = useHistory();
   const classes = useStyles();
+  const currentUser = AuthService.getCurrentUser();
 
   return (
     <Card className="custom-card">
@@ -71,7 +75,7 @@ const CardProduct = ({ product }) => {
           alt={product.image}
           height="220"
           className={classes.image}
-          image={process.env.PUBLIC_URL + "/" + product.image}
+          image={process.env.PUBLIC_URL + "/" + product.images}
           title={product.name}
         />
         <CardContent className={classes.content}>
@@ -105,7 +109,21 @@ const CardProduct = ({ product }) => {
         >
           {product.price} <EuroSymbolIcon />
         </Typography>
-
+        {currentUser.name === product.userOwner.email && (
+          <Button
+            variant="contained"
+            size="small"
+            color="secondary"
+            className={classes.button}
+            onClick={() => {
+              RetroshareService.deleteProduct(product.id);
+              history.push(`/profile`);
+              history.go();
+            }}
+          >
+            <Delete />
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

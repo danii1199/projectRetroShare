@@ -50,7 +50,7 @@ const OneProduct = ({ product }) => {
               component="img"
               alt={product.image}
               className={classes.cardImage}
-              image={process.env.PUBLIC_URL + "/" + product.image}
+              image={process.env.PUBLIC_URL + "/" + product.images}
               title={product.name}
             />
           </Card>
@@ -70,7 +70,8 @@ const OneProduct = ({ product }) => {
           </Typography>
         </Grid>
         <Grid item xs={12} className="action-part">
-          {!isInCart(product) && (
+          
+          {!isInCart(product) && product.userBuyer===null&& (
             <>
               <Button
                 className={classes.button}

@@ -55,7 +55,7 @@ export const CartFormResult = () => {
             .post(`/pr-buy/${articles.id}/${currentUser.id}`, articles)
             .then((resCart) => {
               if (resCart.status === 200) {
-                Swal.fire("Great job!", "Your buy is done", "success");
+                Swal.fire("Felicidades!", "Tu compra se ha realizado correctamente", "success");
                 setSuccess(true);
                 handleCheckout();
               }
@@ -71,6 +71,7 @@ export const CartFormResult = () => {
 
   if (success) {
     history.push("./");
+    history.go();
   }
 
   return (

@@ -49,35 +49,19 @@ const findByEmail = (email) => {
 };
 
 const getVinyl = () => {
-  return http.get("/v-all", {
-    headers: {
-      Authorization: AuthHeader(),
-    },
-  });
+  return http.get("/v-all");
 };
 
 const getGame = () => {
-  return http.get("/g-all", {
-    headers: {
-      Authorization: AuthHeader(),
-    },
-  });
+  return http.get("/g-all");
 };
 
 const getRecordPlayer = () => {
-  return http.get("/rp-all", {
-    headers: {
-      Authorization: AuthHeader(),
-    },
-  });
+  return http.get("/rp-all");
 };
 
 const getGameConsole = () => {
-  return http.get("/gc-all", {
-    headers: {
-      Authorization: AuthHeader(),
-    },
-  });
+  return http.get("/gc-all");
 };
 
 const getProducts = () => {
@@ -95,6 +79,7 @@ const createProduct = (data, tproduct, idUser, idProductStatus) => {
   return http.post(`/${tproduct}/${idUser}/${idProductStatus}`, data, {
     headers: {
       Authorization: AuthHeader(),
+      'Content-Type': 'multipart/form-data'
     },
   });
 };
@@ -105,6 +90,11 @@ const deleteProduct = (id) => {
       Authorization: AuthHeader(),
     },
   });
+  
+};
+
+const verification = (userName) => {
+  return http.post(`/verification/${userName}`);
   
 };
 
@@ -121,6 +111,25 @@ const getCurrentCart = () => {
   return JSON.parse(localStorage.getItem("cart"));
 };
 
+const getMessages = () => {
+  return http.get(`/chat-all`);
+}
+const findEmail = (email) => {
+  return http.get(`/find-email/${email}`);
+};
+
+
+
+const disabled = (id) => {
+  return http.post(`/disabled/${id}`, {
+    headers: {
+      Authorization: AuthHeader(),
+    },
+  });
+
+
+  
+};
 
 
 const services = {
@@ -140,7 +149,11 @@ const services = {
   deleteProduct,
   findByEmail,
   addToCart,
-  getCurrentCart
+  getCurrentCart,
+  getMessages,
+  verification,
+  disabled,
+  findEmail
 };
 
 export default services;

@@ -111,7 +111,7 @@ const FormStepper = () => {
             .post(`/pr-buy/${articles.id}/${currentUser.id}`, articles)
             .then((resCart) => {
               if (resCart.status === 200) {
-                Swal.fire("Great job!", "Your buy is done", "success");
+                Swal.fire("Felicidades!", "Tu compra se ha realizado con éxito", "success");
                 setSuccess(true);
                 handleCheckout();
               }
@@ -132,7 +132,8 @@ const FormStepper = () => {
   };
 
   if (success) {
-    history.push("./");
+    history.push("./home");
+    history.go();
   }
 
   const handleBack = () => {
@@ -223,7 +224,7 @@ const FormStepper = () => {
                   className={classes.button}
                   onClick={handleBack}
                 >
-                  Back
+                  Volver
                 </Button>
                 <Button
                   variant="contained"

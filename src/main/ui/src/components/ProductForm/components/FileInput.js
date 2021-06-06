@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
                   {...getRootProps()}
                 >
                   <CloudUpload className={styles.icon} />
-                  <input {...getInputProps()} name={name} onBlur={onBlur} />
+                  <input type="file" {...getInputProps()} name={name} onBlur={onBlur} />
                   <p>Arrastra una foto de tu producto</p>
                 </Paper>
               )}

@@ -15,6 +15,10 @@ import SearchBar from "../Search/SearchBar";
 import AuthService from "../../Service/Auth/AuthService";
 import { CartContext } from "../../contexts/CartContext";
 import MenuIcon from "@material-ui/icons/Menu";
+import http from "../../Http-common";
+import { MessagesContext } from "../Chat/context/MessagesContext";
+
+
 import {
   AdminButtonsIcons,
   AdminButtons,
@@ -99,9 +103,16 @@ const NavBar = () => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [sideMenuMoreAnchorEl, setSideMenuMoreAnchorEl] = useState(null);
   const { itemCount } = useContext(CartContext);
+  const currentUser = AuthService.getCurrentUser();
+
+  const { mensajesNoLeidos } = useContext(MessagesContext);
+
+  
+
 
   const isAdmin = AuthService.getRoles() === "Admin";
   const isUser = AuthService.getRoles() === "User";
+  const isDisabled = AuthService.getRoles() === "Disabled";
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -124,6 +135,10 @@ const NavBar = () => {
   };
   const handleSideMenuOpen = (event) => {
     setSideMenuMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleReadMessages = () => {
+    http.post(`/chat-read/${currentUser.id}`)
   };
 
   const menuId = "primary-search-account-menu";
@@ -164,8 +179,11 @@ const NavBar = () => {
             component={Link}
             to="/chat"
             disabled={!(isAdmin || isUser)}
+            onClick={handleReadMessages}
           >
-            <Badge badgeContent={1} color="secondary">
+            
+            <Badge
+             badgeContent={mensajesNoLeidos?.length} color="secondary">
               <MailIcon />
             </Badge>
           </IconButton>
@@ -230,16 +248,18 @@ const NavBar = () => {
                 <MenuIcon />
               </IconButton>
             </Grid>
-            <IconButton component={Link} to="/">
+            <IconButton component={Link} to="/home">
               <img
                 alt={"pokeball"}
                 width={"50"}
                 src={
-                  "https://www.pikpng.com/pngl/b/59-590145_pokeball-8-bit-pixel-art-pokemon-clipart.png"
+                  "https://upload.wikimedia.org/wikipedia/commons/5/51/Pokebola-pokeball-png-0.png"
                 }
               />{" "}
             </IconButton>
+            {(isDisabled===false)&&
             <SearchBar />
+            }
             <Grid className={classes.sectionDesktop}>
               {(isAdmin || isUser) && <AdminButtons isAdmin={isAdmin} />}
             </Grid>
@@ -250,9 +270,10 @@ const NavBar = () => {
                 color="inherit"
                 component={Link}
                 to="/chat"
+                onClick={handleReadMessages}
                 disabled={!(isAdmin || isUser)}
               >
-                <Badge badgeContent={1} color="secondary">
+                <Badge badgeContent={mensajesNoLeidos} color="secondary">
                   <MailIcon />
                 </Badge>
               </IconButton>
@@ -278,7 +299,7 @@ const NavBar = () => {
               >
                 <Person />
               </IconButton>
-              <LogedButtons isUser={isAdmin || isUser} />
+              <LogedButtons isUser={isAdmin || isUser || isDisabled} />
             </Grid>
             <Grid className={classes.sectionMobile}>
               <IconButton

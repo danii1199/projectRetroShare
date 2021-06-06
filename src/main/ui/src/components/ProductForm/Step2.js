@@ -33,7 +33,7 @@ export const Step2 = () => {
   return (
     <MainContainer>
       <Typography component="h2" variant="h5">
-        🦄 Step 2
+        Características del producto
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <InputLabel htmlFor="status">Estado del producto</InputLabel>
@@ -55,7 +55,7 @@ export const Step2 = () => {
           <option value={3}>Desgastado</option>
           <option value={4}>Usado</option>
         </NativeSelect>
-        <FormHelperText>Espero que le hayas dado buen uso</FormHelperText>
+        <FormHelperText>Indica el estado del producto</FormHelperText>
 
         <FormControlLabel
           control={
@@ -67,7 +67,7 @@ export const Step2 = () => {
               name="hasDescription"
             />
           }
-          label="Cuentanos algo sobre tu producto"
+          label="Añade una descripción a tu producto"
         />
 
         {hasDescription && (
