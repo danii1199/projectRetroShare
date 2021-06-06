@@ -48,7 +48,7 @@ const Products = (props) => {
           </Grid>
           <Grid container spacing={2}>
             {products.map((product) => {
-              if(product.name===searchName) 
+              if(product.name.toLowerCase()===searchName.toLowerCase()) 
               if(currentUser!==null&&product.userBuyer===null)
               if(product.userOwner.email!==currentUser.name)
               return (

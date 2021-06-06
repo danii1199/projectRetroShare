@@ -105,16 +105,6 @@ const UserComponent = () => {
      onClick={eliminarSeleccionados}
      >Deshabilitar seleccionados</Button>
 
-<Button
-     disabled={disabledEditar}
-     style={{
-       backgroundColor:"white",
-       marginTop: "20px",
-       marginLeft: "10px"
-     }}
-     onClick={handleClickOpen}
-     >Editar seleccionado</Button>
-
 <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Editar Perfil</DialogTitle>
         <DialogContent>

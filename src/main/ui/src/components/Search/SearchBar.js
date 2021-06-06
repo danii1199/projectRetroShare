@@ -58,7 +58,7 @@ const SearchBar = () => {
   var product = ProductsAPI();
 
   let hash = {};
-  product = product.filter(o => hash[o.name] ? false : hash[o.name] = true);
+  product = product.filter(o => hash[o.name.toLowerCase()] ? false : hash[o.name.toLowerCase()] = true);
 
 
 
