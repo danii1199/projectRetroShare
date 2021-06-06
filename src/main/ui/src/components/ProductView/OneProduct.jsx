@@ -50,7 +50,7 @@ const OneProduct = ({ product }) => {
               component="img"
               alt={product.image}
               className={classes.cardImage}
-              image={process.env.PUBLIC_URL + "/" + product.image}
+              image={process.env.PUBLIC_URL + "/" + product.images}
               title={product.name}
             />
           </Card>

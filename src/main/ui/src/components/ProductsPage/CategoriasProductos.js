@@ -28,9 +28,8 @@ const CategoriasProductos = (props) => {
 
   return (
     <>
-      <PrincipalButtons />
-
       <Container>
+        <PrincipalButtons />
         <Grid container spacing={8}>
           {RESPUESTA.length > 0 && (
             <Grid item>

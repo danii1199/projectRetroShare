@@ -25,7 +25,7 @@ import Verification from "./components/Verification/Verification";
 import { SignUpResult } from "./components/UserAuth/SignUpResult";
 import { CartForm } from "./pages/cart/CartForm";
 import { CartFormResult } from "./pages/cart/CartFormResult";
-import { Container } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import Main from "./components/CheckOut/Views/Main";
 import theme from "./constans/theme";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -44,7 +44,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route path="/" exact component={HomePage} />
-          <Container>
+          <Grid>
             <NavBar />
             <Route exact path="/check" component={Main} />
 
@@ -103,7 +103,7 @@ const App = () => {
             {!isDisabled ? (
               <Route path="/home" exact component={Products} />
             ) : null}
-          </Container>
+          </Grid>
           <Route path="*" exact={true} component={NotFound} />
         </Switch>
       </Router>
