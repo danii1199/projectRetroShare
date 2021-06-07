@@ -9,6 +9,7 @@ import CartContextProvider from "./contexts/CartContext";
 import UsersContextProvider from "./contexts/UsersContext";
 import DataContextProvider from "./components/CheckOut/StateContext/DataContext";
 import MessagesContextProvider from "./components/Chat/context/MessagesContext";
+import * as serviceWorker from "./serviceWorker";
 
 
 ReactDOM.render(
@@ -29,5 +30,5 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById("root")
 );
-
+serviceWorker.unregister();
 reportWebVitals();
