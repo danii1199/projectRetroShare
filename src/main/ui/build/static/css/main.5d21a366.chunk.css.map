@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/index.css"],"names":[],"mappings":"AAAA,KACE,4EAAuD,CACvD,oBACF","file":"main.5d21a366.chunk.css","sourcesContent":["body {\r\n  background: url(./fondoPantalla/blackBrick.jpg) #333333;\r\n  background-size: auto;\r\n}\r\n\r\n"]}
