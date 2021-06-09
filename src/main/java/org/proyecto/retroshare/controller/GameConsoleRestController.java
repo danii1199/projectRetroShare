@@ -54,7 +54,7 @@ public class GameConsoleRestController {
 
 	// GUARDAR NUEVO JUEGO
 	@PostMapping(value = "/gameconsole/{idUser}/{idProductStatus}")
-	public ResponseEntity<GameConsole> save(@RequestBody GameConsole gameConsole, @PathVariable Long idUser,
+	public ResponseEntity<GameConsole> save(@ModelAttribute GameConsole gameConsole, @PathVariable Long idUser,
 			@PathVariable Long idProductStatus, @ModelAttribute("files") MultipartFile[] files) {
 
 		for (MultipartFile file : files) {

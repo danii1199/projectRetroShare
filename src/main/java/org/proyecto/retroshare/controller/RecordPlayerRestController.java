@@ -54,7 +54,7 @@ public class RecordPlayerRestController {
 
 	// GUARDAR NUEVO TOCADISCO
 	@PostMapping(value = "/recordplayer/{idUser}/{idProductStatus}")
-	public ResponseEntity<RecordPlayer> save(@RequestBody RecordPlayer recordPlayer, @PathVariable Long idUser,
+	public ResponseEntity<RecordPlayer> save(@ModelAttribute RecordPlayer recordPlayer, @PathVariable Long idUser,
 			@PathVariable Long idProductStatus, @ModelAttribute("files") MultipartFile[] files) {
 
 		for (MultipartFile file : files) {
