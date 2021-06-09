@@ -6,6 +6,7 @@ import {
   Typography,
   CardActionArea,
   fade,
+  Grid,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import EuroSymbolIcon from "@material-ui/icons/EuroSymbol";
@@ -17,6 +18,9 @@ import { UserButton } from "../Buttons/PrincipalButtons";
 import AuthService from "../../Service/Auth/AuthService";
 
 const useStyles = makeStyles((theme) => ({
+  image: {
+    objectFit: "fill"
+  },
   button: {
     marginLeft: theme.spacing(3),
     boxShadow: "5px 6px 15px 1px #0D0D0D",
@@ -44,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: "ellipsis",
   },
   price: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(3),
   },
   status: {
     marginTop: theme.spacing(0),
@@ -89,6 +93,7 @@ const CardProduct = ({ product }) => {
           >
             {product.name}
           </Typography>
+          <Grid style={{display:"inline"}}>
           <Typography
             className={classes.status}
             align="right"
@@ -98,10 +103,7 @@ const CardProduct = ({ product }) => {
           >
             {product.productStatus?.status}
           </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions className={classes.actionsContent}>
-        <Typography
+          <Typography
           className={classes.price}
           gutterBottom
           variant="h5"
@@ -109,12 +111,15 @@ const CardProduct = ({ product }) => {
         >
           {product.price} <EuroSymbolIcon />
         </Typography>
-        {currentUser!==null&& <UserButton product={product} />}
-        
+        </Grid>
+        </CardContent>
+      </CardActionArea>
+      <CardActions className={classes.actionsContent}>
         {currentUser!==null&& <ChatButton product={product}/>}
-
+        {currentUser!==null&&<UserButton product={product} />}
         {!isInCart(product) && currentUser!==null&& <AddCartButton product={product}/>}
         {isInCart(product) && currentUser!==null&& <CartButton />}
+        
         
       </CardActions>
     </Card>

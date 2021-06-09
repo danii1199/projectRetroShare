@@ -69,11 +69,11 @@ const CartItem = ({ product }) => {
         <CardActionArea component={Link} to={`pr/${product.id}`}>
           <CardMedia
             component="img"
-            alt={product.image}
+            alt={product.images}
             height="220"
-            className={classes.image}
-            image={product.image}
-            title={product.name}
+            className={classes.images}
+            image={product.images}
+            title={product.names}
           />
           <CardContent className={classes.content}>
             <Typography

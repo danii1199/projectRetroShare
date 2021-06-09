@@ -20,7 +20,7 @@ const VinylComponentAdmin = () => {
   }, []);
 
   const obtenerDatos = async () => {
-    const data = await fetch("http://localhost:8080/retroshare/v-all");
+    const data = await fetch("https://retroshare-company.herokuapp.com/retroshare/v-all");
     const vinyls = await data.json();
     setVinyl(vinyls);
   };

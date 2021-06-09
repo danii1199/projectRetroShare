@@ -1,7 +1,6 @@
 import { Container, Grid } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import OneProduct from "./OneProduct";
-import Card from "../CardSlider/card/Card";
 import RetroshareService from "../../Service/RetroshareService";
 
 const ProductView = () => {
@@ -27,7 +26,6 @@ const ProductView = () => {
           <Grid container spacing={12}>
             <Grid item xs={12}>
               <OneProduct key={products.id} product={products} />
-              <Card />
             </Grid>
           </Grid>
         </Container>
