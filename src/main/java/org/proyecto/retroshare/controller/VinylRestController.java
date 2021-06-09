@@ -1,5 +1,9 @@
 package org.proyecto.retroshare.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.proyecto.retroshare.domain.ProductStatus;
@@ -14,11 +18,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin("*")
 @RestController
@@ -48,8 +54,19 @@ public class VinylRestController {
 
 	// GUARDAR NUEVO VINILO
 	@PostMapping(value = "/vinyl/{idUser}/{idProductStatus}")
-	public ResponseEntity<Vinyl> save(@RequestBody Vinyl vinyl, @PathVariable Long idUser,
-			@PathVariable Long idProductStatus) {
+	public ResponseEntity<Vinyl> save(@ModelAttribute Vinyl vinyl, @PathVariable Long idUser,
+			@PathVariable Long idProductStatus, @ModelAttribute("files") MultipartFile[] files) {
+
+		for (MultipartFile file : files) {
+
+			try {
+				saveUploadedFile(file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		User user = userRepository.getOne(idUser);
 		vinyl.setUserOwner(user);
 		user.getProductOwner().add(vinyl);
@@ -77,7 +94,7 @@ public class VinylRestController {
 		vinylUpdate.setSongs(vinyl.getSongs());
 		vinylUpdate.setYear(vinyl.getYear());
 		vinylUpdate.setPrice(vinyl.getPrice());
-		
+
 		ProductStatus productStatus = productStatusRepository.findById(idProductStatus)
 				.orElseThrow(() -> new ResourceNotFoundException("No existe el estado" + idProductStatus));
 		vinylUpdate.setProductStatus(productStatus);
@@ -86,6 +103,14 @@ public class VinylRestController {
 		Vinyl obj = vinylRepository.save(vinylUpdate);
 		return new ResponseEntity<Vinyl>(obj, HttpStatus.OK);
 
+	}
+
+	private void saveUploadedFile(MultipartFile file) throws IOException {
+		if (!file.isEmpty()) {
+			byte[] bytes = file.getBytes();
+			Path path = Paths.get("../retroshareProyect/src/main/resources/static/img/" + file.getOriginalFilename());
+			Files.write(path, bytes);
+		}
 	}
 
 }

@@ -1,5 +1,9 @@
 package org.proyecto.retroshare.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.proyecto.retroshare.domain.ProductStatus;
@@ -14,11 +18,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin("*")
 @RestController
@@ -49,7 +55,18 @@ public class RecordPlayerRestController {
 	// GUARDAR NUEVO TOCADISCO
 	@PostMapping(value = "/recordplayer/{idUser}/{idProductStatus}")
 	public ResponseEntity<RecordPlayer> save(@RequestBody RecordPlayer recordPlayer, @PathVariable Long idUser,
-			@PathVariable Long idProductStatus) {
+			@PathVariable Long idProductStatus, @ModelAttribute("files") MultipartFile[] files) {
+
+		for (MultipartFile file : files) {
+
+			try {
+				saveUploadedFile(file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		User user = userRepository.getOne(idUser);
 		recordPlayer.setUserOwner(user);
 		user.getProductOwner().add(recordPlayer);
@@ -77,7 +94,7 @@ public class RecordPlayerRestController {
 		recordPlayerUpdate.setBrand(recordPlayer.getBrand());
 		recordPlayerUpdate.setYear(recordPlayer.getYear());
 		recordPlayerUpdate.setPrice(recordPlayer.getPrice());
-		
+
 		ProductStatus productStatus = productStatusRepository.findById(idProductStatus)
 				.orElseThrow(() -> new ResourceNotFoundException("No existe el estado" + idProductStatus));
 		recordPlayerUpdate.setProductStatus(productStatus);
@@ -86,6 +103,14 @@ public class RecordPlayerRestController {
 		RecordPlayer obj = recordplayerRepository.save(recordPlayerUpdate);
 		return new ResponseEntity<RecordPlayer>(obj, HttpStatus.OK);
 
+	}
+
+	private void saveUploadedFile(MultipartFile file) throws IOException {
+		if (!file.isEmpty()) {
+			byte[] bytes = file.getBytes();
+			Path path = Paths.get("../retroshareProyect/src/main/resources/static/img/" + file.getOriginalFilename());
+			Files.write(path, bytes);
+		}
 	}
 
 }

@@ -112,7 +112,7 @@ public class GameRestController {
 	private void saveUploadedFile(MultipartFile file) throws IOException {
 		if (!file.isEmpty()) {
 			byte[] bytes = file.getBytes();
-			Path path = Paths.get("../retroshareProyect/src/main/ui/public/" + file.getOriginalFilename());
+			Path path = Paths.get("../retroshareProyect/src/main/resources/static/img/" + file.getOriginalFilename());
 			Files.write(path, bytes);
 		}
 	}

@@ -72,7 +72,7 @@ export const Result = () => {
 
   if (success) {
     history.push("./home");
-    history.go();
+    //history.go();
   }
 
   return (

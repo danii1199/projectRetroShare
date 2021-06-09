@@ -78,7 +78,7 @@ const CardProduct = ({ product }) => {
           alt={product.image}
           height="220"
           className={classes.image}
-          image={process.env.PUBLIC_URL + "/" + product.images}
+          image={'https://retroshare-company.herokuapp.com/retroshare/resources/static/img/' + product.images}
           title={product.name}
         />
         <CardContent className={classes.content}>
