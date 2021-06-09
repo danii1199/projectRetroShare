@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
     float: "right",
   },
   text: {
-    margin: theme.spacing(2),
-    padding: theme.spacing(2),
+    margin: theme.spacing(1),
+    padding: theme.spacing(1),
     color: theme.palette.common.white,
   },
 }));
@@ -78,12 +78,12 @@ const Cart = () => {
       {cartItems.length > 0 && (
         <Grid >
           <Grid>
-            <Typography className={styles.text}>Total de productos</Typography>
+            <Typography className={styles.text} variant="h2">Total de productos</Typography>
             <Typography className={styles.text} variant="h4">
               {itemCount}
             </Typography>
-            <Typography className={styles.text}>Pago Total</Typography>
-            <Typography className={styles.text} variant="h3">
+            <Typography className={styles.text} variant="h2">Pago Total</Typography>
+            <Typography className={styles.text} variant="h4">
               {formatNumber(total)}
             </Typography>
             <Grid item>

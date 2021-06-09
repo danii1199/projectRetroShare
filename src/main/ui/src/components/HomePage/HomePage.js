@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginTop: "40vh",
     marginLeft: "40vh",
+    overflow: "hidden",
   },
 
   button: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundAttachment: "fixed",
     backgroundRepeat: "no-repeat",
     height: "100vh",
-    width: "100vw",
+    width: "100%",
   },
   wrapper: {
     margin: theme.spacing(1),
@@ -90,7 +91,7 @@ const HomePage = () => {
       <Grid className={classes.container}>
         <Grid container>
           <Typography variant="h4" className={classes.titulo}>
-            Empieza tú aventura
+            Empieza tu aventura
           </Typography>
         </Grid>
         <Grid className={classes.wrapper}>

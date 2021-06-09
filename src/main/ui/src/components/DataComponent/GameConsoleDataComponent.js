@@ -20,7 +20,7 @@ const GameConsoleDataComponentAdmin = () => {
   }, []);
 
   const obtenerDatos = async () => {
-    const data = await fetch("http://localhost:8080/retroshare/gc-all");
+    const data = await fetch("https://retroshare-company.herokuapp.com/retroshare/gc-all");
     const gameConsoles = await data.json();
     setGameConsole(gameConsoles);
   };

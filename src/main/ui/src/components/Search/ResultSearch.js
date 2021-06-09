@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
   product: {
     margin: theme.spacing(10),
   },
+  buttons:{
+    textAlign:"center"
+  }
 }));
 
 const Products = (props) => {
@@ -36,7 +39,7 @@ const Products = (props) => {
 
   return (
     <Suspense fallback={<Grid>Loading...</Grid>}>
-      <Grid item>
+      <Grid item  className={classes.buttons}>
         <PrincipalButtons />
       </Grid>
       <Container id="products">
@@ -48,9 +51,16 @@ const Products = (props) => {
           </Grid>
           <Grid container spacing={2}>
             {products.map((product) => {
-              if(product.name===searchName) 
+              if(product.name.toLowerCase()===searchName.toLowerCase()) 
               if(currentUser!==null&&product.userBuyer===null)
               if(product.userOwner.email!==currentUser.name)
+              return (
+                <Grid item sm={6} md={3}>
+                  <CardProduct product={product} />
+                </Grid>
+              );
+              if(product.name.toLowerCase()===searchName.toLowerCase()) 
+              if(currentUser===null&&product.userBuyer===null)
               return (
                 <Grid item sm={6} md={3}>
                   <CardProduct product={product} />

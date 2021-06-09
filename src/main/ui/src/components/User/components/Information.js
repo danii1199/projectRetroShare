@@ -58,7 +58,7 @@ const Information = () => {
       </Grid>
           }
         <Grid container>
-          <Typography variant="h5" className={classes.titulo}>
+          <Typography variant="h5" className={classes.titulo} style={{fontWeight:"500"}}>
             {user.userName}
           </Typography>
           <Grid container className={classes.linea}>

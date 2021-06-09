@@ -203,7 +203,7 @@ export default function SignUp() {
           <PrimaryButton>Resgistrar</PrimaryButton>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/singin" variant="body2">
+              <Link href="/logIn" variant="body2">
                 ¿Ya estas registrado? Inica sesión
               </Link>
             </Grid>

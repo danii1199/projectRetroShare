@@ -20,7 +20,7 @@ const RecordPlayerComponentAdmin = () => {
   }, []);
 
   const obtenerDatos = async () => {
-    const data = await fetch("http://localhost:8080/retroshare/rp-all");
+    const data = await fetch("https://retroshare-company.herokuapp.com/retroshare/rp-all");
     const recordPlayers = await data.json();
     setRecordPlayer(recordPlayers);
   };
