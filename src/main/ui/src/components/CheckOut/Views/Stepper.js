@@ -111,7 +111,11 @@ const FormStepper = () => {
             .post(`/pr-buy/${articles.id}/${currentUser.id}`, articles)
             .then((resCart) => {
               if (resCart.status === 200) {
-                Swal.fire("Felicidades!", "Tu compra se ha realizado con éxito", "success");
+                Swal.fire("Felicidades!", "Tu compra se ha realizado con éxito", "success").then(() =>{
+                  history.push("./home");
+                  history.go();
+                }
+                );
                 setSuccess(true);
                 handleCheckout();
               }
@@ -131,10 +135,7 @@ const FormStepper = () => {
     }
   };
 
-  if (success) {
-    history.push("./home");
-    history.go();
-  }
+  
 
   const handleBack = () => {
     if (activeStep > 0) {

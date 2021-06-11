@@ -17,6 +17,7 @@ import RetroService from "../../Service/RetroshareService"
 import { isEmail } from "validator";
 import { useHistory } from "react-router-dom";
 import { useData } from "../ProductForm/DataContext";
+import Swal from "sweetalert2";
 
 function Copyright() {
   return (
@@ -85,7 +86,11 @@ export default function SingIn() {
     }
   });
       setValues(data);
-    });
+    },()=>{Swal.fire({
+      text: "El correo o la contraseña no son correctos",
+      icon: "error"
+  
+  })});
   };
   console.log(RetroService.findByEmail(data.email))
   return (
@@ -109,6 +114,7 @@ export default function SingIn() {
             inputRef={register({
               required: { value: true, message: "required field" },
             })}
+            required
             fullWidth
             id="email"
             label="Correo Electrónico"

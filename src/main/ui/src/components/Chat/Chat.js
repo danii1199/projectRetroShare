@@ -38,6 +38,10 @@ const useStyles = makeStyles({
     height: "65vh",
     overflowY: "auto",
   },
+  userArea: {
+    height: "65vh",
+    overflowY: "scroll",
+  },
   background: {
     marginTop: "90px",
   },
@@ -52,6 +56,7 @@ const Chat = (props) => {
   //const [mensaje, setMensaje] = useState("");
   const { reset, register, handleSubmit } = useForm();
   const history = useHistory();
+  const usuarioLog = OneUser(currentUser.id);
 
   const { messages } = useContext(MessagesContext);
 
@@ -89,16 +94,17 @@ const Chat = (props) => {
                   src={OneUser(currentUser.id).image}
                 />
               </ListItemIcon>
-              <ListItemText primary={currentUser.name}></ListItemText>
+              <ListItemText primary={usuarioLog.userName}></ListItemText>
             </ListItem>
           </List>
           <Divider />
 
-          <List>
+          <List className={classes.userArea}>
             {users.map((user) => {
               if (currentUser.id !== user.id) {
                 return (
                   <List
+                    
                     value={reciberUser}
                     exclusive
                     onClick={() => {

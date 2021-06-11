@@ -101,7 +101,7 @@ export const CartFormResult = () => {
           </Table>
         </TableContainer>
         <PrimaryButton onClick={onSubmit}>Submit</PrimaryButton>
-        <Link to="/">Start over</Link>
+        <Link to="/home">Start over</Link>
       </MainContainer>
     </>
   );
