@@ -78,7 +78,7 @@ public class ProductRestController {
 		EmailSenderService email = new EmailSenderService();
 
 		try {
-			email.sendSimpleEmail(product.getUserBuyer().getEmail(),
+			email.sendSimpleEmail(product.getUserOwner().getEmail(),
 					"Ha recibido una peticion de compra de " + product.getUserBuyer().getUserName() + " del producto "
 							+ product.getDescription() + " en la direccion " + product.getUserBuyer().getAddress()
 							+ product.getUserBuyer().getCity() + product.getUserBuyer().getCountry());

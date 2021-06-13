@@ -69,7 +69,7 @@ export const Result = () => {
           history.go();
         }
         );
-        setSuccess(true);
+        //setSuccess(true);
       }
     });
   };
