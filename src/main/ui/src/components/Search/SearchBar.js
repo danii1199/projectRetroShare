@@ -9,6 +9,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { useHistory } from "react-router";
 import ProductsAPI from "../../lib/ProductsAPI";
+import AuthService from "../../Service/Auth/AuthService";
 
 const CssTextField = withStyles({})(TextField);
 
@@ -54,44 +55,47 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchBar = () => {
   const classes = useStyles();
-
+  const currentUser = AuthService.getCurrentUser();
   var product = ProductsAPI();
-
+  
   let hash = {};
   product = product.filter(o => hash[o.name.toLowerCase()] ? false : hash[o.name.toLowerCase()] = true);
 
 
-
   const history = useHistory();
+  console.log(currentUser);
 
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
+      
       <Autocomplete
         freeSolo
         options={product}
         renderOption={(product) => (
+          
           <Grid
             item
             onClick={() => {
               history.push(`/search/`+product.name);
-              history.go();
             }}
           >
-            {product.name}
+
+           {product.name}
+          
           </Grid>
         )}
         getOptionLabel={(product) => product.name}
         renderInput={(params) => (
-          <Grid container>
+          <Grid container id="barra">
             <Grid item>
               <CssTextField
                 className="text"
                 {...params}
                 style={{
-                  width: 150,
+                  width: "20vw",
                   marginLeft: 40,
                 }}
                 placeholder="Buscar"
