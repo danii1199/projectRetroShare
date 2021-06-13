@@ -3,11 +3,14 @@ package org.proyecto.retroshare.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.proyecto.retroshare.domain.Product;
 import org.proyecto.retroshare.domain.User;
 import org.proyecto.retroshare.exception.ProductNotFoundException;
 import org.proyecto.retroshare.repositories.ProductRepository;
 import org.proyecto.retroshare.repositories.UserRepository;
+import org.proyecto.retroshare.service.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -36,7 +39,7 @@ public class ProductRestController {
 	@GetMapping(value = "/pr-all")
 	public List<Product> findAll() {
 		return productRepository.findAll();
-		
+
 	}
 
 	@GetMapping(value = "/pr/{id}")
@@ -72,8 +75,19 @@ public class ProductRestController {
 
 		Product obj = productRepository.save(productUpdate);
 
+		EmailSenderService email = new EmailSenderService();
+
+		try {
+			email.sendSimpleEmail(product.getUserOwner().getEmail(),
+					"Ha recibido una peticion de compra de " + product.getUserBuyer().getUserName() + " del producto "
+							+ product.getDescription() + " en la direccion " + product.getUserBuyer().getAddress()
+							+ product.getUserBuyer().getCity() + product.getUserBuyer().getCountry());
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
 		return new ResponseEntity<Product>(obj, HttpStatus.OK);
 
 	}
-	
+
 }

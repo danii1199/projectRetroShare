@@ -64,16 +64,15 @@ export const Result = () => {
           "Felicidades!",
           "Has registrado un producto con éxito",
           "success"
+        ).then(() =>{
+          history.push("./home");
+          history.go();
+        }
         );
-        setSuccess(true);
+        //setSuccess(true);
       }
     });
   };
-
-  if (success) {
-    history.push("./home");
-    history.go();
-  }
 
   return (
     <>
