@@ -34,6 +34,10 @@ public class ProductRestController {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private EmailSenderService service;
+	
 
 	// VER TODOS LOS PRODUCTOS
 	@GetMapping(value = "/pr-all")
@@ -62,8 +66,7 @@ public class ProductRestController {
 	}
 
 	@PostMapping(value = "/pr-buy/{id}/{userId}")
-	public ResponseEntity<Product> update(@PathVariable Long id, @PathVariable Long userId,
-			@RequestBody Product product) {
+	public ResponseEntity<Product> update(@PathVariable Long id, @PathVariable Long userId) {
 
 		Product productUpdate = productRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No existe el producto " + id));
@@ -74,14 +77,16 @@ public class ProductRestController {
 		user.getProductBuyer().add(productUpdate);
 
 		Product obj = productRepository.save(productUpdate);
-
-		EmailSenderService email = new EmailSenderService();
+		
+		User user2 = productUpdate.getUserOwner();
+		
+		
 
 		try {
-			email.sendSimpleEmail(product.getUserOwner().getEmail(),
-					"Ha recibido una peticion de compra de " + product.getUserBuyer().getUserName() + " del producto "
-							+ product.getDescription() + " en la direccion " + product.getUserBuyer().getAddress()
-							+ product.getUserBuyer().getCity() + product.getUserBuyer().getCountry());
+			service.sendSimpleEmail(user2.getEmail(),
+					"El usuario  " + user.getUserName() + " ha realizado la compra de su producto"+
+					" en la direccion " + user.getAddress()+" "
+							+ user.getCity()+" " + user.getCountry());
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
