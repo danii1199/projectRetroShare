@@ -102,7 +102,7 @@ public class UserRestController {
 		service.sendSimpleEmail(user.getEmail(),"<html><body>"
         		+ "<p>Para verificar este correo pulsa el siguiente link de enlace</p>"
         		+ "<br>"
-        		+ "<a href='retroshare-m8dimk8bq-danii1199.vercel.app/verification/"+user.getUserName()+"'>Pulsa aqui</a>"
+        		+ "<a href='https://retroshare-project.vercel.app/verification/"+user.getUserName()+"'>Pulsa aqui</a>"
         		+ "</body></html>");
 		
 		User obj = userRepository.save(user);
